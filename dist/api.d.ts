@@ -1,4 +1,7 @@
-export declare const API_CONFIG: {
-    BASE_URL: string;
+import type { TPokemon } from "./types.js";
+declare const API_REQUESTS: {
+    fetchData: (endpointName: string) => Promise<TPokemon>;
+    getAllData: (array: string[]) => void;
 };
+export default API_REQUESTS;
 //# sourceMappingURL=api.d.ts.map
