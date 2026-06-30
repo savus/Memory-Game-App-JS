@@ -1,1 +1,8 @@
-alert("success");
+const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
+
+export const getData = async (pokeName: string) => {
+  const response = await fetch(`${BASE_URL}${pokeName}`);
+
+  const data = await response.json();
+  return data;
+};
