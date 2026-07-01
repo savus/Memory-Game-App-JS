@@ -1,3 +1,1 @@
-import { getData } from "./app.js";
-
-getData("ditto");
+import { pokeNames } from "./constants.js";

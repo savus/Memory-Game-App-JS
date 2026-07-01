@@ -1,3 +1,2 @@
-import { getData } from "./app.js";
-getData("ditto");
+import { pokeNames } from "./constants.js";
 //# sourceMappingURL=api.js.map

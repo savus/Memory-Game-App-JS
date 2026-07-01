@@ -1,2 +1,2 @@
-export declare const getData: (pokeName: string) => Promise<any>;
+export {};
 //# sourceMappingURL=app.d.ts.map
