@@ -1,4 +1,4 @@
-import { card_container } from "./app.js";
+import { card_container, cardData } from "./app.js";
 export const convertToTSObject = (data) => {
     return {
         name: data.name,
@@ -10,6 +10,7 @@ export const convertToTSObject = (data) => {
         special_attack: data.stats[3].base_stat,
         special_defense: data.stats[4].base_stat,
         speed: data.stats[5].base_stat,
+        isFaceUp: false,
     };
 };
 export const buildCardHTML = (data) => {
@@ -54,6 +55,19 @@ export const buildCardHTML = (data) => {
     speed.innerHTML = `speed: ${data.speed}`;
     stats.append(hp, attack, defense, special_attack, special_defense, speed);
     card.append(stats);
+    card.metaData = data;
+    card.addEventListener("click", () => {
+        if (card.metaData) {
+            if (card.metaData.isFaceUp) {
+                card.metaData.isFaceUp = false;
+                card.style.backgroundColor = "white";
+            }
+            else {
+                card.metaData.isFaceUp = true;
+                card.style.backgroundColor = "red";
+            }
+        }
+    });
     return card;
 };
 export const populateCard = (data) => {
@@ -64,5 +78,8 @@ export const populateAllCards = (array) => {
     array.forEach((mon) => {
         populateCard(mon);
     });
+};
+export const displayAllFaceStatuses = () => {
+    console.log(cardData.map((card) => card.isFaceUp));
 };
 //# sourceMappingURL=utility.js.map

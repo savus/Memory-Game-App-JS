@@ -1,4 +1,4 @@
-import { card_container } from "./app.js";
+import { card_container, cardData } from "./app.js";
 import type { TPokemon } from "./types.js";
 
 export const convertToTSObject = (data: any): TPokemon => {
@@ -12,6 +12,7 @@ export const convertToTSObject = (data: any): TPokemon => {
     special_attack: data.stats[3].base_stat,
     special_defense: data.stats[4].base_stat,
     speed: data.stats[5].base_stat,
+    isFaceUp: false,
   };
 };
 
@@ -34,7 +35,9 @@ export const buildCardHTML = (data: TPokemon) => {
   //     <div>speed: 30</div>
   //   </div>
   // </div>
-  const card = document.createElement("div");
+  const card = document.createElement("div") as HTMLElement & {
+    metaData?: TPokemon;
+  };
 
   const name = document.createElement("div");
   name.innerHTML = data.name;
@@ -71,6 +74,20 @@ export const buildCardHTML = (data: TPokemon) => {
 
   card.append(stats);
 
+  card.metaData = data;
+
+  card.addEventListener("click", () => {
+    if (card.metaData) {
+      if (card.metaData.isFaceUp) {
+        card.metaData.isFaceUp = false;
+        card.style.backgroundColor = "white";
+      } else {
+        card.metaData.isFaceUp = true;
+        card.style.backgroundColor = "red";
+      }
+    }
+  });
+
   return card;
 };
 
@@ -83,4 +100,8 @@ export const populateAllCards = (array: TPokemon[]) => {
   array.forEach((mon) => {
     populateCard(mon);
   });
+};
+
+export const displayAllFaceStatuses = () => {
+  console.log(cardData.map((card) => card.isFaceUp));
 };

@@ -19,6 +19,7 @@ export const API_REQUESTS = {
         special_attack: "30",
         special_defense: "30",
         speed: "30",
+        isFaceUp: false,
       };
 
     return convertToTSObject(await response.json());

@@ -8,5 +8,6 @@ export type TPokemon = {
     special_attack: string;
     special_defense: string;
     speed: string;
+    isFaceUp: boolean;
 };
 //# sourceMappingURL=types.d.ts.map
