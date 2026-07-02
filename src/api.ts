@@ -11,6 +11,12 @@ export const API_REQUESTS = {
     if (!response.ok)
       return {
         name: "unknown",
+        hp: "30",
+        attack: "30",
+        defense: "30",
+        special_attack: "30",
+        special_defense: "30",
+        speed: "30",
       };
 
     return convertToTSObject(await response.json());
