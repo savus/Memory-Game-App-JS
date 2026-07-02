@@ -1,1 +1,1 @@
-export const pokeNames = ["pikachu"];
+export const pokeNames = ["pikachu", "ditto", "charmander"];
