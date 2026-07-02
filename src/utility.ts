@@ -3,6 +3,8 @@ import type { TPokemon } from "./types.js";
 export const convertToTSObject = (data: any): TPokemon => {
   return {
     name: data.name,
+    img: data.sprites.front_default,
+    type: data.types[0].type.name,
     hp: data.stats[0].base_stat,
     attack: data.stats[1].base_stat,
     defense: data.stats[2].base_stat,

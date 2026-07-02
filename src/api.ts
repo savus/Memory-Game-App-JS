@@ -11,6 +11,8 @@ export const API_REQUESTS = {
     if (!response.ok)
       return {
         name: "unknown",
+        img: "unknown",
+        type: "unknown",
         hp: "30",
         attack: "30",
         defense: "30",

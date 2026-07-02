@@ -1,5 +1,7 @@
 export type TPokemon = {
   name: string;
+  img: string;
+  type: string;
   hp: string;
   attack: string;
   defense: string;
