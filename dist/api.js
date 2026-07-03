@@ -4,6 +4,21 @@ const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 export const API_REQUESTS = {
     fetchData: async (endpoint) => {
         const response = await fetch(`${BASE_URL}${endpoint}`);
+        if (!response.ok) {
+            console.log("error occured");
+            return {
+                name: "unkonwn",
+                img: "unknown",
+                type: "unkonwn",
+                hp: "30",
+                attack: "30",
+                defense: "30",
+                special_attack: "30",
+                special_defense: "30",
+                speed: "30",
+                isFaceUp: false,
+            };
+        }
         return convertToTSObject(await response.json());
     },
     fetchAllData: (array) => {

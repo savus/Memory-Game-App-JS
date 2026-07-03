@@ -4,6 +4,7 @@ export declare const CSS_CLASSES: {
     CARD: string;
     CARD_NAME: string;
     IMG_CONTAINER: string;
+    IMG: string;
     STATS: string;
 };
 //# sourceMappingURL=constants.d.ts.map

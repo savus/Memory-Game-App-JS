@@ -4,6 +4,7 @@ export const CSS_CLASSES = {
     CARD: "card",
     CARD_NAME: "card-name",
     IMG_CONTAINER: "img-container",
+    IMG: "img",
     STATS: "stats",
 };
 //# sourceMappingURL=constants.js.map

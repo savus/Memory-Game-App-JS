@@ -1,8 +1,22 @@
 .card-container {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
   width: 255px;
+}
+
+.card .card-name {
+  text-align: center;
+  font-size: 20px;
+}
+
+.card .img-container img {
+  width: 100%;
+  object-fit: cover;
+  background-position: center;
 }

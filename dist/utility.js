@@ -36,7 +36,8 @@ export const buildCardHTML = (data) => {
     // </div>
     const card = document.createElement("div");
     const name = document.createElement("div");
-    const img_container = document.createElement("img");
+    const img_container = document.createElement("div");
+    const img = document.createElement("img");
     const type = document.createElement("div");
     const stats = document.createElement("div");
     const hp = document.createElement("div");
@@ -49,7 +50,8 @@ export const buildCardHTML = (data) => {
     name.className = CSS_CLASSES.CARD_NAME;
     name.innerHTML = data.name;
     img_container.className = CSS_CLASSES.IMG_CONTAINER;
-    img_container.src = data.img;
+    img.className = CSS_CLASSES.IMG;
+    img.src = data.img;
     type.innerHTML = `Type: ${data.type}`;
     stats.className = CSS_CLASSES.STATS;
     hp.innerHTML = `hp: ${data.hp}`;
@@ -58,6 +60,7 @@ export const buildCardHTML = (data) => {
     special_attack.innerHTML = `special_attack: ${data.special_attack}`;
     special_defense.innerHTML = `special_defense: ${data.special_defense}`;
     speed.innerHTML = `speed: ${data.speed}`;
+    img_container.appendChild(img);
     stats.append(hp, attack, defense, special_attack, special_defense, speed);
     card.append(name, img_container, type, stats);
     card.metaData = data;
