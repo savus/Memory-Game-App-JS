@@ -4,6 +4,7 @@ export declare const CSS_CLASSES: {
     CARD: string;
     CARD_NAME: string;
     IMG_CONTAINER: string;
+    CARD_IMG: string;
     IMG: string;
     STATS: string;
 };

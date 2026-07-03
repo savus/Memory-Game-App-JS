@@ -22,10 +22,12 @@ export const buildCardHTML = (data: TPokemon) => {
   // <div class="card">
   //   <div class="name">Pikachu</div>
   //   <div class="img-container">
-  //     <img
-  //       src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-  //       alt=""
-  //     />
+  //     <div class="card-img">
+  //       <img
+  //         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+  //         alt=""
+  //       />
+  //     </div>
   //   </div>
   //   <div>Type: Electric</div>
   //   <div class="stats">
@@ -43,6 +45,7 @@ export const buildCardHTML = (data: TPokemon) => {
 
   const name = document.createElement("div");
   const img_container = document.createElement("div");
+  const card_img = document.createElement("div");
   const img = document.createElement("img");
   const type = document.createElement("div");
   const stats = document.createElement("div");
@@ -57,6 +60,7 @@ export const buildCardHTML = (data: TPokemon) => {
   name.className = CSS_CLASSES.CARD_NAME;
   name.innerHTML = data.name;
   img_container.className = CSS_CLASSES.IMG_CONTAINER;
+  card_img.className = CSS_CLASSES.CARD_IMG;
   img.className = CSS_CLASSES.IMG;
   img.src = data.img;
   type.innerHTML = `Type: ${data.type}`;
@@ -68,7 +72,8 @@ export const buildCardHTML = (data: TPokemon) => {
   special_defense.innerHTML = `special_defense: ${data.special_defense}`;
   speed.innerHTML = `speed: ${data.speed}`;
 
-  img_container.appendChild(img);
+  card_img.appendChild(img);
+  img_container.appendChild(card_img);
   stats.append(hp, attack, defense, special_attack, special_defense, speed);
 
   card.append(name, img_container, type, stats);
