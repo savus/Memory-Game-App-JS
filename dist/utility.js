@@ -1,4 +1,5 @@
 import { card_container, cardData } from "./app.js";
+import { cardOnClick } from "./eventListeners.js";
 export const convertToTSObject = (data) => {
     return {
         name: data.name,
@@ -34,39 +35,29 @@ export const buildCardHTML = (data) => {
     // </div>
     const card = document.createElement("div");
     const name = document.createElement("div");
-    name.innerHTML = data.name;
     const img_container = document.createElement("img");
-    img_container.src = data.img;
     const type = document.createElement("div");
-    type.innerHTML = `Type: ${data.type}`;
-    card.append(name, img_container, type);
     const stats = document.createElement("div");
     const hp = document.createElement("div");
-    hp.innerHTML = `hp: ${data.hp}`;
     const attack = document.createElement("div");
-    attack.innerHTML = `attack: ${data.attack}`;
     const defense = document.createElement("div");
-    defense.innerHTML = `defense: ${data.defense}`;
     const special_attack = document.createElement("div");
-    special_attack.innerHTML = `special_attack: ${data.special_attack}`;
     const special_defense = document.createElement("div");
-    special_defense.innerHTML = `special_defense: ${data.special_defense}`;
     const speed = document.createElement("div");
+    name.innerHTML = data.name;
+    img_container.src = data.img;
+    type.innerHTML = `Type: ${data.type}`;
+    hp.innerHTML = `hp: ${data.hp}`;
+    attack.innerHTML = `attack: ${data.attack}`;
+    defense.innerHTML = `defense: ${data.defense}`;
+    special_attack.innerHTML = `special_attack: ${data.special_attack}`;
+    special_defense.innerHTML = `special_defense: ${data.special_defense}`;
     speed.innerHTML = `speed: ${data.speed}`;
-    stats.append(hp, attack, defense, special_attack, special_defense, speed);
+    stats.append(name, img_container, type, hp, attack, defense, special_attack, special_defense, speed);
     card.append(stats);
     card.metaData = data;
     card.addEventListener("click", () => {
-        if (card.metaData) {
-            if (card.metaData.isFaceUp) {
-                card.metaData.isFaceUp = false;
-                card.style.backgroundColor = "white";
-            }
-            else {
-                card.metaData.isFaceUp = true;
-                card.style.backgroundColor = "red";
-            }
-        }
+        cardOnClick(card);
     });
     return card;
 };
