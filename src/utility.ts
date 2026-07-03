@@ -1,4 +1,5 @@
 import { card_container, cardData } from "./app.js";
+import { CSS_CLASSES } from "./constants.js";
 import { cardOnClick } from "./eventListeners.js";
 import type { TPokemon } from "./types.js";
 
@@ -51,9 +52,13 @@ export const buildCardHTML = (data: TPokemon) => {
   const special_defense = document.createElement("div");
   const speed = document.createElement("div");
 
+  card.className = CSS_CLASSES.CARD;
+  name.className = CSS_CLASSES.CARD_NAME;
   name.innerHTML = data.name;
+  img_container.className = CSS_CLASSES.IMG_CONTAINER;
   img_container.src = data.img;
   type.innerHTML = `Type: ${data.type}`;
+  stats.className = CSS_CLASSES.STATS;
   hp.innerHTML = `hp: ${data.hp}`;
   attack.innerHTML = `attack: ${data.attack}`;
   defense.innerHTML = `defense: ${data.defense}`;
@@ -61,19 +66,9 @@ export const buildCardHTML = (data: TPokemon) => {
   special_defense.innerHTML = `special_defense: ${data.special_defense}`;
   speed.innerHTML = `speed: ${data.speed}`;
 
-  stats.append(
-    name,
-    img_container,
-    type,
-    hp,
-    attack,
-    defense,
-    special_attack,
-    special_defense,
-    speed,
-  );
+  stats.append(hp, attack, defense, special_attack, special_defense, speed);
 
-  card.append(stats);
+  card.append(name, img_container, type, stats);
   card.metaData = data;
 
   card.addEventListener("click", () => {
