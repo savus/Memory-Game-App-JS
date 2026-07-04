@@ -46,6 +46,7 @@ export const buildCardHTML = (data: TPokemon) => {
     metaData?: TPokemon;
   };
 
+  const cardBody = document.createElement("div");
   const cardInner = document.createElement("div");
   const name = document.createElement("div");
   const img_container = document.createElement("div");
@@ -62,6 +63,7 @@ export const buildCardHTML = (data: TPokemon) => {
   const cardBack = document.createElement("div");
 
   cardOuter.className = `${CSS_CLASSES.CARD_OUTER} face-down`;
+  cardBody.className = CSS_CLASSES.CARD_BODY;
   cardInner.className = CSS_CLASSES.CARD_INNER;
   name.className = CSS_CLASSES.CARD_NAME;
   name.innerHTML = data.name;
@@ -84,16 +86,9 @@ export const buildCardHTML = (data: TPokemon) => {
   stats.append(hp, attack, defense, special_attack, special_defense, speed);
 
   cardInner.append(name, img_container, type, stats);
-  cardOuter.append(cardInner, cardBack);
+  cardBody.append(cardInner, cardBack);
+  cardOuter.appendChild(cardBody);
   cardOuter.metaData = data;
-
-  cardOuter.addEventListener("mouseover", () => {
-    cardOuter.classList.remove("face-down");
-  });
-
-  cardOuter.addEventListener("mouseleave", () => {
-    cardOuter.classList.add("face-down");
-  });
 
   cardOuter.addEventListener("click", () => {
     cardOnClick(cardOuter);
@@ -104,6 +99,7 @@ export const buildCardHTML = (data: TPokemon) => {
 
 export const populateCard = (data: TPokemon) => {
   const card = buildCardHTML(data);
+  console.log(card.metaData?.isFaceUp);
   return card_container.appendChild(card);
 };
 

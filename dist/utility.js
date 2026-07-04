@@ -40,6 +40,7 @@ export const buildCardHTML = (data) => {
     //   <div class="card-back"></div>
     // </div>
     const cardOuter = document.createElement("div");
+    const cardBody = document.createElement("div");
     const cardInner = document.createElement("div");
     const name = document.createElement("div");
     const img_container = document.createElement("div");
@@ -55,6 +56,7 @@ export const buildCardHTML = (data) => {
     const speed = document.createElement("div");
     const cardBack = document.createElement("div");
     cardOuter.className = `${CSS_CLASSES.CARD_OUTER} face-down`;
+    cardBody.className = CSS_CLASSES.CARD_BODY;
     cardInner.className = CSS_CLASSES.CARD_INNER;
     name.className = CSS_CLASSES.CARD_NAME;
     name.innerHTML = data.name;
@@ -75,14 +77,9 @@ export const buildCardHTML = (data) => {
     img_container.appendChild(card_img);
     stats.append(hp, attack, defense, special_attack, special_defense, speed);
     cardInner.append(name, img_container, type, stats);
-    cardOuter.append(cardInner, cardBack);
+    cardBody.append(cardInner, cardBack);
+    cardOuter.appendChild(cardBody);
     cardOuter.metaData = data;
-    cardOuter.addEventListener("mouseover", () => {
-        cardOuter.classList.remove("face-down");
-    });
-    cardOuter.addEventListener("mouseleave", () => {
-        cardOuter.classList.add("face-down");
-    });
     cardOuter.addEventListener("click", () => {
         cardOnClick(cardOuter);
     });
@@ -90,6 +87,7 @@ export const buildCardHTML = (data) => {
 };
 export const populateCard = (data) => {
     const card = buildCardHTML(data);
+    console.log(card.metaData?.isFaceUp);
     return card_container.appendChild(card);
 };
 export const populateAllCards = (array) => {

@@ -3,6 +3,7 @@ export const pokeNames = ["pikachu", "ditto", "charmander", "bulbasaur"];
 export const CSS_CLASSES = {
   CARD_CONTAINER: "card-container",
   CARD_OUTER: "card-outer",
+  CARD_BODY: "card-body",
   CARD_INNER: "card-inner",
   CARD_BACK: "card-back",
   CARD_NAME: "card-name",
@@ -10,4 +11,5 @@ export const CSS_CLASSES = {
   CARD_IMG: "card-img",
   IMG: "img",
   STATS: "stats",
+  FACE_DOWN: "face-down",
 };
