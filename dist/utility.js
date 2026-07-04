@@ -16,27 +16,31 @@ export const convertToTSObject = (data) => {
     };
 };
 export const buildCardHTML = (data) => {
-    // <div class="card">
-    //   <div class="name">Pikachu</div>
-    //   <div class="img-container">
-    //     <div class="card-img">
-    //       <img
-    //         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-    //         alt=""
-    //       />
+    // <div class="card-outer">
+    //   <div class="card-inner">
+    //     <div class="name">Pikachu</div>
+    //     <div class="img-container">
+    //       <div class="card-img">
+    //         <img
+    //           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+    //           alt=""
+    //         />
+    //       </div>
+    //     </div>
+    //     <div>Type: Electric</div>
+    //     <div class="stats">
+    //       <div>hp: 30</div>
+    //       <div>attack: 30</div>
+    //       <div>defense: 30</div>
+    //       <div>special_attack: 30</div>
+    //       <div>special_defense: 30</div>
+    //       <div>speed: 30</div>
     //     </div>
     //   </div>
-    //   <div>Type: Electric</div>
-    //   <div class="stats">
-    //     <div>hp: 30</div>
-    //     <div>attack: 30</div>
-    //     <div>defense: 30</div>
-    //     <div>special_attack: 30</div>
-    //     <div>special_defense: 30</div>
-    //     <div>speed: 30</div>
-    //   </div>
+    //   <div class="card-back"></div>
     // </div>
-    const card = document.createElement("div");
+    const cardOuter = document.createElement("div");
+    const cardInner = document.createElement("div");
     const name = document.createElement("div");
     const img_container = document.createElement("div");
     const card_img = document.createElement("div");
@@ -49,7 +53,9 @@ export const buildCardHTML = (data) => {
     const special_attack = document.createElement("div");
     const special_defense = document.createElement("div");
     const speed = document.createElement("div");
-    card.className = CSS_CLASSES.CARD;
+    const cardBack = document.createElement("div");
+    cardOuter.className = `${CSS_CLASSES.CARD_OUTER} face-down`;
+    cardInner.className = CSS_CLASSES.CARD_INNER;
     name.className = CSS_CLASSES.CARD_NAME;
     name.innerHTML = data.name;
     img_container.className = CSS_CLASSES.IMG_CONTAINER;
@@ -64,15 +70,23 @@ export const buildCardHTML = (data) => {
     special_attack.innerHTML = `special_attack: ${data.special_attack}`;
     special_defense.innerHTML = `special_defense: ${data.special_defense}`;
     speed.innerHTML = `speed: ${data.speed}`;
+    cardBack.className = CSS_CLASSES.CARD_BACK;
     card_img.appendChild(img);
     img_container.appendChild(card_img);
     stats.append(hp, attack, defense, special_attack, special_defense, speed);
-    card.append(name, img_container, type, stats);
-    card.metaData = data;
-    card.addEventListener("click", () => {
-        cardOnClick(card);
+    cardInner.append(name, img_container, type, stats);
+    cardOuter.append(cardInner, cardBack);
+    cardOuter.metaData = data;
+    cardOuter.addEventListener("mouseover", () => {
+        cardOuter.classList.remove("face-down");
     });
-    return card;
+    cardOuter.addEventListener("mouseleave", () => {
+        cardOuter.classList.add("face-down");
+    });
+    cardOuter.addEventListener("click", () => {
+        cardOnClick(cardOuter);
+    });
+    return cardOuter;
 };
 export const populateCard = (data) => {
     const card = buildCardHTML(data);
