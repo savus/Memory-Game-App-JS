@@ -1,4 +1,5 @@
-import { pokemon } from "./app.js";
+import { pokemonData } from "./app.js";
+import { dummyColors, dummyTypes, pokeNames } from "./constants.js";
 import type { TPokemon } from "./types.js";
 import { convertToTSObject } from "./utility.js";
 
@@ -10,10 +11,11 @@ export const API_REQUESTS = {
 
     if (!response.ok) {
       console.log("error occured");
+
       return {
-        name: "unkonwn",
-        img: "unknown",
-        type: "unkonwn",
+        name: endpoint,
+        img: dummyColors[Math.floor(Math.random() * dummyColors.length + 1)]!,
+        type: dummyTypes[Math.floor(Math.random() * dummyTypes.length + 1)]!,
         hp: "30",
         attack: "30",
         defense: "30",
@@ -27,10 +29,10 @@ export const API_REQUESTS = {
     return convertToTSObject(await response.json());
   },
 
-  fetchAllData: (array: string[]) => {
+  fetchAllPokemon: (array: string[]) => {
     return Promise.all(array.map((name) => API_REQUESTS.fetchData(name))).then(
       (data) => {
-        Array.from(data).forEach((mon) => pokemon.push(mon));
+        Array.from(data).forEach((mon) => pokemonData.push(mon));
       },
     );
   },

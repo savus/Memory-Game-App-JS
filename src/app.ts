@@ -6,7 +6,7 @@ import { displayAllFaceStatuses, populateAllCards } from "./utility.js";
 export const card_container = document.querySelector(
   `.${CSS_CLASSES.CARD_CONTAINER}`,
 )!;
-export const pokemon: TPokemon[] = [];
+export const pokemonData: TPokemon[] = [];
 export const cardData: TPokemon[] = [];
 
 const generateCardData = (array: TPokemon[]) => {
@@ -19,11 +19,11 @@ const generateCardData = (array: TPokemon[]) => {
 };
 
 const runGame = () => {
-  generateCardData(pokemon);
+  generateCardData(pokemonData);
   populateAllCards(cardData);
 };
 
-API_REQUESTS.fetchAllData(pokeNames).finally(runGame);
+API_REQUESTS.fetchAllPokemon(pokeNames).finally(runGame);
 
 document.addEventListener("keyup", (e) => {
   const key = e.key;

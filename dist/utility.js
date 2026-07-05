@@ -16,29 +16,6 @@ export const convertToTSObject = (data) => {
     };
 };
 export const buildCardHTML = (data) => {
-    // <div class="card-outer">
-    //   <div class="card-inner">
-    //     <div class="name">Pikachu</div>
-    //     <div class="img-container">
-    //       <div class="card-img">
-    //         <img
-    //           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-    //           alt=""
-    //         />
-    //       </div>
-    //     </div>
-    //     <div>Type: Electric</div>
-    //     <div class="stats">
-    //       <div>hp: 30</div>
-    //       <div>attack: 30</div>
-    //       <div>defense: 30</div>
-    //       <div>special_attack: 30</div>
-    //       <div>special_defense: 30</div>
-    //       <div>speed: 30</div>
-    //     </div>
-    //   </div>
-    //   <div class="card-back"></div>
-    // </div>
     const cardOuter = document.createElement("div");
     const cardBody = document.createElement("div");
     const cardInner = document.createElement("div");
