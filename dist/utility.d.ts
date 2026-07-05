@@ -3,6 +3,8 @@ export declare const convertToTSObject: (data: any) => TPokemon;
 export declare const buildCardHTML: (data: TPokemon) => HTMLElement & {
     metaData?: TPokemon;
 };
+export declare const spliceRandomItem: (array: string[]) => string | undefined;
+export declare const buildDummyData: (endpoint: string) => TPokemon;
 export declare const populateCard: (data: TPokemon) => HTMLElement & {
     metaData?: TPokemon;
 };

@@ -1,5 +1,5 @@
-import { API_REQUESTS, spliceRandomItem } from "./api.js";
-import { CSS_CLASSES, dummyColors, dummyTypes, pokeNames, } from "./constants.js";
+import { API_REQUESTS } from "./api.js";
+import { CSS_CLASSES, pokeNames } from "./constants.js";
 import { displayAllFaceStatuses, populateAllCards } from "./utility.js";
 export const card_container = document.querySelector(`.${CSS_CLASSES.CARD_CONTAINER}`);
 export const pokemonData = [];

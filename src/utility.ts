@@ -1,5 +1,5 @@
 import { card_container, cardData } from "./app.js";
-import { CSS_CLASSES } from "./constants.js";
+import { CSS_CLASSES, dummyColors, dummyTypes } from "./constants.js";
 import { cardOnClick } from "./eventListeners.js";
 import type { TPokemon } from "./types.js";
 
@@ -76,6 +76,32 @@ export const buildCardHTML = (data: TPokemon) => {
   });
 
   return cardOuter;
+};
+
+export const spliceRandomItem = (array: string[]) => {
+  const random = Math.floor(Math.random() * array.length);
+
+  return array.splice(random, 1)[0];
+};
+
+export const buildDummyData = (endpoint: string): TPokemon => {
+  const dummyColor = spliceRandomItem(dummyColors)!;
+
+  const dummyType = spliceRandomItem(dummyTypes)!;
+
+  return {
+    name: endpoint,
+    img: dummyColor,
+    type: dummyType,
+    hp: "30",
+    attack: "30",
+    defense: "30",
+    special_attack: "30",
+    special_defense: "30",
+    speed: "30",
+    isFaceUp: false,
+    isDummyData: true,
+  };
 };
 
 export const populateCard = (data: TPokemon) => {
