@@ -15,6 +15,7 @@ export const convertToTSObject = (data: any): TPokemon => {
     special_defense: data.stats[4].base_stat,
     speed: data.stats[5].base_stat,
     isFaceUp: false,
+    isDummyData: false,
   };
 };
 
@@ -28,6 +29,7 @@ export const buildCardHTML = (data: TPokemon) => {
   const name = document.createElement("div");
   const img_container = document.createElement("div");
   const card_img = document.createElement("div");
+  const dummy_color = document.createElement("div");
   const img = document.createElement("img");
   const type = document.createElement("div");
   const stats = document.createElement("div");
@@ -39,13 +41,15 @@ export const buildCardHTML = (data: TPokemon) => {
   const speed = document.createElement("div");
   const cardBack = document.createElement("div");
 
-  cardOuter.className = `${CSS_CLASSES.CARD_OUTER} face-down`;
+  cardOuter.className = `${CSS_CLASSES.CARD_OUTER} face-down ${data.isDummyData ? "dummy-card" : ""}`;
   cardBody.className = CSS_CLASSES.CARD_BODY;
   cardInner.className = CSS_CLASSES.CARD_INNER;
   name.className = CSS_CLASSES.CARD_NAME;
   name.innerHTML = data.name;
   img_container.className = CSS_CLASSES.IMG_CONTAINER;
   card_img.className = CSS_CLASSES.CARD_IMG;
+  dummy_color.className = "dummy-color";
+  dummy_color.style.backgroundColor = data.img;
   img.className = CSS_CLASSES.IMG;
   img.src = data.img;
   type.innerHTML = `Type: ${data.type}`;
@@ -58,7 +62,7 @@ export const buildCardHTML = (data: TPokemon) => {
   speed.innerHTML = `speed: ${data.speed}`;
   cardBack.className = CSS_CLASSES.CARD_BACK;
 
-  card_img.appendChild(img);
+  card_img.append(img, dummy_color);
   img_container.appendChild(card_img);
   stats.append(hp, attack, defense, special_attack, special_defense, speed);
 

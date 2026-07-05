@@ -1,5 +1,10 @@
-import { API_REQUESTS } from "./api.js";
-import { CSS_CLASSES, pokeNames } from "./constants.js";
+import { API_REQUESTS, spliceRandomItem } from "./api.js";
+import {
+  CSS_CLASSES,
+  dummyColors,
+  dummyTypes,
+  pokeNames,
+} from "./constants.js";
 import type { TPokemon } from "./types.js";
 import { displayAllFaceStatuses, populateAllCards } from "./utility.js";
 

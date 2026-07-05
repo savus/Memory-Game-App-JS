@@ -9,4 +9,5 @@ export type TPokemon = {
   special_defense: string;
   speed: string;
   isFaceUp: boolean;
+  isDummyData: boolean;
 };

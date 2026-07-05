@@ -5,6 +5,32 @@ import { convertToTSObject } from "./utility.js";
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
+export const spliceRandomItem = (array: string[]) => {
+  const random = Math.floor(Math.random() * array.length);
+
+  return array.splice(random, 1)[0];
+};
+
+export const buildDummyData = (endpoint: string): TPokemon => {
+  const dummyColor = spliceRandomItem(dummyColors)!;
+
+  const dummyType = spliceRandomItem(dummyTypes)!;
+
+  return {
+    name: endpoint,
+    img: dummyColor,
+    type: dummyType,
+    hp: "30",
+    attack: "30",
+    defense: "30",
+    special_attack: "30",
+    special_defense: "30",
+    speed: "30",
+    isFaceUp: false,
+    isDummyData: true,
+  };
+};
+
 export const API_REQUESTS = {
   fetchData: async (endpoint: string): Promise<TPokemon> => {
     const response = await fetch(`${BASE_URL}${endpoint}`);
@@ -12,18 +38,7 @@ export const API_REQUESTS = {
     if (!response.ok) {
       console.log("error occured");
 
-      return {
-        name: endpoint,
-        img: dummyColors[Math.floor(Math.random() * dummyColors.length + 1)]!,
-        type: dummyTypes[Math.floor(Math.random() * dummyTypes.length + 1)]!,
-        hp: "30",
-        attack: "30",
-        defense: "30",
-        special_attack: "30",
-        special_defense: "30",
-        speed: "30",
-        isFaceUp: false,
-      };
+      return buildDummyData(endpoint);
     }
 
     return convertToTSObject(await response.json());
