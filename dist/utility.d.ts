@@ -8,4 +8,5 @@ export declare const populateCard: (data: TPokemon) => HTMLElement & {
 };
 export declare const populateAllCards: (array: TPokemon[]) => void;
 export declare const displayAllFaceStatuses: () => void;
+export declare function shuffleInPlace<T>(array: T[]): T[];
 //# sourceMappingURL=utility.d.ts.map

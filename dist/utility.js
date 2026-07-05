@@ -87,15 +87,25 @@ export const buildCardHTML = (data) => {
 };
 export const populateCard = (data) => {
     const card = buildCardHTML(data);
-    console.log(card.metaData?.isFaceUp);
     return card_container.appendChild(card);
 };
 export const populateAllCards = (array) => {
-    array.forEach((mon) => {
+    let shuffledArray = [];
+    for (let i = 0; i <= 10; i++) {
+        shuffledArray = shuffleInPlace(array);
+    }
+    shuffledArray.forEach((mon) => {
         populateCard(mon);
     });
 };
 export const displayAllFaceStatuses = () => {
     console.log(cardData.map((card) => card.isFaceUp));
 };
+export function shuffleInPlace(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 //# sourceMappingURL=utility.js.map

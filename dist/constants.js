@@ -1,4 +1,16 @@
-export const pokeNames = ["pikachu", "ditto", "charmander", "bulbasaur"];
+export const pokeNames = [
+    "pikachu",
+    "ditto",
+    "charmander",
+    "bulbasaur",
+    "abra",
+    "goldeen",
+    "articuno",
+    "diglett",
+    // "aegislash",
+    // "kabuto",
+    // "kabutops",
+];
 export const CSS_CLASSES = {
     CARD_CONTAINER: "card-container",
     CARD_OUTER: "card-outer",
