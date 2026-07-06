@@ -1,6 +1,6 @@
 import { API_REQUESTS } from "./api.js";
 import { CSS_CLASSES, pokeNames } from "./constants.js";
-import { displayAllFaceStatuses, generateCardData, populateAllCards, wait, } from "./utility.js";
+import { displayAllFaceStatuses, generateCardData, populateAllCards, } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -27,8 +27,6 @@ export const cardData = [];
 const runGame = async () => {
     generateCardData(pokemonData);
     populateAllCards(cardData);
-    await wait(3000);
-    card_container.children[0]?.classList.remove(CSS_CLASSES.FACE_DOWN);
 };
 API_REQUESTS.fetchAllPokemon(pokeNames).finally(runGame);
 document.addEventListener("keyup", (e) => {

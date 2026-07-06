@@ -1,7 +1,7 @@
 import { card_container, cardData, dummyColors, dummyTypes } from "./app.js";
 import { CSS_CLASSES } from "./constants.js";
 import { cardOnClick } from "./eventListeners.js";
-import type { TPokemon } from "./types.js";
+import type { TPokemon, TPokemon_Dom } from "./types.js";
 
 export const convertToTSObject = (data: any): TPokemon => {
   return {
@@ -20,9 +20,7 @@ export const convertToTSObject = (data: any): TPokemon => {
 };
 
 export const buildCardHTML = (data: TPokemon) => {
-  const cardOuter = document.createElement("div") as HTMLElement & {
-    metaData?: TPokemon;
-  };
+  const cardOuter: TPokemon_Dom = document.createElement("div");
 
   const cardBody = document.createElement("div");
   const cardInner = document.createElement("div");

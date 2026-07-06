@@ -5,7 +5,6 @@ import {
   displayAllFaceStatuses,
   generateCardData,
   populateAllCards,
-  wait,
 } from "./utility.js";
 
 export const dummyColors = [
