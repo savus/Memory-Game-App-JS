@@ -1,4 +1,11 @@
-import { card_container, cardData, dummyColors, dummyTypes } from "./app.js";
+import {
+  allCards,
+  card_container,
+  cardData,
+  dummyColors,
+  dummyTypes,
+} from "./app.js";
+import Card from "./Card.js";
 import { CSS_CLASSES } from "./constants.js";
 import { cardOnClick } from "./eventListeners.js";
 import type { TPokemon, TPokemon_Dom } from "./types.js";
@@ -14,7 +21,6 @@ export const convertToTSObject = (data: any): TPokemon => {
     special_attack: data.stats[3].base_stat,
     special_defense: data.stats[4].base_stat,
     speed: data.stats[5].base_stat,
-    isFaceUp: false,
     isDummyData: false,
   };
 };
@@ -97,17 +103,20 @@ export const buildDummyData = (endpoint: string): TPokemon => {
     special_attack: "30",
     special_defense: "30",
     speed: "30",
-    isFaceUp: false,
     isDummyData: true,
   };
 };
 
-export const populateCard = (data: TPokemon) => {
-  const card = buildCardHTML(data);
-  return card_container.appendChild(card);
+export const createAndAppendCard = (data: TPokemon) => {
+  const cardHTML = buildCardHTML(data);
+  const card = new Card(cardHTML, data);
+
+  allCards.push(card);
+
+  return card_container.appendChild(cardHTML);
 };
 
-export const populateAllCards = (array: TPokemon[]) => {
+export const createAndAppendAllCards = (array: TPokemon[]) => {
   let shuffledArray: TPokemon[] = [];
 
   for (let i = 0; i <= 10; i++) {
@@ -115,12 +124,8 @@ export const populateAllCards = (array: TPokemon[]) => {
   }
 
   shuffledArray.forEach((mon) => {
-    populateCard(mon);
+    createAndAppendCard(mon);
   });
-};
-
-export const displayAllFaceStatuses = () => {
-  console.log(cardData.map((card) => card.isFaceUp));
 };
 
 export function shuffleInPlace<T>(array: T[]): T[] {
@@ -144,3 +149,9 @@ export const wait = async (miliseconds: number) =>
   new Promise((resolve) => {
     return setTimeout(resolve, miliseconds);
   });
+
+export const flipAllCardsDown = (array: Card[]) => {
+  array.forEach((card) => {
+    card.flipCardDown();
+  });
+};

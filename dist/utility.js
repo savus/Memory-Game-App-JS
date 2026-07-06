@@ -1,4 +1,5 @@
-import { card_container, cardData, dummyColors, dummyTypes } from "./app.js";
+import { allCards, card_container, cardData, dummyColors, dummyTypes, } from "./app.js";
+import Card from "./Card.js";
 import { CSS_CLASSES } from "./constants.js";
 import { cardOnClick } from "./eventListeners.js";
 export const convertToTSObject = (data) => {
@@ -12,7 +13,6 @@ export const convertToTSObject = (data) => {
         special_attack: data.stats[3].base_stat,
         special_defense: data.stats[4].base_stat,
         speed: data.stats[5].base_stat,
-        isFaceUp: false,
         isDummyData: false,
     };
 };
@@ -83,25 +83,23 @@ export const buildDummyData = (endpoint) => {
         special_attack: "30",
         special_defense: "30",
         speed: "30",
-        isFaceUp: false,
         isDummyData: true,
     };
 };
-export const populateCard = (data) => {
-    const card = buildCardHTML(data);
-    return card_container.appendChild(card);
+export const createAndAppendCard = (data) => {
+    const cardHTML = buildCardHTML(data);
+    const card = new Card(cardHTML, data);
+    allCards.push(card);
+    return card_container.appendChild(cardHTML);
 };
-export const populateAllCards = (array) => {
+export const createAndAppendAllCards = (array) => {
     let shuffledArray = [];
     for (let i = 0; i <= 10; i++) {
         shuffledArray = shuffleInPlace(array);
     }
     shuffledArray.forEach((mon) => {
-        populateCard(mon);
+        createAndAppendCard(mon);
     });
-};
-export const displayAllFaceStatuses = () => {
-    console.log(cardData.map((card) => card.isFaceUp));
 };
 export function shuffleInPlace(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -121,4 +119,9 @@ export const generateCardData = (array) => {
 export const wait = async (miliseconds) => new Promise((resolve) => {
     return setTimeout(resolve, miliseconds);
 });
+export const flipAllCardsDown = (array) => {
+    array.forEach((card) => {
+        card.flipCardDown();
+    });
+};
 //# sourceMappingURL=utility.js.map

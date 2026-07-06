@@ -1,6 +1,7 @@
 import { API_REQUESTS } from "./api.js";
+import Card from "./Card.js";
 import { CSS_CLASSES, pokeNames } from "./constants.js";
-import { displayAllFaceStatuses, generateCardData, populateAllCards, } from "./utility.js";
+import { buildCardHTML, generateCardData, createAndAppendAllCards, } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -21,17 +22,19 @@ export const dummyTypes = [
     "WOA MAMA",
     "Hi",
 ];
-export const card_container = document.querySelector(`.${CSS_CLASSES.CARD_CONTAINER}`);
+export const allCards = [];
 export const pokemonData = [];
 export const cardData = [];
+export const card_container = document.querySelector(`.${CSS_CLASSES.CARD_CONTAINER}`);
 const runGame = async () => {
     generateCardData(pokemonData);
-    populateAllCards(cardData);
+    createAndAppendAllCards(cardData);
+    console.log(cardData, allCards);
 };
-API_REQUESTS.fetchAllPokemon(pokeNames).finally(runGame);
+API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
+    runGame();
+});
 document.addEventListener("keyup", (e) => {
     const key = e.key;
-    if (key === "Enter")
-        displayAllFaceStatuses();
 });
 //# sourceMappingURL=app.js.map
