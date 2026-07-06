@@ -1,5 +1,5 @@
-import { card_container, cardData } from "./app.js";
-import { CSS_CLASSES, dummyColors, dummyTypes } from "./constants.js";
+import { card_container, cardData, dummyColors, dummyTypes } from "./app.js";
+import { CSS_CLASSES } from "./constants.js";
 import { cardOnClick } from "./eventListeners.js";
 export const convertToTSObject = (data) => {
     return {
@@ -110,4 +110,15 @@ export function shuffleInPlace(array) {
     }
     return array;
 }
+export const generateCardData = (array) => {
+    array.forEach((item) => {
+        const clone1 = { ...item };
+        const clone2 = { ...item };
+        cardData.push(clone1);
+        cardData.push(clone2);
+    });
+};
+export const wait = async (miliseconds) => new Promise((resolve) => {
+    return setTimeout(resolve, miliseconds);
+});
 //# sourceMappingURL=utility.js.map

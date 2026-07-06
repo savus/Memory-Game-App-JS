@@ -9,28 +9,6 @@ export const pokeNames = [
   "diglett",
 ];
 
-export const dummyColors = [
-  "#e80a0a",
-  "#0ed3e5",
-  "#d8d512",
-  "#0a2e91",
-  "#02b61d",
-  "#c205a0",
-  "#c78004",
-  "#000",
-];
-
-export const dummyTypes = [
-  "Frank",
-  "Burger",
-  "Twenty-three",
-  "Meow",
-  "Hannigan-Montgomery",
-  "ERWERILWEIRW",
-  "WOA MAMA",
-  "Hi",
-];
-
 export const CSS_CLASSES = {
   CARD_CONTAINER: "card-container",
   CARD_OUTER: "card-outer",

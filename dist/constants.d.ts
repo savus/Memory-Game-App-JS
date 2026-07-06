@@ -1,6 +1,4 @@
 export declare const pokeNames: string[];
-export declare const dummyColors: string[];
-export declare const dummyTypes: string[];
 export declare const CSS_CLASSES: {
     CARD_CONTAINER: string;
     CARD_OUTER: string;

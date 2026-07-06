@@ -1,5 +1,5 @@
-import { card_container, cardData } from "./app.js";
-import { CSS_CLASSES, dummyColors, dummyTypes } from "./constants.js";
+import { card_container, cardData, dummyColors, dummyTypes } from "./app.js";
+import { CSS_CLASSES } from "./constants.js";
 import { cardOnClick } from "./eventListeners.js";
 import type { TPokemon } from "./types.js";
 
@@ -132,3 +132,17 @@ export function shuffleInPlace<T>(array: T[]): T[] {
   }
   return array;
 }
+
+export const generateCardData = (array: TPokemon[]) => {
+  array.forEach((item) => {
+    const clone1 = { ...item };
+    const clone2 = { ...item };
+    cardData.push(clone1);
+    cardData.push(clone2);
+  });
+};
+
+export const wait = async (miliseconds: number) =>
+  new Promise((resolve) => {
+    return setTimeout(resolve, miliseconds);
+  });
