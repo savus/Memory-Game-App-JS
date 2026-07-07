@@ -73,16 +73,17 @@ export const spliceRandomItem = (array) => {
 export const buildDummyData = (endpoint) => {
     const dummyColor = spliceRandomItem(dummyColors);
     const dummyType = spliceRandomItem(dummyTypes);
+    const getRandomNum = () => Math.floor(Math.random() * 100 + 1);
     return {
         name: endpoint,
         img: dummyColor,
         type: dummyType,
-        hp: "30",
-        attack: "30",
-        defense: "30",
-        special_attack: "30",
-        special_defense: "30",
-        speed: "30",
+        hp: `${getRandomNum()}`,
+        attack: `${getRandomNum()}`,
+        defense: `${getRandomNum()}`,
+        special_attack: `${getRandomNum()}`,
+        special_defense: `${getRandomNum()}`,
+        speed: `${getRandomNum()}`,
         isDummyData: true,
     };
 };

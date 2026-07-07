@@ -7,7 +7,6 @@ import {
 } from "./app.js";
 import Card from "./Card.js";
 import { CSS_CLASSES } from "./constants.js";
-import { cardOnClick } from "./eventListeners.js";
 import type { TPokemon, TPokemon_Dom } from "./types.js";
 
 export const convertToTSObject = (data: any): TPokemon => {
@@ -45,14 +44,14 @@ export const buildCardHTML = (data: TPokemon) => {
   const speed = document.createElement("div");
   const cardBack = document.createElement("div");
 
-  cardOuter.className = `${CSS_CLASSES.CARD_OUTER} face-down ${data.isDummyData ? "dummy-card" : ""}`;
+  cardOuter.className = `${CSS_CLASSES.CARD_OUTER} ${CSS_CLASSES.FACE_DOWN} ${data.isDummyData ? CSS_CLASSES.DUMMY_CARD : ""}`;
   cardBody.className = CSS_CLASSES.CARD_BODY;
   cardInner.className = CSS_CLASSES.CARD_INNER;
   name.className = CSS_CLASSES.CARD_NAME;
   name.innerHTML = data.name;
   img_container.className = CSS_CLASSES.IMG_CONTAINER;
   card_img.className = CSS_CLASSES.CARD_IMG;
-  dummy_color.className = "dummy-color";
+  dummy_color.className = CSS_CLASSES.DUMMY_COLOR;
   dummy_color.style.backgroundColor = data.img;
   img.className = CSS_CLASSES.IMG;
   img.src = data.img;
@@ -75,10 +74,6 @@ export const buildCardHTML = (data: TPokemon) => {
   cardOuter.appendChild(cardBody);
   cardOuter.metaData = data;
 
-  cardOuter.addEventListener("click", () => {
-    cardOnClick(cardOuter);
-  });
-
   return cardOuter;
 };
 
@@ -93,16 +88,17 @@ export const buildDummyData = (endpoint: string): TPokemon => {
 
   const dummyType = spliceRandomItem(dummyTypes)!;
 
+  const getRandomNum = () => Math.floor(Math.random() * 100 + 1);
   return {
     name: endpoint,
     img: dummyColor,
     type: dummyType,
-    hp: "30",
-    attack: "30",
-    defense: "30",
-    special_attack: "30",
-    special_defense: "30",
-    speed: "30",
+    hp: `${getRandomNum()}`,
+    attack: `${getRandomNum()}`,
+    defense: `${getRandomNum()}`,
+    special_attack: `${getRandomNum()}`,
+    special_defense: `${getRandomNum()}`,
+    speed: `${getRandomNum()}`,
     isDummyData: true,
   };
 };

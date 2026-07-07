@@ -1,6 +1,5 @@
 import { allCards } from "./app.js";
 import { CSS_CLASSES } from "./constants.js";
-import { cardOnClick } from "./eventListeners.js";
 import Game_Handler from "./game_handler.js";
 import type { TPokemon, TPokemon_Dom } from "./types.js";
 import { flipAllCardsDown, wait } from "./utility.js";

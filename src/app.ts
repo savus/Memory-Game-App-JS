@@ -41,7 +41,6 @@ export const card_container = document.querySelector(
 const runGame = async () => {
   generateCardData(pokemonData);
   createAndAppendAllCards(cardData);
-  console.log(cardData, allCards);
 };
 
 API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
