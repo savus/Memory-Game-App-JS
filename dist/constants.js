@@ -20,5 +20,7 @@ export const CSS_CLASSES = {
     IMG: "img",
     STATS: "stats",
     FACE_DOWN: "face-down",
+    DUMMY_CARD: "dummy-card",
+    DUMMY_COLOR: "dummy-color",
 };
 //# sourceMappingURL=constants.js.map

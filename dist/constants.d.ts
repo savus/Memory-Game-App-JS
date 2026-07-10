@@ -11,5 +11,7 @@ export declare const CSS_CLASSES: {
     IMG: string;
     STATS: string;
     FACE_DOWN: string;
+    DUMMY_CARD: string;
+    DUMMY_COLOR: string;
 };
 //# sourceMappingURL=constants.d.ts.map
