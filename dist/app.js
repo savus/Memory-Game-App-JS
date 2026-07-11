@@ -35,5 +35,10 @@ API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
 });
 document.addEventListener("keyup", (e) => {
     const key = e.key;
+    switch (key) {
+        case "Enter":
+            const displayMessage = document.querySelector(".display-message");
+            displayMessage?.classList.toggle("visible");
+    }
 });
 //# sourceMappingURL=app.js.map
