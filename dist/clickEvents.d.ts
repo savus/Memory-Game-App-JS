@@ -1,5 +1,3 @@
-import type { TPokemon } from "./types.js";
-export declare const cardOnClick: (card: HTMLElement & {
-    metaData?: TPokemon;
-}) => void;
+import type Card from "./Card.js";
+export declare const cardOnClickHandler: (self: Card) => Promise<void>;
 //# sourceMappingURL=clickEvents.d.ts.map

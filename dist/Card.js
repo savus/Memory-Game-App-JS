@@ -1,7 +1,5 @@
-import { allCards } from "./app.js";
+import { cardOnClickHandler } from "./clickEvents.js";
 import { CSS_CLASSES } from "./constants.js";
-import Game_Handler from "./game_handler.js";
-import { flipAllCardsDown, wait } from "./utility.js";
 class Card {
     html;
     cardData;
@@ -10,33 +8,8 @@ class Card {
         this.html = htmlData;
         this.cardData = cardData;
         this.facePosition = "down";
-        this.html.addEventListener("click", async () => {
-            if (Game_Handler.game_state === "choose-card") {
-                if (this.facePosition === "down") {
-                    if (Game_Handler.player_choices[0] === null) {
-                        Game_Handler.player_choices[0] = this.html;
-                        this.flipCardUp();
-                    }
-                    else if (Game_Handler.player_choices[1] === null) {
-                        Game_Handler.player_choices[1] = this.html;
-                        if (Game_Handler.player_choices[0].metaData?.name ===
-                            Game_Handler.player_choices[1].metaData?.name)
-                            console.log("Match!");
-                        else {
-                            console.log("Not a match!");
-                        }
-                        this.flipCardUp();
-                        Game_Handler.player_choices = [null, null];
-                        Game_Handler.game_state = "waiting";
-                        await wait(2000);
-                        Game_Handler.game_state = "choose-card";
-                        flipAllCardsDown(allCards);
-                    }
-                }
-            }
-            else {
-                console.log("sorry, you may not click right now");
-            }
+        this.html.addEventListener("click", () => {
+            cardOnClickHandler(this);
         });
     }
     flipCardUp = () => {

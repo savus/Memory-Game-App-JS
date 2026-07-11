@@ -1,4 +1,4 @@
 import type { TGameHandler } from "./types.js";
 declare const GameHandler: TGameHandler;
 export default GameHandler;
-//# sourceMappingURL=GameHandler.d.ts.map
+//# sourceMappingURL=gameHandler.d.ts.map
