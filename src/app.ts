@@ -47,11 +47,25 @@ API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
   runGame();
 });
 
-document.addEventListener("keyup", (e) => {
+document.addEventListener("keyup", async (e) => {
   const key = e.key;
   switch (key) {
     case "Enter":
       const displayMessage = document.querySelector(".display-message");
-      displayMessage?.classList.toggle("visible");
+      const anim1 = displayMessage?.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: 1000,
+        fill: "forwards",
+      });
+
+      await anim1?.finished;
+
+      const anim2 = displayMessage?.animate(
+        [{ transform: "translateX(0px)" }, { transform: "translateX(100px)" }],
+        { duration: 500, fill: "forwards" },
+      );
+
+      await anim2?.finished;
+
+      console.log("animations finished");
   }
 });

@@ -16,14 +16,6 @@
   align-items: center;
   font-size: 100px;
   color: red;
-  transition: all 0.3s;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.game-message .display-message.visible {
-  opacity: 1;
-  visibility: visible;
 }
 
 .card-container {
