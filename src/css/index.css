@@ -14,8 +14,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 100px;
+  font-size: 33px;
   color: red;
+}
+
+.game-message .display-message li {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-100px);
+  transition: all 0.5s ease;
+}
+
+.game-message.showtime .display-message li:first-child {
+  transition-delay: 0s;
+}
+
+.game-message.showtime .display-message li {
+  transition-delay: calc(0.1s * var(--index));
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
 }
 
 .card-container {
