@@ -2,6 +2,9 @@
   position: fixed;
   z-index: 10;
   pointer-events: none;
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 0.5s;
 }
 
 .game-message,
@@ -18,18 +21,29 @@
   color: red;
 }
 
+.game-message.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.game-message.fade-out {
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
 .game-message .display-message li {
   opacity: 0;
   visibility: hidden;
   transform: translateX(-100px);
   transition: all 0.5s ease;
-}
-
-.game-message.showtime .display-message li:first-child {
   transition-delay: 0s;
 }
 
-.game-message.showtime .display-message li {
+.display-message.showtime li {
+  transition-delay: 0s;
+}
+
+.display-message.showtime li:not(:first-child) {
   transition-delay: calc(0.1s * var(--index));
   transform: translateX(0);
   opacity: 1;

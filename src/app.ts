@@ -6,6 +6,7 @@ import {
   buildCardHTML,
   generateCardData,
   createAndAppendAllCards,
+  wait,
 } from "./utility.js";
 
 export const dummyColors = [
@@ -51,22 +52,74 @@ document.addEventListener("keyup", async (e) => {
   const key = e.key;
   switch (key) {
     case "Enter":
-      const gameMessage = document.querySelector(".game-message");
-      const displayMessage = document.querySelector(".display-message");
-      const anim1 = gameMessage?.animate(
-        {
-          opacity: [0, 1],
-          transform: ["translateX(-100px)", "translateX(0)"],
-        },
-        {
-          fill: "forwards",
-          duration: 500,
-        },
-      );
+      const gameMessage = document.querySelector(
+        ".game-message",
+      ) as HTMLElement;
+      const displayMessage = document.querySelector(
+        ".display-message",
+      ) as HTMLElement;
 
-      await anim1?.finished;
+      function transitionElement(
+        element: HTMLElement,
+        className: string,
+        addOrRemove: boolean,
+      ) {
+        return new Promise((resolve) => {
+          const handleTransitionEnd = () => {
+            element.removeEventListener("transitionend", handleTransitionEnd);
+            resolve(element);
+          };
 
-      gameMessage?.classList.add("showtime");
+          element.addEventListener("transitionend", handleTransitionEnd);
+
+          addOrRemove
+            ? element.classList.add(className)
+            : element.classList.remove(className);
+        });
+      }
+
+      await transitionElement(gameMessage, "visible", true);
+      await transitionElement(displayMessage, "showtime", true);
+      await wait(300);
+      await transitionElement(displayMessage, "showtime", false);
+      await transitionElement(gameMessage, "visible", false);
+      await wait(300);
+      await transitionElement(gameMessage, "visible", true);
+      await transitionElement(displayMessage, "showtime", true);
+
+      // const anim1 = gameMessage?.animate(
+      //   {
+      //     opacity: [0, 1],
+      //     transform: ["translateX(-100px)", "translateX(0)"],
+      //   },
+      //   {
+      //     fill: "forwards",
+      //     duration: 500,
+      //   },
+      // );
+
+      // await anim1?.finished;
+
+      // gameMessage?.classList.add("showtime");
+
+      // await wait(1000);
+
+      // gameMessage?.classList.remove("showtime");
+
+      // await wait(500);
+
+      // const anim2 = gameMessage?.animate(
+      //   {
+      //     opacity: [1, 0],
+      //     transform: ["translateX(0)", "translateX(-100px)"],
+      //   },
+      //   {
+      //     fill: "forwards",
+      //     duration: 500,
+      //   },
+      // );
+
+      // await anim2?.finished;
       // const anim1 = displayMessage?.animate(
       //   {
       //     opacity: [0, 1],
