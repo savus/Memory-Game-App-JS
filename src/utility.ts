@@ -151,3 +151,24 @@ export const flipAllCardsDown = (array: Card[]) => {
     card.flipCardDown();
   });
 };
+
+export const animateElement = async (
+  element: HTMLElement,
+  className: string,
+  animationOrTransition: "animationend" | "transitionend",
+) =>
+  new Promise((resolve) => {
+    const handleListenerEnd = () => {
+      element.removeEventListener(animationOrTransition, handleListenerEnd);
+      resolve(element);
+    };
+
+    element.addEventListener(animationOrTransition, handleListenerEnd);
+
+    element.classList.add(className);
+  });
+
+export const displayGameMessage = async (element: HTMLElement) => {
+  await animateElement(element, "slide", "animationend");
+  element.classList.remove("slide");
+};

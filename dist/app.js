@@ -1,7 +1,7 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { CSS_CLASSES, pokeNames } from "./constants.js";
-import { buildCardHTML, generateCardData, createAndAppendAllCards, } from "./utility.js";
+import { buildCardHTML, generateCardData, createAndAppendAllCards, animateElement, wait, displayGameMessage, } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -37,51 +37,9 @@ document.addEventListener("keyup", async (e) => {
     const key = e.key;
     switch (key) {
         case "Enter":
+            const messageContainer = document.querySelector(".message-container");
             const gameMessage = document.querySelector(".game-message");
-            const displayMessage = document.querySelector(".display-message");
-            const anim1 = gameMessage?.animate({
-                opacity: [0, 1],
-                transform: ["translateX(-100px)", "translateX(0)"],
-            }, {
-                fill: "forwards",
-                duration: 500,
-            });
-            await anim1?.finished;
-            gameMessage?.classList.add("showtime");
-            // const anim1 = displayMessage?.animate(
-            //   {
-            //     opacity: [0, 1],
-            //     transform: ["scale(0)", "scale(1)"],
-            //   },
-            //   {
-            //     fill: "forwards",
-            //     duration: 1000,
-            //   },
-            // );
-            // await anim1?.finished;
-            // const anim2 = displayMessage?.animate(
-            //   {
-            //     opacity: [1, 0],
-            //     transform: ["translateX(0)", "translateX(100px)"],
-            //   },
-            //   {
-            //     fill: "forwards",
-            //     duration: 1000,
-            //   },
-            // );
-            // await anim2?.finished;
-            // alert("Animations finished");
-            // const anim1 = displayMessage?.animate([{ opacity: 0 }, { opacity: 1 }], {
-            //   duration: 1000,
-            //   fill: "forwards",
-            // });
-            // await anim1?.finished;
-            // const anim2 = displayMessage?.animate(
-            //   [{ transform: "translateX(0px)" }, { transform: "translateX(100px)" }],
-            //   { duration: 500, fill: "forwards" },
-            // );
-            // await anim2?.finished;
-            console.log("animations finished");
+            await displayGameMessage(messageContainer);
     }
 });
 //# sourceMappingURL=app.js.map
