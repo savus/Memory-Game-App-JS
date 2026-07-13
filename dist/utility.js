@@ -121,4 +121,16 @@ export const flipAllCardsDown = (array) => {
         card.flipCardDown();
     });
 };
+export const animateElement = async (element, className, animationOrTransition) => new Promise((resolve) => {
+    const handleListenerEnd = () => {
+        element.removeEventListener(animationOrTransition, handleListenerEnd);
+        resolve(element);
+    };
+    element.addEventListener(animationOrTransition, handleListenerEnd);
+    element.classList.add(className);
+});
+export const displayGameMessage = async (element) => {
+    await animateElement(element, "slide", "animationend");
+    element.classList.remove("slide");
+};
 //# sourceMappingURL=utility.js.map

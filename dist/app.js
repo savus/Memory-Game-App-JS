@@ -1,7 +1,11 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { CSS_CLASSES, pokeNames } from "./constants.js";
+<<<<<<< HEAD
 import { buildCardHTML, generateCardData, createAndAppendAllCards, wait, } from "./utility.js";
+=======
+import { buildCardHTML, generateCardData, createAndAppendAllCards, animateElement, wait, displayGameMessage, } from "./utility.js";
+>>>>>>> refs/remotes/origin/feature/CardClickEvent
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -37,7 +41,9 @@ document.addEventListener("keyup", async (e) => {
     const key = e.key;
     switch (key) {
         case "Enter":
+            const messageContainer = document.querySelector(".message-container");
             const gameMessage = document.querySelector(".game-message");
+<<<<<<< HEAD
             const displayMessage = document.querySelector(".display-message");
             function transitionElement(element, className, addOrRemove) {
                 return new Promise((resolve) => {
@@ -119,6 +125,9 @@ document.addEventListener("keyup", async (e) => {
             // );
             // await anim2?.finished;
             console.log("animations finished");
+=======
+            await displayGameMessage(messageContainer);
+>>>>>>> refs/remotes/origin/feature/CardClickEvent
     }
 });
 //# sourceMappingURL=app.js.map
