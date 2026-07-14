@@ -11,5 +11,4 @@ export declare const generateCardData: (array: TPokemon[]) => void;
 export declare const wait: (miliseconds: number) => Promise<unknown>;
 export declare const flipAllCardsDown: (array: Card[]) => void;
 export declare const animateElement: (element: HTMLElement, className: string, animationOrTransition: "animationend" | "transitionend") => Promise<unknown>;
-export declare const displayGameMessage: (element: HTMLElement) => Promise<void>;
 //# sourceMappingURL=utility.d.ts.map

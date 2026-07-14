@@ -1,15 +1,9 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { CSS_CLASSES, pokeNames } from "./constants.js";
+import GameHandler from "./gameHandler.js";
 import type { TPokemon } from "./types.js";
-import {
-  buildCardHTML,
-  generateCardData,
-  createAndAppendAllCards,
-  animateElement,
-  wait,
-  displayGameMessage,
-} from "./utility.js";
+import { generateCardData, createAndAppendAllCards } from "./utility.js";
 
 export const dummyColors = [
   "#e80a0a",
@@ -41,6 +35,14 @@ export const card_container = document.querySelector(
   `.${CSS_CLASSES.CARD_CONTAINER}`,
 )!;
 
+export const messageContainer = document.querySelector(
+  `.${CSS_CLASSES.MESSAGE_CONTAINER}`,
+)! as HTMLElement;
+
+export const gameMessage = document.querySelector(
+  `.${CSS_CLASSES.GAME_MESSAGE}`,
+)!;
+
 const runGame = async () => {
   generateCardData(pokemonData);
   createAndAppendAllCards(cardData);
@@ -54,13 +56,5 @@ document.addEventListener("keyup", async (e) => {
   const key = e.key;
   switch (key) {
     case "Enter":
-      const messageContainer = document.querySelector(
-        ".message-container",
-      ) as HTMLElement;
-      const gameMessage = document.querySelector(
-        ".game-message",
-      ) as HTMLElement;
-
-      await displayGameMessage(messageContainer);
   }
 });

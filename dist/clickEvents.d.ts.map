@@ -1,1 +1,1 @@
-{"version":3,"file":"clickEvents.d.ts","sourceRoot":"","sources":["../src/clickEvents.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,IAAI,MAAM,WAAW,CAAC;AAIlC,eAAO,MAAM,kBAAkB,GAAU,MAAM,IAAI,kBA2BlD,CAAC"}
+{"version":3,"file":"clickEvents.d.ts","sourceRoot":"","sources":["../src/clickEvents.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,IAAI,MAAM,WAAW,CAAC;AAGlC,eAAO,MAAM,kBAAkB,GAAU,MAAM,IAAI,kBAElD,CAAC"}

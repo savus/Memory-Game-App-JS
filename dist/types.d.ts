@@ -1,3 +1,4 @@
+import type Card from "./Card.js";
 export type TPokemon = {
     name: string;
     img: string;
@@ -18,5 +19,12 @@ export type TPlayer_Choices = [TPokemon_Dom | null, TPokemon_Dom | null];
 export type TGameHandler = {
     game_state: TGame_State;
     player_choices: TPlayer_Choices;
+    displayGameMessage: (className: string, message: string) => void;
+    doPlayerChoicesMatch: () => boolean;
+    handlePlayerChoice: (card: Card) => void;
+    displayRightOrWrongChoice: () => void;
+    setFirstChoice: (card: Card) => void;
+    setSecondChoice: (card: Card) => void;
+    resetPlayerChoices: () => void;
 };
 //# sourceMappingURL=types.d.ts.map

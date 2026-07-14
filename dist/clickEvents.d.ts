@@ -1,3 +1,3 @@
 import type Card from "./Card.js";
-export declare const cardOnClickHandler: (self: Card) => Promise<void>;
+export declare const cardOnClickHandler: (card: Card) => Promise<void>;
 //# sourceMappingURL=clickEvents.d.ts.map

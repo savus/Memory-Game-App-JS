@@ -129,8 +129,4 @@ export const animateElement = async (element, className, animationOrTransition) 
     element.addEventListener(animationOrTransition, handleListenerEnd);
     element.classList.add(className);
 });
-export const displayGameMessage = async (element) => {
-    await animateElement(element, "slide", "animationend");
-    element.classList.remove("slide");
-};
 //# sourceMappingURL=utility.js.map

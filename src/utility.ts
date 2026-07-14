@@ -167,8 +167,3 @@ export const animateElement = async (
 
     element.classList.add(className);
   });
-
-export const displayGameMessage = async (element: HTMLElement) => {
-  await animateElement(element, "slide", "animationend");
-  element.classList.remove("slide");
-};

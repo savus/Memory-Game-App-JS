@@ -13,5 +13,8 @@ export declare const CSS_CLASSES: {
     FACE_DOWN: string;
     DUMMY_CARD: string;
     DUMMY_COLOR: string;
+    MESSAGE_CONTAINER: string;
+    GAME_MESSAGE: string;
+    SLIDE: string;
 };
 //# sourceMappingURL=constants.d.ts.map

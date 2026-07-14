@@ -23,4 +23,7 @@ export const CSS_CLASSES = {
   FACE_DOWN: "face-down",
   DUMMY_CARD: "dummy-card",
   DUMMY_COLOR: "dummy-color",
+  MESSAGE_CONTAINER: "message-container",
+  GAME_MESSAGE: "game-message",
+  SLIDE: "slide",
 };
