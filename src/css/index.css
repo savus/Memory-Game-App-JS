@@ -9,6 +9,22 @@
   font-size: 50px;
 }
 
+.incoming-points {
+  --opacity: 0;
+  --transition-duration: 0.6s;
+  --translate-x: 0;
+  opacity: var(--opacity);
+  transform: translateX(var(--translate-x));
+  transition:
+    opacity var(--transition-duration) ease,
+    transform var(--transition-duration) ease;
+}
+
+.incoming-points.active {
+  --opacity: 1;
+  --translate-x: 100px;
+}
+
 .message-container {
   --anim-duration: 1.25s;
   background-image: linear-gradient(

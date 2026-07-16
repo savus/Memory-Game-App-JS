@@ -3,7 +3,12 @@ import Card from "./Card.js";
 import { CSS_CLASSES, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
 import type { TPokemon } from "./types.js";
-import { generateCardData, createAndAppendAllCards } from "./utility.js";
+import {
+  generateCardData,
+  createAndAppendAllCards,
+  wait,
+  animateElement,
+} from "./utility.js";
 
 export const dummyColors = [
   "#e80a0a",
@@ -42,6 +47,35 @@ export const messageContainer = document.querySelector(
 export const gameMessage = document.querySelector(
   `.${CSS_CLASSES.GAME_MESSAGE}`,
 )!;
+
+const playerPoints = document.querySelector(`${CSS_CLASSES.PLAYER_POINTS}`)!;
+const incomingPoints = document.querySelector(
+  `${CSS_CLASSES.INCOMING_POINTS}`,
+)! as HTMLElement;
+
+let gamePoints = 0;
+let incomingGamePoints = 0;
+let whileLoopFailsafe = 0;
+
+export const gameHandler = new GameHandler();
+
+const setPlayerPoints = async (points: number) => {
+  incomingGamePoints = points;
+  playerPoints.innerHTML = `Points: ${gamePoints}`;
+  incomingPoints.innerHTML = `+ ${incomingGamePoints}`;
+  await animateElement(incomingPoints, CSS_CLASSES.ACTIVE, "transitionend");
+  while (incomingGamePoints > 0) {
+    whileLoopFailsafe++;
+    if (whileLoopFailsafe >= 1000) return;
+    incomingGamePoints--;
+    gamePoints++;
+    incomingPoints.innerHTML = `+ ${incomingGamePoints}`;
+    playerPoints.innerHTML = `Points: ${gamePoints}`;
+    await wait(10);
+  }
+  incomingPoints.classList.remove("active");
+  whileLoopFailsafe = 0;
+};
 
 const runGame = async () => {
   generateCardData(pokemonData);

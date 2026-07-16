@@ -16,5 +16,8 @@ export declare const CSS_CLASSES: {
     MESSAGE_CONTAINER: string;
     GAME_MESSAGE: string;
     SLIDE: string;
+    PLAYER_POINTS: string;
+    INCOMING_POINTS: string;
+    ACTIVE: string;
 };
 //# sourceMappingURL=constants.d.ts.map

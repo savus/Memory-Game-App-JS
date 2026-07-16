@@ -1,64 +1,67 @@
 import { allCards, gameMessage, messageContainer } from "./app.js";
 import type Card from "./Card.js";
 import { CSS_CLASSES } from "./constants.js";
-import type { TGameHandler } from "./types.js";
+import type { TGame_State, TPlayer_Choices } from "./types.js";
 import { animateElement, flipAllCardsDown, wait } from "./utility.js";
 
-const GameHandler: TGameHandler = {
-  game_state: "choose-card",
-  player_choices: [null, null],
+class GameHandler {
+  game_state: TGame_State;
+  player_choices: TPlayer_Choices;
 
-  displayGameMessage: async (className: string, message: string) => {
+  constructor() {
+    this.game_state = "choose-card";
+    this.player_choices = [null, null];
+  }
+
+  displayGameMessage = async (className: string, message: string) => {
     gameMessage.innerHTML = message;
     await animateElement(messageContainer, className, "animationend");
     messageContainer.classList.remove(className);
-  },
+  };
 
-  doPlayerChoicesMatch: () =>
-    (GameHandler.player_choices[0] &&
-      GameHandler.player_choices[0].metaData?.name) ===
-    (GameHandler.player_choices[1] &&
-      GameHandler.player_choices[1].metaData?.name),
+  doPlayerChoicesMatch = () =>
+    (this.player_choices[0] && this.player_choices[0].metaData?.name) ===
+    (this.player_choices[1] && this.player_choices[1].metaData?.name);
 
-  handlePlayerChoice: async (card: Card) => {
-    if (GameHandler.game_state === "choose-card") {
+  handlePlayerChoice = async (card: Card) => {
+    if (this.game_state === "choose-card") {
       if (card.facePosition === "down") {
-        if (GameHandler.player_choices[0] === null) {
-          GameHandler.setFirstChoice(card);
-        } else if (GameHandler.player_choices[1] === null) {
-          GameHandler.setSecondChoice(card);
+        if (this.player_choices[0] === null) {
+          this.setFirstChoice(card);
+        } else if (this.player_choices[1] === null) {
+          this.setSecondChoice(card);
         }
       }
     } else {
       console.log("sorry, you may not click right now");
     }
-  },
+  };
 
-  displayRightOrWrongChoice: () => {
-    if (GameHandler.doPlayerChoicesMatch()) {
-      GameHandler.displayGameMessage(CSS_CLASSES.SLIDE, "There was a match!");
+  displayRightOrWrongChoice = () => {
+    if (this.doPlayerChoicesMatch()) {
+      this.displayGameMessage(CSS_CLASSES.SLIDE, "There was a match!");
     } else {
-      GameHandler.displayGameMessage(CSS_CLASSES.SLIDE, "Oops! No Match!");
+      this.displayGameMessage(CSS_CLASSES.SLIDE, "Oops! No Match!");
     }
-  },
+  };
 
-  setFirstChoice: (card: Card) => {
-    GameHandler.player_choices[0] = card.html;
+  setFirstChoice = (card: Card) => {
+    this.player_choices[0] = card.html;
     card.flipCardUp();
-  },
+  };
 
-  resetPlayerChoices: () => (GameHandler.player_choices = [null, null]),
+  resetPlayerChoices = () => (this.player_choices = [null, null]);
 
-  setSecondChoice: async (card: Card) => {
-    GameHandler.player_choices[1] = card.html;
-    GameHandler.displayRightOrWrongChoice();
+  setSecondChoice = async (card: Card) => {
+    this.player_choices[1] = card.html;
+    this.displayRightOrWrongChoice();
     card.flipCardUp();
-    GameHandler.game_state = "waiting";
+    this.game_state = "waiting";
     await wait(2000);
-    GameHandler.resetPlayerChoices();
-    GameHandler.game_state = "choose-card";
+    this.resetPlayerChoices();
+    this.game_state = "choose-card";
     flipAllCardsDown(allCards);
-  },
-};
+  };
+}
 
 export default GameHandler;

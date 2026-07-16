@@ -1,5 +1,5 @@
-import GameHandler from "./gameHandler.js";
+import { gameHandler } from "./app.js";
 export const cardOnClickHandler = async (card) => {
-    GameHandler.handlePlayerChoice(card);
+    gameHandler.handlePlayerChoice(card);
 };
 //# sourceMappingURL=clickEvents.js.map

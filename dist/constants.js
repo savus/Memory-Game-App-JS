@@ -25,5 +25,8 @@ export const CSS_CLASSES = {
     MESSAGE_CONTAINER: "message-container",
     GAME_MESSAGE: "game-message",
     SLIDE: "slide",
+    PLAYER_POINTS: "player-points",
+    INCOMING_POINTS: "incoming-points",
+    ACTIVE: "active",
 };
 //# sourceMappingURL=constants.js.map
