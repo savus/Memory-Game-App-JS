@@ -1,12 +1,14 @@
-import { allCards, gameMessage, messageContainer } from "./app.js";
+import { allCards, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, playerPoints, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
 import { CSS_CLASSES } from "./constants.js";
 import { animateElement, flipAllCardsDown, wait } from "./utility.js";
 class GameHandler {
     game_state;
     player_choices;
+    level_points;
     constructor() {
         this.game_state = "choose-card";
         this.player_choices = [null, null];
+        this.level_points = 50;
     }
     displayGameMessage = async (className, message) => {
         gameMessage.innerHTML = message;
@@ -33,6 +35,7 @@ class GameHandler {
     displayRightOrWrongChoice = () => {
         if (this.doPlayerChoicesMatch()) {
             this.displayGameMessage(CSS_CLASSES.SLIDE, "There was a match!");
+            this.setPlayerPoints(this.level_points);
         }
         else {
             this.displayGameMessage(CSS_CLASSES.SLIDE, "Oops! No Match!");
@@ -52,6 +55,28 @@ class GameHandler {
         this.resetPlayerChoices();
         this.game_state = "choose-card";
         flipAllCardsDown(allCards);
+    };
+    setPlayerPoints = async (points) => {
+        setIncomingGamePoints(points);
+        playerPoints.innerHTML = `Points: ${gamePoints}`;
+        incomingPoints.innerHTML = `+ ${incomingGamePoints}`;
+        await animateElement(incomingPoints, CSS_CLASSES.ACTIVE, "transitionend");
+        await this.transferPointsAnimation();
+        incomingPoints.classList.remove("active");
+        setWhileLoopFailSafe(0);
+    };
+    transferPointsAnimation = async () => {
+        while (incomingGamePoints > 0) {
+            setWhileLoopFailSafe(whileLoopFailsafe + 1);
+            if (whileLoopFailsafe >= 1000)
+                return;
+            setIncomingGamePoints(incomingGamePoints - 1);
+            setGamePoints(gamePoints + 1);
+            incomingPoints.innerHTML = `+ ${incomingGamePoints}`;
+            playerPoints.innerHTML = `Points: ${gamePoints}`;
+            await wait(10);
+        }
+        return;
     };
 }
 export default GameHandler;

@@ -48,34 +48,23 @@ export const gameMessage = document.querySelector(
   `.${CSS_CLASSES.GAME_MESSAGE}`,
 )!;
 
-const playerPoints = document.querySelector(`${CSS_CLASSES.PLAYER_POINTS}`)!;
-const incomingPoints = document.querySelector(
-  `${CSS_CLASSES.INCOMING_POINTS}`,
+export const playerPoints = document.querySelector(
+  `.${CSS_CLASSES.PLAYER_POINTS}`,
+)!;
+export const incomingPoints = document.querySelector(
+  `.${CSS_CLASSES.INCOMING_POINTS}`,
 )! as HTMLElement;
 
-let gamePoints = 0;
-let incomingGamePoints = 0;
-let whileLoopFailsafe = 0;
+export let gamePoints = 0;
+export const setGamePoints = (points: number) => (gamePoints = points);
+export let incomingGamePoints = 0;
+export const setIncomingGamePoints = (points: number) =>
+  (incomingGamePoints = points);
+export let whileLoopFailsafe = 0;
+export const setWhileLoopFailSafe = (limit: number) =>
+  (whileLoopFailsafe = limit);
 
 export const gameHandler = new GameHandler();
-
-const setPlayerPoints = async (points: number) => {
-  incomingGamePoints = points;
-  playerPoints.innerHTML = `Points: ${gamePoints}`;
-  incomingPoints.innerHTML = `+ ${incomingGamePoints}`;
-  await animateElement(incomingPoints, CSS_CLASSES.ACTIVE, "transitionend");
-  while (incomingGamePoints > 0) {
-    whileLoopFailsafe++;
-    if (whileLoopFailsafe >= 1000) return;
-    incomingGamePoints--;
-    gamePoints++;
-    incomingPoints.innerHTML = `+ ${incomingGamePoints}`;
-    playerPoints.innerHTML = `Points: ${gamePoints}`;
-    await wait(10);
-  }
-  incomingPoints.classList.remove("active");
-  whileLoopFailsafe = 0;
-};
 
 const runGame = async () => {
   generateCardData(pokemonData);
@@ -90,5 +79,6 @@ document.addEventListener("keyup", async (e) => {
   const key = e.key;
   switch (key) {
     case "Enter":
+    // gameHandler.setPlayerPoints(50);
   }
 });

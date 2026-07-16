@@ -9,5 +9,13 @@ export declare const cardData: TPokemon[];
 export declare const card_container: Element;
 export declare const messageContainer: HTMLElement;
 export declare const gameMessage: Element;
+export declare const playerPoints: Element;
+export declare const incomingPoints: HTMLElement;
+export declare let gamePoints: number;
+export declare const setGamePoints: (points: number) => number;
+export declare let incomingGamePoints: number;
+export declare const setIncomingGamePoints: (points: number) => number;
+export declare let whileLoopFailsafe: number;
+export declare const setWhileLoopFailSafe: (limit: number) => number;
 export declare const gameHandler: GameHandler;
 //# sourceMappingURL=app.d.ts.map
