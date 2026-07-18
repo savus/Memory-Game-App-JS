@@ -1,8 +1,9 @@
 .screen-container {
   position: relative;
+  height: 100vh;
 }
 
-.game-screen {
+.modal {
   --opacity: 0;
   --visibility: hidden;
   --transition-delay: 0s;
@@ -15,10 +16,13 @@
   position: absolute;
   left: 0;
   top: 0;
+  right: 0;
+  bottom: 0;
   background-color: #000;
+  color: white;
 }
 
-.game-screen.active {
+.modal.active {
   --opacity: 1;
   --visibility: visible;
   --transition-delay: 0.3s;

@@ -30,4 +30,5 @@ export const CSS_CLASSES = {
   INCOMING_POINTS: "incoming-points",
   ACTIVE: "active",
   GAME_SCREEN: "game-screen",
+  MODAL: "modal",
 };

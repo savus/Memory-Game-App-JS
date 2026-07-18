@@ -50,8 +50,8 @@ document.addEventListener("keyup", async (e) => {
     const key = e.key;
     switch (key) {
         case "Enter":
-            const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.GAME_SCREEN}`);
-            swapScreens(gameScreens[gameScreenIndex]);
+            const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.MODAL}`);
+            swapScreens(gameScreens[gameScreenIndex], CSS_CLASSES.MODAL);
             if (gameScreenIndex >= gameScreens.length - 1) {
                 gameScreenIndex = 0;
             }
