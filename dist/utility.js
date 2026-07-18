@@ -129,4 +129,11 @@ export const animateElement = async (element, className, animationOrTransition) 
     element.addEventListener(animationOrTransition, handleListenerEnd);
     element.classList.add(className);
 });
+export const swapScreens = (elementToActivate) => {
+    const elementToDeactivate = document.querySelector(`.${CSS_CLASSES.GAME_SCREEN}.${CSS_CLASSES.ACTIVE}`);
+    if (elementToDeactivate !== null) {
+        elementToDeactivate.classList.remove(CSS_CLASSES.ACTIVE);
+    }
+    elementToActivate.classList.add(CSS_CLASSES.ACTIVE);
+};
 //# sourceMappingURL=utility.js.map

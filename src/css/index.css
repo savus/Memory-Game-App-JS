@@ -1,3 +1,29 @@
+.screen-container {
+  position: relative;
+}
+
+.game-screen {
+  --opacity: 0;
+  --visibility: hidden;
+  --transition-delay: 0s;
+  opacity: var(--opacity);
+  visibility: var(--visibility);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+  transition-delay: var(--transition-delay);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #000;
+}
+
+.game-screen.active {
+  --opacity: 1;
+  --visibility: visible;
+  --transition-delay: 0.3s;
+}
+
 .game-ui {
   position: fixed;
   left: 0;

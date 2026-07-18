@@ -8,6 +8,7 @@ import {
   createAndAppendAllCards,
   wait,
   animateElement,
+  swapScreens,
 } from "./utility.js";
 
 export const dummyColors = [
@@ -75,10 +76,19 @@ API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
   runGame();
 });
 
+let gameScreenIndex = 0;
 document.addEventListener("keyup", async (e) => {
   const key = e.key;
   switch (key) {
     case "Enter":
-    // gameHandler.setPlayerPoints(50);
+      const gameScreens = document.querySelectorAll(
+        `.${CSS_CLASSES.GAME_SCREEN}`,
+      );
+
+      swapScreens(gameScreens[gameScreenIndex] as HTMLElement);
+
+      if (gameScreenIndex >= gameScreens.length - 1) {
+        gameScreenIndex = 0;
+      } else gameScreenIndex++;
   }
 });

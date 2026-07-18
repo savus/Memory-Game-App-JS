@@ -2,7 +2,7 @@ import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { CSS_CLASSES, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
-import { generateCardData, createAndAppendAllCards, wait, animateElement, } from "./utility.js";
+import { generateCardData, createAndAppendAllCards, wait, animateElement, swapScreens, } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -45,11 +45,18 @@ const runGame = async () => {
 API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
     runGame();
 });
+let gameScreenIndex = 0;
 document.addEventListener("keyup", async (e) => {
     const key = e.key;
     switch (key) {
         case "Enter":
-        // gameHandler.setPlayerPoints(50);
+            const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.GAME_SCREEN}`);
+            swapScreens(gameScreens[gameScreenIndex]);
+            if (gameScreenIndex >= gameScreens.length - 1) {
+                gameScreenIndex = 0;
+            }
+            else
+                gameScreenIndex++;
     }
 });
 //# sourceMappingURL=app.js.map

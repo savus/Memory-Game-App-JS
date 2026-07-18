@@ -19,5 +19,6 @@ export declare const CSS_CLASSES: {
     PLAYER_POINTS: string;
     INCOMING_POINTS: string;
     ACTIVE: string;
+    GAME_SCREEN: string;
 };
 //# sourceMappingURL=constants.d.ts.map

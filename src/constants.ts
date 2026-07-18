@@ -29,4 +29,5 @@ export const CSS_CLASSES = {
   PLAYER_POINTS: "player-points",
   INCOMING_POINTS: "incoming-points",
   ACTIVE: "active",
+  GAME_SCREEN: "game-screen",
 };
