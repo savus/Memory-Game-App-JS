@@ -1,6 +1,6 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
-import { CSS_CLASSES, pokeNames } from "./constants.js";
+import { CSS_CLASSES, HTML_IDS, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
 import { generateCardData, createAndAppendAllCards, wait, animateElement, swapScreens, } from "./utility.js";
 export const dummyColors = [
@@ -31,6 +31,8 @@ export const messageContainer = document.querySelector(`.${CSS_CLASSES.MESSAGE_C
 export const gameMessage = document.querySelector(`.${CSS_CLASSES.GAME_MESSAGE}`);
 export const playerPoints = document.querySelector(`.${CSS_CLASSES.PLAYER_POINTS}`);
 export const incomingPoints = document.querySelector(`.${CSS_CLASSES.INCOMING_POINTS}`);
+const newGameButton = document.getElementById(HTML_IDS.NEW_GAME);
+const mainGame = document.querySelector(`.${CSS_CLASSES.MAIN_GAME}`);
 export let gamePoints = 0;
 export const setGamePoints = (points) => (gamePoints = points);
 export let incomingGamePoints = 0;
@@ -45,18 +47,22 @@ const runGame = async () => {
 API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
     runGame();
 });
+newGameButton?.addEventListener("click", () => {
+    swapScreens(mainGame, CSS_CLASSES.ACTIVE);
+});
 let gameScreenIndex = 0;
 document.addEventListener("keyup", async (e) => {
     const key = e.key;
     switch (key) {
         case "Enter":
-            const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.MODAL}`);
-            swapScreens(gameScreens[gameScreenIndex], CSS_CLASSES.MODAL);
-            if (gameScreenIndex >= gameScreens.length - 1) {
-                gameScreenIndex = 0;
-            }
-            else
-                gameScreenIndex++;
+        // const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.MODAL}`);
+        // swapScreens(
+        //   gameScreens[gameScreenIndex] as HTMLElement,
+        //   CSS_CLASSES.MODAL,
+        // );
+        // if (gameScreenIndex >= gameScreens.length - 1) {
+        //   gameScreenIndex = 0;
+        // } else gameScreenIndex++;
     }
 });
 //# sourceMappingURL=app.js.map

@@ -15,4 +15,5 @@ export type TPokemon_Dom = HTMLElement & {
 };
 export type TGame_State = "choose-card" | "waiting" | "something";
 export type TPlayer_Choices = [TPokemon_Dom | null, TPokemon_Dom | null];
+export type THTML_Element = HTMLElement;
 //# sourceMappingURL=types.d.ts.map

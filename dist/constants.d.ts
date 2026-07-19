@@ -21,5 +21,9 @@ export declare const CSS_CLASSES: {
     ACTIVE: string;
     GAME_SCREEN: string;
     MODAL: string;
+    MAIN_GAME: string;
+};
+export declare const HTML_IDS: {
+    NEW_GAME: string;
 };
 //# sourceMappingURL=constants.d.ts.map

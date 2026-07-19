@@ -1,8 +1,8 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
-import { CSS_CLASSES, pokeNames } from "./constants.js";
+import { CSS_CLASSES, HTML_IDS, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
-import type { TPokemon } from "./types.js";
+import type { THTML_Element, TPokemon } from "./types.js";
 import {
   generateCardData,
   createAndAppendAllCards,
@@ -52,9 +52,16 @@ export const gameMessage = document.querySelector(
 export const playerPoints = document.querySelector(
   `.${CSS_CLASSES.PLAYER_POINTS}`,
 )!;
+
 export const incomingPoints = document.querySelector(
   `.${CSS_CLASSES.INCOMING_POINTS}`,
 )! as HTMLElement;
+
+const newGameButton = document.getElementById(HTML_IDS.NEW_GAME);
+
+const mainGame: THTML_Element = document.querySelector(
+  `.${CSS_CLASSES.MAIN_GAME}`,
+)!;
 
 export let gamePoints = 0;
 export const setGamePoints = (points: number) => (gamePoints = points);
@@ -76,20 +83,24 @@ API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
   runGame();
 });
 
+newGameButton?.addEventListener("click", () => {
+  swapScreens(mainGame, CSS_CLASSES.ACTIVE);
+});
+
 let gameScreenIndex = 0;
 document.addEventListener("keyup", async (e) => {
   const key = e.key;
   switch (key) {
     case "Enter":
-      const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.MODAL}`);
+    // const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.MODAL}`);
 
-      swapScreens(
-        gameScreens[gameScreenIndex] as HTMLElement,
-        CSS_CLASSES.MODAL,
-      );
+    // swapScreens(
+    //   gameScreens[gameScreenIndex] as HTMLElement,
+    //   CSS_CLASSES.MODAL,
+    // );
 
-      if (gameScreenIndex >= gameScreens.length - 1) {
-        gameScreenIndex = 0;
-      } else gameScreenIndex++;
+    // if (gameScreenIndex >= gameScreens.length - 1) {
+    //   gameScreenIndex = 0;
+    // } else gameScreenIndex++;
   }
 });

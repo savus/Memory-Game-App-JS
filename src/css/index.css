@@ -1,3 +1,8 @@
+body {
+  font-size: 1.5rem;
+  letter-spacing: 1.8px;
+}
+
 .screen-container {
   position: relative;
   height: 100vh;
@@ -26,35 +31,81 @@
   --transition-delay: 0.3s;
 }
 
-.modal .modal-overlay {
-  width: 100%;
-  height: 100%;
+.main-menu {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #222;
+  color: #fff;
 }
 
-.modal-body {
-  padding: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  box-shadow: 0px 9px 10px 5px rgba(0, 0, 0, 0.1);
-  min-width: 400px;
-}
-
-.main-menu .modal-body .title {
+.main-menu .title {
   text-align: center;
+  margin-bottom: 3rem;
 }
 
-.main-menu .modal-body .menu-items {
+.main-menu li {
+  padding: 0.8rem 0;
+}
+
+.main-menu li .menu-item {
+  transition: left 0.4s ease;
+  position: relative;
+  left: 0;
+}
+
+.main-menu .menu-item .bullet-point-outline {
+  --left: 0px;
+  --opacity: 0;
+  --visibility: hidden;
+  --transition-dur: 0.3s;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  position: absolute;
+  top: 0;
+  left: var(--left);
+  opacity: var(--opacity);
+  visibility: var(--visibility);
+  transition: all var(--transition-dur) ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  animation: idleRotate 3s linear 0s infinite forwards;
 }
 
-.main-menu .modal-body .menu-items li {
-  padding: 0.8rem 1rem;
+.main-menu .bullet-point-outline .bullet-point {
+  --bullet-scale: 0.02;
+  transform: scale(var(--bullet-scale));
+  transition: transform var(--transition-dur) ease;
+  width: 40%;
+  height: 40%;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.main-menu li:hover {
+  cursor: pointer;
+  /* background-color: rgba(22, 22, 22, 0.2); */
+}
+
+.main-menu li:hover .menu-item {
+  left: 50px;
+}
+
+.main-menu li:hover .bullet-point-outline {
+  --left: -90px;
+  --opacity: 1;
+  --visibility: visible;
+  /* animation: idleRotate 2s linear forwards infinite; */
+}
+
+.main-menu li:hover .bullet-point {
+  --bullet-scale: 1;
 }
 
 .game-ui {
@@ -155,6 +206,7 @@
   cursor: pointer;
   transition: transform 800ms;
   transform-style: preserve-3d;
+  font-size: 1rem;
 }
 
 .card-inner,
@@ -242,5 +294,14 @@
   100% {
     transform: translateX(-200%);
     opacity: 0;
+  }
+}
+
+@keyframes idleRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

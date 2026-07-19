@@ -30,5 +30,9 @@ export const CSS_CLASSES = {
     ACTIVE: "active",
     GAME_SCREEN: "game-screen",
     MODAL: "modal",
+    MAIN_GAME: "main-game",
+};
+export const HTML_IDS = {
+    NEW_GAME: "new-game",
 };
 //# sourceMappingURL=constants.js.map
