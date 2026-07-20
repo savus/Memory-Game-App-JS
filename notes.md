@@ -14,4 +14,6 @@ e.g:
 wait(3000);
 displayYouLostMessage(); // => will wait 3000 miliseconds before displaying the "you lost" message
 
-TASK: build click event method that handles game stages and initial game play. build structure of how rules work and what user interaction should entail.
+TASK : build click event method that handles game stages and initial game play. build structure of how rules work and what user interaction should entail.
+
+TASK : Clean up html structure and css code. Include custom properties and organization. Make game screens look more neat.
