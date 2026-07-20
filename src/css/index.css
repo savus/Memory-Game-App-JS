@@ -5,7 +5,6 @@ body {
 
 .screen-container {
   position: relative;
-  height: 100vh;
 }
 
 .modal {
@@ -18,7 +17,7 @@ body {
     opacity 0.2s ease,
     visibility 0.2s ease;
   transition-delay: var(--transition-delay);
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   right: 0;
@@ -29,6 +28,23 @@ body {
   --opacity: 1;
   --visibility: visible;
   --transition-delay: 0.3s;
+}
+
+.message-box {
+  color: #000;
+}
+
+.message-box .modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.message-box .modal-body {
+  background-color: white;
+  border-radius: 20px;
 }
 
 .main-menu {
@@ -119,7 +135,7 @@ body {
   font-size: 50px;
 }
 
-.incoming-points {
+.game-ui .incoming-points {
   --opacity: 0;
   --transition-duration: 0.6s;
   --translate-x: 0;
@@ -130,12 +146,12 @@ body {
     transform var(--transition-duration) ease;
 }
 
-.incoming-points.active {
+.game-ui .incoming-points.active {
   --opacity: 1;
   --translate-x: 100px;
 }
 
-.message-container {
+.game-ui .message-container {
   --anim-duration: 1.25s;
   background-image: linear-gradient(
     to right,
@@ -156,14 +172,14 @@ body {
   animation-duration: var(--anim-duration);
 }
 
-.message-container.slide {
+.game-ui .message-container.slide {
   animation-name: slideFadeLeft;
 }
 /*
   % * b = a
   % * 1.7 = 0.3
 */
-.message-container .game-message {
+.game-ui .message-container .game-message {
   --anim-delay-percentage: 0.18;
   color: #fff;
   opacity: 0;
@@ -172,7 +188,7 @@ body {
   animation-delay: calc(var(--anim-duration) * var(--anim-delay-percentage));
 }
 
-.message-container.slide .game-message {
+.game-ui .message-container.slide .game-message {
   animation-name: slideFadeRight;
 }
 
