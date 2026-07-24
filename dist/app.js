@@ -2,7 +2,7 @@ import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { CSS_CLASSES, HTML_IDS, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
-import { generateCardData, createAndAppendAllCards, wait, animateElement, swapScreens, } from "./utility.js";
+import { generateCardData, createAndAppendAllCards, swapScreens, } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -40,6 +40,7 @@ export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
 export const gameHandler = new GameHandler();
+console.log(gameMessage);
 const runGame = async () => {
     generateCardData(pokemonData);
     createAndAppendAllCards(cardData);
@@ -55,14 +56,8 @@ document.addEventListener("keyup", async (e) => {
     const key = e.key;
     switch (key) {
         case "Enter":
-        // const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.MODAL}`);
-        // swapScreens(
-        //   gameScreens[gameScreenIndex] as HTMLElement,
-        //   CSS_CLASSES.MODAL,
-        // );
-        // if (gameScreenIndex >= gameScreens.length - 1) {
-        //   gameScreenIndex = 0;
-        // } else gameScreenIndex++;
+            gameHandler.displayGameMessage(CSS_CLASSES.SLIDE, "Testing");
+            console.log("testing");
     }
 });
 //# sourceMappingURL=app.js.map

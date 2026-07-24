@@ -6,8 +6,6 @@ import type { THTML_Element, TPokemon } from "./types.js";
 import {
   generateCardData,
   createAndAppendAllCards,
-  wait,
-  animateElement,
   swapScreens,
 } from "./utility.js";
 
@@ -92,15 +90,6 @@ document.addEventListener("keyup", async (e) => {
   const key = e.key;
   switch (key) {
     case "Enter":
-    // const gameScreens = document.querySelectorAll(`.${CSS_CLASSES.MODAL}`);
-
-    // swapScreens(
-    //   gameScreens[gameScreenIndex] as HTMLElement,
-    //   CSS_CLASSES.MODAL,
-    // );
-
-    // if (gameScreenIndex >= gameScreens.length - 1) {
-    //   gameScreenIndex = 0;
-    // } else gameScreenIndex++;
+      gameHandler.displayGameMessage(CSS_CLASSES.SLIDE, "Testing");
   }
 });

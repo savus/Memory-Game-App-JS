@@ -1,3 +1,23 @@
+:root {
+  --bg-primary: #000;
+  --bg-secondary: #fff;
+  --text-color-primary: #000;
+  --modal-overlay-bg: rgba(0, 0, 0, 0.25);
+
+  --size-5: 0.2rem;
+  --size-8: 0.8rem;
+  --size-10: 0.625rem;
+  --size-12: 0.75rem;
+  --size-16: 1rem;
+  --size-18: 1.125rem;
+  --size-20: 1.25rem;
+  --size-24: 1.5rem;
+  --size-40: 2.5rem;
+  --size-48: 3rem;
+  --size-50: 3.125rem;
+  --size-100: 6.25rem;
+}
+
 section,
 footer,
 header,
@@ -32,7 +52,21 @@ p {
 }
 
 button {
+  cursor: pointer;
+}
+
+button,
+input {
+  border: none;
   outline: none;
+  appearance: none;
+  background: transparent;
+  user-select: none;
+  overflow: hidden;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 .container {
