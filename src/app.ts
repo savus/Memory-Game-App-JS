@@ -7,7 +7,7 @@ import {
   generateCardData,
   createAndAppendAllCards,
   swapScreens,
-  setPlayerPointsText,
+  writePlayerPoints,
 } from "./utility.js";
 
 export const dummyColors = [
@@ -31,6 +31,8 @@ export const dummyTypes = [
   "WOA MAMA",
   "Hi",
 ];
+
+export const points = "Points: ";
 
 export const allCards: Card[] = [];
 export const pokemonData: TPokemon[] = [];
@@ -73,15 +75,18 @@ export const setWhileLoopFailSafe = (limit: number) =>
 
 export const gameHandler = new GameHandler();
 
-const runGame = async () => {
-  setPlayerPointsText(gamePoints);
+const initApp = () =>
+  API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
+    startMemoryGame();
+  });
+
+const startMemoryGame = async () => {
+  writePlayerPoints(`${points} ${gamePoints}`);
   generateCardData(pokemonData);
   createAndAppendAllCards(cardData);
 };
 
-API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
-  runGame();
-});
+initApp();
 
 newGameButton?.addEventListener("click", () => {
   swapScreens(mainGame, CSS_CLASSES.ACTIVE);

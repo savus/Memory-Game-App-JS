@@ -3,6 +3,7 @@ import GameHandler from "./gameHandler.js";
 import type { TPokemon } from "./types.js";
 export declare const dummyColors: string[];
 export declare const dummyTypes: string[];
+export declare const points = "Points: ";
 export declare const allCards: Card[];
 export declare const pokemonData: TPokemon[];
 export declare const cardData: TPokemon[];

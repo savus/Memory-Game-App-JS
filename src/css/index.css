@@ -22,6 +22,7 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
+  overflow-x: scroll;
 }
 
 .modal.active {
@@ -91,7 +92,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: idleRotate 3s linear 0s infinite forwards;
+  pointer-events: none;
 }
 
 .main-menu .bullet-point-outline .bullet-point {
@@ -106,7 +107,6 @@ body {
 
 .main-menu li:hover {
   cursor: pointer;
-  /* background-color: rgba(22, 22, 22, 0.2); */
 }
 
 .main-menu li:hover .menu-item {
@@ -117,7 +117,7 @@ body {
   --left: calc(var(--size-100) * -1);
   --opacity: 1;
   --visibility: visible;
-  /* animation: idleRotate 2s linear forwards infinite; */
+  animation: idleRotate 2s linear var(--transition-dur) forwards infinite;
 }
 
 .main-menu li:hover .bullet-point {
@@ -133,6 +133,11 @@ body {
   pointer-events: none;
   z-index: 100;
   font-size: var(--size-50);
+}
+
+.game-ui .player-points {
+  background-color: var(--bg-primary);
+  color: var(--text-color-secondary);
 }
 
 .game-ui .incoming-points {
@@ -175,10 +180,7 @@ body {
 .game-ui .message-container.slide {
   animation-name: slideFadeLeft;
 }
-/*
-  % * b = a
-  % * 1.7 = 0.3
-*/
+
 .game-ui .message-container .game-message {
   --anim-delay-percentage: 0.18;
   color: #fff;

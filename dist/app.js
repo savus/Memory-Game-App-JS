@@ -2,7 +2,7 @@ import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { CSS_CLASSES, HTML_IDS, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
-import { generateCardData, createAndAppendAllCards, swapScreens, setPlayerPointsText, } from "./utility.js";
+import { generateCardData, createAndAppendAllCards, swapScreens, writePlayerPoints, } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -23,6 +23,7 @@ export const dummyTypes = [
     "WOA MAMA",
     "Hi",
 ];
+export const points = "Points: ";
 export const allCards = [];
 export const pokemonData = [];
 export const cardData = [];
@@ -40,14 +41,15 @@ export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
 export const gameHandler = new GameHandler();
-const runGame = async () => {
-    setPlayerPointsText(gamePoints);
+const initApp = () => API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
+    startMemoryGame();
+});
+const startMemoryGame = async () => {
+    writePlayerPoints(`${points} ${gamePoints}`);
     generateCardData(pokemonData);
     createAndAppendAllCards(cardData);
 };
-API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
-    runGame();
-});
+initApp();
 newGameButton?.addEventListener("click", () => {
     swapScreens(mainGame, CSS_CLASSES.ACTIVE);
 });

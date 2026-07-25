@@ -136,8 +136,8 @@ export const swapScreens = (elementToActivate, className) => {
     }
     elementToActivate.classList.add(CSS_CLASSES.ACTIVE);
 };
-export const setPlayerPointsText = (points) => {
-    playerPoints.innerHTML = `Points: ${points}`;
+export const writePlayerPoints = (text) => {
+    playerPoints.innerHTML = text;
 };
 export const setIncomingPointsText = (points, addOrSubtract) => {
     incomingPoints.innerHTML = `${addOrSubtract} ${points}`;

@@ -6,6 +6,7 @@ import {
   incomingPoints,
   messageContainer,
   playerPoints,
+  points,
   setGamePoints,
   setIncomingGamePoints,
   setWhileLoopFailSafe,
@@ -18,7 +19,7 @@ import {
   animateElement,
   flipAllCardsDown,
   setIncomingPointsText,
-  setPlayerPointsText,
+  writePlayerPoints,
   wait,
 } from "./utility.js";
 
@@ -93,7 +94,7 @@ class GameHandler {
   setPlayerPoints = async (points: number) => {
     setIncomingGamePoints(points);
     setIncomingPointsText(incomingGamePoints, "-");
-    setPlayerPointsText(gamePoints);
+    writePlayerPoints(`${points} ${gamePoints}`);
     await animateElement(incomingPoints, CSS_CLASSES.ACTIVE, "transitionend");
     await this.transferPointsAnimation();
     incomingPoints.classList.remove("active");
@@ -107,7 +108,7 @@ class GameHandler {
       setIncomingGamePoints(incomingGamePoints - 1);
       setGamePoints(gamePoints - 1);
       setIncomingPointsText(incomingGamePoints, "-");
-      setPlayerPointsText(gamePoints);
+      writePlayerPoints(`${points} ${gamePoints}`);
       await wait(10);
     }
     return;
