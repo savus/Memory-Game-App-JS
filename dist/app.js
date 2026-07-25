@@ -2,7 +2,7 @@ import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { CSS_CLASSES, HTML_IDS, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
-import { generateCardData, createAndAppendAllCards, swapScreens, } from "./utility.js";
+import { generateCardData, createAndAppendAllCards, swapScreens, setPlayerPointsText, } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -33,15 +33,15 @@ export const playerPoints = document.querySelector(`.${CSS_CLASSES.PLAYER_POINTS
 export const incomingPoints = document.querySelector(`.${CSS_CLASSES.INCOMING_POINTS}`);
 const newGameButton = document.getElementById(HTML_IDS.NEW_GAME);
 const mainGame = document.querySelector(`.${CSS_CLASSES.MAIN_GAME}`);
-export let gamePoints = 0;
+export let gamePoints = 500;
 export const setGamePoints = (points) => (gamePoints = points);
 export let incomingGamePoints = 0;
 export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
 export const gameHandler = new GameHandler();
-console.log(gameMessage);
 const runGame = async () => {
+    setPlayerPointsText(gamePoints);
     generateCardData(pokemonData);
     createAndAppendAllCards(cardData);
 };
@@ -57,7 +57,6 @@ document.addEventListener("keyup", async (e) => {
     switch (key) {
         case "Enter":
             gameHandler.displayGameMessage(CSS_CLASSES.SLIDE, "Testing");
-            console.log("testing");
     }
 });
 //# sourceMappingURL=app.js.map

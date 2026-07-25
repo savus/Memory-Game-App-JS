@@ -4,6 +4,7 @@ declare class GameHandler {
     game_state: TGame_State;
     player_choices: TPlayer_Choices;
     level_points: number;
+    choices_matched: boolean;
     constructor();
     displayGameMessage: (className: string, message: string) => Promise<void>;
     doPlayerChoicesMatch: () => boolean;

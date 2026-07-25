@@ -7,6 +7,7 @@ import {
   generateCardData,
   createAndAppendAllCards,
   swapScreens,
+  setPlayerPointsText,
 } from "./utility.js";
 
 export const dummyColors = [
@@ -61,7 +62,7 @@ const mainGame: THTML_Element = document.querySelector(
   `.${CSS_CLASSES.MAIN_GAME}`,
 )!;
 
-export let gamePoints = 0;
+export let gamePoints = 500;
 export const setGamePoints = (points: number) => (gamePoints = points);
 export let incomingGamePoints = 0;
 export const setIncomingGamePoints = (points: number) =>
@@ -73,6 +74,7 @@ export const setWhileLoopFailSafe = (limit: number) =>
 export const gameHandler = new GameHandler();
 
 const runGame = async () => {
+  setPlayerPointsText(gamePoints);
   generateCardData(pokemonData);
   createAndAppendAllCards(cardData);
 };

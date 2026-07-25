@@ -4,6 +4,10 @@ import {
   cardData,
   dummyColors,
   dummyTypes,
+  gamePoints,
+  incomingGamePoints,
+  incomingPoints,
+  playerPoints,
 } from "./app.js";
 import Card from "./Card.js";
 import { CSS_CLASSES } from "./constants.js";
@@ -179,4 +183,15 @@ export const swapScreens = (
     elementToDeactivate.classList.remove(CSS_CLASSES.ACTIVE);
   }
   elementToActivate.classList.add(CSS_CLASSES.ACTIVE);
+};
+
+export const setPlayerPointsText = (points: number) => {
+  playerPoints.innerHTML = `Points: ${points}`;
+};
+
+export const setIncomingPointsText = (
+  points: number,
+  addOrSubtract: "-" | "+",
+) => {
+  incomingPoints.innerHTML = `${addOrSubtract} ${points}`;
 };

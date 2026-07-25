@@ -1,4 +1,4 @@
-import { allCards, card_container, cardData, dummyColors, dummyTypes, } from "./app.js";
+import { allCards, card_container, cardData, dummyColors, dummyTypes, gamePoints, incomingGamePoints, incomingPoints, playerPoints, } from "./app.js";
 import Card from "./Card.js";
 import { CSS_CLASSES } from "./constants.js";
 export const convertToTSObject = (data) => {
@@ -135,5 +135,11 @@ export const swapScreens = (elementToActivate, className) => {
         elementToDeactivate.classList.remove(CSS_CLASSES.ACTIVE);
     }
     elementToActivate.classList.add(CSS_CLASSES.ACTIVE);
+};
+export const setPlayerPointsText = (points) => {
+    playerPoints.innerHTML = `Points: ${points}`;
+};
+export const setIncomingPointsText = (points, addOrSubtract) => {
+    incomingPoints.innerHTML = `${addOrSubtract} ${points}`;
 };
 //# sourceMappingURL=utility.js.map

@@ -1,14 +1,16 @@
 import { allCards, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, playerPoints, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
 import { CSS_CLASSES } from "./constants.js";
-import { animateElement, flipAllCardsDown, wait } from "./utility.js";
+import { animateElement, flipAllCardsDown, setIncomingPointsText, setPlayerPointsText, wait, } from "./utility.js";
 class GameHandler {
     game_state;
     player_choices;
     level_points;
+    choices_matched;
     constructor() {
         this.game_state = "choose-card";
         this.player_choices = [null, null];
         this.level_points = 50;
+        this.choices_matched = false;
     }
     displayGameMessage = async (className, message) => {
         gameMessage.innerHTML = message;
@@ -36,6 +38,7 @@ class GameHandler {
         if (this.doPlayerChoicesMatch()) {
             this.displayGameMessage(CSS_CLASSES.SLIDE, "There was a match!");
             this.setPlayerPoints(this.level_points);
+            this.choices_matched = true;
         }
         else {
             this.displayGameMessage(CSS_CLASSES.SLIDE, "Oops! No Match!");
@@ -52,14 +55,17 @@ class GameHandler {
         card.flipCardUp();
         this.game_state = "waiting";
         await wait(2000);
+        if (!this.choices_matched) {
+            flipAllCardsDown(allCards);
+        }
         this.resetPlayerChoices();
         this.game_state = "choose-card";
-        flipAllCardsDown(allCards);
+        this.choices_matched = false;
     };
     setPlayerPoints = async (points) => {
         setIncomingGamePoints(points);
-        playerPoints.innerHTML = `Points: ${gamePoints}`;
-        incomingPoints.innerHTML = `+ ${incomingGamePoints}`;
+        setIncomingPointsText(incomingGamePoints, "-");
+        setPlayerPointsText(gamePoints);
         await animateElement(incomingPoints, CSS_CLASSES.ACTIVE, "transitionend");
         await this.transferPointsAnimation();
         incomingPoints.classList.remove("active");
@@ -71,9 +77,9 @@ class GameHandler {
             if (whileLoopFailsafe >= 1000)
                 return;
             setIncomingGamePoints(incomingGamePoints - 1);
-            setGamePoints(gamePoints + 1);
-            incomingPoints.innerHTML = `+ ${incomingGamePoints}`;
-            playerPoints.innerHTML = `Points: ${gamePoints}`;
+            setGamePoints(gamePoints - 1);
+            setIncomingPointsText(incomingGamePoints, "-");
+            setPlayerPointsText(gamePoints);
             await wait(10);
         }
         return;
