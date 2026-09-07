@@ -2,7 +2,7 @@ TASK(completed): Card HTML elements are generated and then appended to the DOM. 
 
 SOLUTION: Directly Assign a custom property to the DOM element and cast it for typescript using the following strategy.
 
-    const card = document.createElement("div") as HTMLElement & { metaData?: TPokemon};
+    const card = document.createElement("div") as HTMLElement & { metaData?: TPokemonData};
 
     card.metaData = data;
 

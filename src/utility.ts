@@ -11,25 +11,10 @@ import {
 } from "./app.js";
 import Card from "./Card.js";
 import { ACTIVE } from "./constants.js";
-import type { TPokemon, TPokemon_Dom } from "./types.js";
+import type { TPokemonData } from "./types.js";
 
-export const convertToTSObject = (data: any): TPokemon => {
-  return {
-    name: data.name,
-    img: data.sprites.front_default,
-    type: data.types[0].type.name,
-    hp: data.stats[0].base_stat,
-    attack: data.stats[1].base_stat,
-    defense: data.stats[2].base_stat,
-    special_attack: data.stats[3].base_stat,
-    special_defense: data.stats[4].base_stat,
-    speed: data.stats[5].base_stat,
-    isDummyData: false,
-  };
-};
-
-export const buildCardHTML = (data: TPokemon) => {
-  // const cardOuter: TPokemon_Dom = document.createElement("div");
+export const buildCardHTML = (data: TPokemonData) => {
+  // const cardOuter: TPokemonData_Dom = document.createElement("div");
   // const cardBody = document.createElement("div");
   // const cardInner = document.createElement("div");
   // const name = document.createElement("div");
@@ -82,35 +67,15 @@ export const spliceRandomItem = (array: string[]) => {
   return array.splice(random, 1)[0];
 };
 
-export const buildDummyData = (endpoint: string): TPokemon => {
-  const dummyColor = spliceRandomItem(dummyColors)!;
-
-  const dummyType = spliceRandomItem(dummyTypes)!;
-
-  const getRandomNum = () => Math.floor(Math.random() * 100 + 1);
-  return {
-    name: endpoint,
-    img: dummyColor,
-    type: dummyType,
-    hp: `${getRandomNum()}`,
-    attack: `${getRandomNum()}`,
-    defense: `${getRandomNum()}`,
-    special_attack: `${getRandomNum()}`,
-    special_defense: `${getRandomNum()}`,
-    speed: `${getRandomNum()}`,
-    isDummyData: true,
-  };
-};
-
-export const createAndAppendCard = (data: TPokemon) => {
+export const createAndAppendCard = (data: TPokemonData) => {
   // const cardHTML = buildCardHTML(data);
   // const card = new Card(cardHTML, data);
   // allCards.push(card);
   // return card_container.appendChild(cardHTML);
 };
 
-export const createAndAppendAllCards = (array: TPokemon[]) => {
-  let shuffledArray: TPokemon[] = [];
+export const createAndAppendAllCards = (array: TPokemonData[]) => {
+  let shuffledArray: TPokemonData[] = [];
 
   for (let i = 0; i <= 10; i++) {
     shuffledArray = shuffleInPlace(array);
@@ -129,7 +94,7 @@ export function shuffleInPlace<T>(array: T[]): T[] {
   return array;
 }
 
-export const generateCardData = (array: TPokemon[]) => {
+export const generateCardData = (array: TPokemonData[]) => {
   array.forEach((item) => {
     const clone1 = { ...item };
     const clone2 = { ...item };

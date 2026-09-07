@@ -1,9 +1,9 @@
-import type { TPokemon, TPokemon_Dom } from "./types.js";
+import type { TPokemonData, TPokemon_Dom } from "./types.js";
 declare class Card {
     html: TPokemon_Dom;
-    cardData: TPokemon;
+    cardData: TPokemonData;
     facePosition: "up" | "down";
-    constructor(htmlData: TPokemon_Dom, cardData: TPokemon);
+    constructor(htmlData: TPokemon_Dom, cardData: TPokemonData);
     flipCardUp: () => void;
     flipCardDown: () => void;
 }

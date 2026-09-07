@@ -44,16 +44,16 @@ export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
 export const gameHandler = new GameHandler();
-// const initializeApp = () =>
-//   API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
-//     startMemoryGame();
-//   });
-// const startMemoryGame = async () => {
-//   writePlayerPoints(`${points} ${gamePoints}`);
-//   generateCardData(pokemonData);
-//   createAndAppendAllCards(cardData);
-// };
-// initializeApp();
+const initializeApp = () => API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
+    startMemoryGame();
+});
+const startMemoryGame = async () => {
+    // writePlayerPoints(`${points} ${gamePoints}`);
+    // generateCardData(pokemonData);
+    // createAndAppendAllCards(cardData);
+    console.log("start game");
+};
+initializeApp();
 // let gameScreenIndex = 0;
 // document.addEventListener("keyup", async (e) => {
 //   const key = e.key;

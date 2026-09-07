@@ -1,13 +1,11 @@
 import Card from "./Card.js";
-import type { TPokemon } from "./types.js";
-export declare const convertToTSObject: (data: any) => TPokemon;
-export declare const buildCardHTML: (data: TPokemon) => void;
+import type { TPokemonData } from "./types.js";
+export declare const buildCardHTML: (data: TPokemonData) => void;
 export declare const spliceRandomItem: (array: string[]) => string | undefined;
-export declare const buildDummyData: (endpoint: string) => TPokemon;
-export declare const createAndAppendCard: (data: TPokemon) => void;
-export declare const createAndAppendAllCards: (array: TPokemon[]) => void;
+export declare const createAndAppendCard: (data: TPokemonData) => void;
+export declare const createAndAppendAllCards: (array: TPokemonData[]) => void;
 export declare function shuffleInPlace<T>(array: T[]): T[];
-export declare const generateCardData: (array: TPokemon[]) => void;
+export declare const generateCardData: (array: TPokemonData[]) => void;
 export declare const wait: (miliseconds: number) => Promise<unknown>;
 export declare const flipAllCardsDown: (array: Card[]) => void;
 export declare const animateElement: (element: HTMLElement, className: string, animationOrTransition: "animationend" | "transitionend") => Promise<unknown>;

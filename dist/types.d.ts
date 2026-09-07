@@ -1,4 +1,4 @@
-export type TPokemon = {
+export type TPokemonData = {
     name: string;
     img: string;
     type: string;
@@ -11,7 +11,7 @@ export type TPokemon = {
     isDummyData: boolean;
 };
 export type TPokemon_Dom = HTMLElement & {
-    metaData?: TPokemon;
+    metaData?: TPokemonData;
 };
 export type TGame_State = "choose-card" | "waiting" | "something";
 export type TPlayer_Choices = [TPokemon_Dom | null, TPokemon_Dom | null];

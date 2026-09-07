@@ -1,22 +1,8 @@
 import { allCards, card_container, cardData, dummyColors, dummyTypes, gamePoints, incomingGamePoints, incomingPoints, playerPoints, } from "./app.js";
 import Card from "./Card.js";
 import { ACTIVE } from "./constants.js";
-export const convertToTSObject = (data) => {
-    return {
-        name: data.name,
-        img: data.sprites.front_default,
-        type: data.types[0].type.name,
-        hp: data.stats[0].base_stat,
-        attack: data.stats[1].base_stat,
-        defense: data.stats[2].base_stat,
-        special_attack: data.stats[3].base_stat,
-        special_defense: data.stats[4].base_stat,
-        speed: data.stats[5].base_stat,
-        isDummyData: false,
-    };
-};
 export const buildCardHTML = (data) => {
-    // const cardOuter: TPokemon_Dom = document.createElement("div");
+    // const cardOuter: TPokemonData_Dom = document.createElement("div");
     // const cardBody = document.createElement("div");
     // const cardInner = document.createElement("div");
     // const name = document.createElement("div");
@@ -65,23 +51,6 @@ export const buildCardHTML = (data) => {
 export const spliceRandomItem = (array) => {
     const random = Math.floor(Math.random() * array.length);
     return array.splice(random, 1)[0];
-};
-export const buildDummyData = (endpoint) => {
-    const dummyColor = spliceRandomItem(dummyColors);
-    const dummyType = spliceRandomItem(dummyTypes);
-    const getRandomNum = () => Math.floor(Math.random() * 100 + 1);
-    return {
-        name: endpoint,
-        img: dummyColor,
-        type: dummyType,
-        hp: `${getRandomNum()}`,
-        attack: `${getRandomNum()}`,
-        defense: `${getRandomNum()}`,
-        special_attack: `${getRandomNum()}`,
-        special_defense: `${getRandomNum()}`,
-        speed: `${getRandomNum()}`,
-        isDummyData: true,
-    };
 };
 export const createAndAppendCard = (data) => {
     // const cardHTML = buildCardHTML(data);

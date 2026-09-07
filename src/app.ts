@@ -2,7 +2,7 @@ import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { ACTIVE, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
-import type { THTML_Element, TPokemon } from "./types.js";
+import type { THTML_Element, TPokemonData } from "./types.js";
 import {
   generateCardData,
   createAndAppendAllCards,
@@ -35,8 +35,8 @@ export const dummyTypes = [
 export const points = "Points: ";
 
 export const allCards: Card[] = [];
-export const pokemonData: TPokemon[] = [];
-export const cardData: TPokemon[] = [];
+export const pokemonData: TPokemonData[] = [];
+export const cardData: TPokemonData[] = [];
 
 export const card_container = document.querySelector(`.card-container`)!;
 
@@ -62,27 +62,30 @@ newGameButton?.addEventListener("click", () => {
 
 export let gamePoints = 500;
 export const setGamePoints = (points: number) => (gamePoints = points);
+
 export let incomingGamePoints = 0;
 export const setIncomingGamePoints = (points: number) =>
   (incomingGamePoints = points);
+
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit: number) =>
   (whileLoopFailsafe = limit);
 
 export const gameHandler = new GameHandler();
 
-// const initializeApp = () =>
-//   API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
-//     startMemoryGame();
-//   });
+const initializeApp = () =>
+  API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
+    startMemoryGame();
+  });
 
-// const startMemoryGame = async () => {
-//   writePlayerPoints(`${points} ${gamePoints}`);
-//   generateCardData(pokemonData);
-//   createAndAppendAllCards(cardData);
-// };
+const startMemoryGame = async () => {
+  // writePlayerPoints(`${points} ${gamePoints}`);
+  // generateCardData(pokemonData);
+  // createAndAppendAllCards(cardData);
+  console.log("start game");
+};
 
-// initializeApp();
+initializeApp();
 
 // let gameScreenIndex = 0;
 // document.addEventListener("keyup", async (e) => {
