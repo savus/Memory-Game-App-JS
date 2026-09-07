@@ -8,31 +8,7 @@ export const pokeNames = [
     "articuno",
     "diglett",
 ];
-export const CSS_CLASSES = {
-    CARD_CONTAINER: "card-container",
-    CARD_OUTER: "card-outer",
-    CARD_BODY: "card-body",
-    CARD_INNER: "card-inner",
-    CARD_BACK: "card-back",
-    CARD_NAME: "card-name",
-    IMG_CONTAINER: "img-container",
-    CARD_IMG: "card-img",
-    IMG: "img",
-    STATS: "stats",
-    FACE_DOWN: "face-down",
-    DUMMY_CARD: "dummy-card",
-    DUMMY_COLOR: "dummy-color",
-    MESSAGE_CONTAINER: "message-container",
-    GAME_MESSAGE: "game-message",
-    SLIDE: "slide",
-    PLAYER_POINTS: "player-points",
-    INCOMING_POINTS: "incoming-points",
-    ACTIVE: "active",
-    GAME_SCREEN: "game-screen",
-    MODAL: "modal",
-    MAIN_GAME: "main-game",
-};
-export const HTML_IDS = {
-    NEW_GAME: "new-game",
-};
+export const ACTIVE = "active";
+export const FACEDOWN = "face-down";
+export const SLIDE = "slide";
 //# sourceMappingURL=constants.js.map

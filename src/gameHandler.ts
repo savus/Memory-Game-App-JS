@@ -5,7 +5,6 @@ import {
   incomingGamePoints,
   incomingPoints,
   messageContainer,
-  playerPoints,
   points,
   setGamePoints,
   setIncomingGamePoints,
@@ -13,7 +12,7 @@ import {
   whileLoopFailsafe,
 } from "./app.js";
 import type Card from "./Card.js";
-import { CSS_CLASSES } from "./constants.js";
+import { ACTIVE, SLIDE } from "./constants.js";
 import type { TGame_State, TPlayer_Choices } from "./types.js";
 import {
   animateElement,
@@ -62,11 +61,11 @@ class GameHandler {
 
   displayRightOrWrongChoice = () => {
     if (this.doPlayerChoicesMatch()) {
-      this.displayGameMessage(CSS_CLASSES.SLIDE, "There was a match!");
+      this.displayGameMessage(SLIDE, "There was a match!");
       this.setPlayerPoints(this.level_points);
       this.choices_matched = true;
     } else {
-      this.displayGameMessage(CSS_CLASSES.SLIDE, "Oops! No Match!");
+      this.displayGameMessage(SLIDE, "Oops! No Match!");
     }
   };
 
@@ -95,7 +94,7 @@ class GameHandler {
     setIncomingGamePoints(points);
     setIncomingPointsText(incomingGamePoints, "-");
     writePlayerPoints(`${points} ${gamePoints}`);
-    await animateElement(incomingPoints, CSS_CLASSES.ACTIVE, "transitionend");
+    await animateElement(incomingPoints, ACTIVE, "transitionend");
     await this.transferPointsAnimation();
     incomingPoints.classList.remove("active");
     setWhileLoopFailSafe(0);

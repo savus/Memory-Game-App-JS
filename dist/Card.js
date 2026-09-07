@@ -1,5 +1,5 @@
 import { cardOnClickHandler } from "./clickEvents.js";
-import { CSS_CLASSES } from "./constants.js";
+import { FACEDOWN } from "./constants.js";
 class Card {
     html;
     cardData;
@@ -14,11 +14,11 @@ class Card {
     }
     flipCardUp = () => {
         this.facePosition = "up";
-        this.html.classList.remove(CSS_CLASSES.FACE_DOWN);
+        this.html.classList.remove(FACEDOWN);
     };
     flipCardDown = () => {
         this.facePosition = "down";
-        this.html.classList.add(CSS_CLASSES.FACE_DOWN);
+        this.html.classList.add(FACEDOWN);
     };
 }
 export default Card;

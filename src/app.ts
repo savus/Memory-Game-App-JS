@@ -1,6 +1,6 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
-import { CSS_CLASSES, HTML_IDS, pokeNames } from "./constants.js";
+import { ACTIVE, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
 import type { THTML_Element, TPokemon } from "./types.js";
 import {
@@ -38,31 +38,27 @@ export const allCards: Card[] = [];
 export const pokemonData: TPokemon[] = [];
 export const cardData: TPokemon[] = [];
 
-export const card_container = document.querySelector(
-  `.${CSS_CLASSES.CARD_CONTAINER}`,
-)!;
+export const card_container = document.querySelector(`.card-container`)!;
 
 export const messageContainer = document.querySelector(
-  `.${CSS_CLASSES.MESSAGE_CONTAINER}`,
+  `.message-container`,
 )! as HTMLElement;
 
-export const gameMessage = document.querySelector(
-  `.${CSS_CLASSES.GAME_MESSAGE}`,
-)!;
+export const gameMessage = document.querySelector(`.game-message`)!;
 
-export const playerPoints = document.querySelector(
-  `.${CSS_CLASSES.PLAYER_POINTS}`,
-)!;
+export const playerPoints = document.querySelector(`.player-points`)!;
 
 export const incomingPoints = document.querySelector(
-  `.${CSS_CLASSES.INCOMING_POINTS}`,
+  `.incoming-points`,
 )! as HTMLElement;
 
-const newGameButton = document.getElementById(HTML_IDS.NEW_GAME);
+const mainGame: THTML_Element = document.querySelector(`.main-game`)!;
 
-const mainGame: THTML_Element = document.querySelector(
-  `.${CSS_CLASSES.MAIN_GAME}`,
-)!;
+const newGameButton = document.getElementById("new-game");
+
+newGameButton?.addEventListener("click", () => {
+  swapScreens(mainGame, ACTIVE);
+});
 
 export let gamePoints = 500;
 export const setGamePoints = (points: number) => (gamePoints = points);
@@ -75,28 +71,24 @@ export const setWhileLoopFailSafe = (limit: number) =>
 
 export const gameHandler = new GameHandler();
 
-const initApp = () =>
-  API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
-    startMemoryGame();
-  });
+// const initializeApp = () =>
+//   API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
+//     startMemoryGame();
+//   });
 
-const startMemoryGame = async () => {
-  writePlayerPoints(`${points} ${gamePoints}`);
-  generateCardData(pokemonData);
-  createAndAppendAllCards(cardData);
-};
+// const startMemoryGame = async () => {
+//   writePlayerPoints(`${points} ${gamePoints}`);
+//   generateCardData(pokemonData);
+//   createAndAppendAllCards(cardData);
+// };
 
-initApp();
+// initializeApp();
 
-newGameButton?.addEventListener("click", () => {
-  swapScreens(mainGame, CSS_CLASSES.ACTIVE);
-});
-
-let gameScreenIndex = 0;
-document.addEventListener("keyup", async (e) => {
-  const key = e.key;
-  switch (key) {
-    case "Enter":
-      gameHandler.displayGameMessage(CSS_CLASSES.SLIDE, "Testing");
-  }
-});
+// let gameScreenIndex = 0;
+// document.addEventListener("keyup", async (e) => {
+//   const key = e.key;
+//   switch (key) {
+//     case "Enter":
+//       gameHandler.displayGameMessage(SLIDE, "Testing");
+//   }
+// });

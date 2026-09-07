@@ -1,6 +1,6 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
-import { CSS_CLASSES, HTML_IDS, pokeNames } from "./constants.js";
+import { ACTIVE, pokeNames } from "./constants.js";
 import GameHandler from "./gameHandler.js";
 import { generateCardData, createAndAppendAllCards, swapScreens, writePlayerPoints, } from "./utility.js";
 export const dummyColors = [
@@ -27,13 +27,16 @@ export const points = "Points: ";
 export const allCards = [];
 export const pokemonData = [];
 export const cardData = [];
-export const card_container = document.querySelector(`.${CSS_CLASSES.CARD_CONTAINER}`);
-export const messageContainer = document.querySelector(`.${CSS_CLASSES.MESSAGE_CONTAINER}`);
-export const gameMessage = document.querySelector(`.${CSS_CLASSES.GAME_MESSAGE}`);
-export const playerPoints = document.querySelector(`.${CSS_CLASSES.PLAYER_POINTS}`);
-export const incomingPoints = document.querySelector(`.${CSS_CLASSES.INCOMING_POINTS}`);
-const newGameButton = document.getElementById(HTML_IDS.NEW_GAME);
-const mainGame = document.querySelector(`.${CSS_CLASSES.MAIN_GAME}`);
+export const card_container = document.querySelector(`.card-container`);
+export const messageContainer = document.querySelector(`.message-container`);
+export const gameMessage = document.querySelector(`.game-message`);
+export const playerPoints = document.querySelector(`.player-points`);
+export const incomingPoints = document.querySelector(`.incoming-points`);
+const mainGame = document.querySelector(`.main-game`);
+const newGameButton = document.getElementById("new-game");
+newGameButton?.addEventListener("click", () => {
+    swapScreens(mainGame, ACTIVE);
+});
 export let gamePoints = 500;
 export const setGamePoints = (points) => (gamePoints = points);
 export let incomingGamePoints = 0;
@@ -41,24 +44,22 @@ export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
 export const gameHandler = new GameHandler();
-const initApp = () => API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
-    startMemoryGame();
-});
-const startMemoryGame = async () => {
-    writePlayerPoints(`${points} ${gamePoints}`);
-    generateCardData(pokemonData);
-    createAndAppendAllCards(cardData);
-};
-initApp();
-newGameButton?.addEventListener("click", () => {
-    swapScreens(mainGame, CSS_CLASSES.ACTIVE);
-});
-let gameScreenIndex = 0;
-document.addEventListener("keyup", async (e) => {
-    const key = e.key;
-    switch (key) {
-        case "Enter":
-            gameHandler.displayGameMessage(CSS_CLASSES.SLIDE, "Testing");
-    }
-});
+// const initializeApp = () =>
+//   API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
+//     startMemoryGame();
+//   });
+// const startMemoryGame = async () => {
+//   writePlayerPoints(`${points} ${gamePoints}`);
+//   generateCardData(pokemonData);
+//   createAndAppendAllCards(cardData);
+// };
+// initializeApp();
+// let gameScreenIndex = 0;
+// document.addEventListener("keyup", async (e) => {
+//   const key = e.key;
+//   switch (key) {
+//     case "Enter":
+//       gameHandler.displayGameMessage(SLIDE, "Testing");
+//   }
+// });
 //# sourceMappingURL=app.js.map

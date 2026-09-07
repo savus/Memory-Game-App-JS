@@ -10,7 +10,7 @@ import {
   playerPoints,
 } from "./app.js";
 import Card from "./Card.js";
-import { CSS_CLASSES } from "./constants.js";
+import { ACTIVE } from "./constants.js";
 import type { TPokemon, TPokemon_Dom } from "./types.js";
 
 export const convertToTSObject = (data: any): TPokemon => {
@@ -29,56 +29,51 @@ export const convertToTSObject = (data: any): TPokemon => {
 };
 
 export const buildCardHTML = (data: TPokemon) => {
-  const cardOuter: TPokemon_Dom = document.createElement("div");
-
-  const cardBody = document.createElement("div");
-  const cardInner = document.createElement("div");
-  const name = document.createElement("div");
-  const img_container = document.createElement("div");
-  const card_img = document.createElement("div");
-  const dummy_color = document.createElement("div");
-  const img = document.createElement("img");
-  const type = document.createElement("div");
-  const stats = document.createElement("div");
-  const hp = document.createElement("div");
-  const attack = document.createElement("div");
-  const defense = document.createElement("div");
-  const special_attack = document.createElement("div");
-  const special_defense = document.createElement("div");
-  const speed = document.createElement("div");
-  const cardBack = document.createElement("div");
-
-  cardOuter.className = `${CSS_CLASSES.CARD_OUTER} ${CSS_CLASSES.FACE_DOWN} ${data.isDummyData ? CSS_CLASSES.DUMMY_CARD : ""}`;
-  cardBody.className = CSS_CLASSES.CARD_BODY;
-  cardInner.className = CSS_CLASSES.CARD_INNER;
-  name.className = CSS_CLASSES.CARD_NAME;
-  name.innerHTML = data.name;
-  img_container.className = CSS_CLASSES.IMG_CONTAINER;
-  card_img.className = CSS_CLASSES.CARD_IMG;
-  dummy_color.className = CSS_CLASSES.DUMMY_COLOR;
-  dummy_color.style.backgroundColor = data.img;
-  img.className = CSS_CLASSES.IMG;
-  img.src = data.img;
-  type.innerHTML = `Type: ${data.type}`;
-  stats.className = CSS_CLASSES.STATS;
-  hp.innerHTML = `hp: ${data.hp}`;
-  attack.innerHTML = `attack: ${data.attack}`;
-  defense.innerHTML = `defense: ${data.defense}`;
-  special_attack.innerHTML = `special_attack: ${data.special_attack}`;
-  special_defense.innerHTML = `special_defense: ${data.special_defense}`;
-  speed.innerHTML = `speed: ${data.speed}`;
-  cardBack.className = CSS_CLASSES.CARD_BACK;
-
-  card_img.append(img, dummy_color);
-  img_container.appendChild(card_img);
-  stats.append(hp, attack, defense, special_attack, special_defense, speed);
-
-  cardInner.append(name, img_container, type, stats);
-  cardBody.append(cardInner, cardBack);
-  cardOuter.appendChild(cardBody);
-  cardOuter.metaData = data;
-
-  return cardOuter;
+  // const cardOuter: TPokemon_Dom = document.createElement("div");
+  // const cardBody = document.createElement("div");
+  // const cardInner = document.createElement("div");
+  // const name = document.createElement("div");
+  // const img_container = document.createElement("div");
+  // const card_img = document.createElement("div");
+  // const dummy_color = document.createElement("div");
+  // const img = document.createElement("img");
+  // const type = document.createElement("div");
+  // const stats = document.createElement("div");
+  // const hp = document.createElement("div");
+  // const attack = document.createElement("div");
+  // const defense = document.createElement("div");
+  // const special_attack = document.createElement("div");
+  // const special_defense = document.createElement("div");
+  // const speed = document.createElement("div");
+  // const cardBack = document.createElement("div");
+  // cardOuter.className = `${CSS_CLASSES} ${CSS_CLASSES.FACE_DOWN} ${data.isDummyData ? CSS_CLASSES.DUMMY_CARD : ""}`;
+  // cardBody.className = CSS_CLASSES.CARD_BODY;
+  // cardInner.className = CSS_CLASSES.CARD_INNER;
+  // name.className = CSS_CLASSES.CARD_NAME;
+  // name.innerHTML = data.name;
+  // img_container.className = CSS_CLASSES.IMG_CONTAINER;
+  // card_img.className = CSS_CLASSES.CARD_IMG;
+  // dummy_color.className = CSS_CLASSES.DUMMY_COLOR;
+  // dummy_color.style.backgroundColor = data.img;
+  // img.className = CSS_CLASSES.IMG;
+  // img.src = data.img;
+  // type.innerHTML = `Type: ${data.type}`;
+  // stats.className = CSS_CLASSES.STATS;
+  // hp.innerHTML = `hp: ${data.hp}`;
+  // attack.innerHTML = `attack: ${data.attack}`;
+  // defense.innerHTML = `defense: ${data.defense}`;
+  // special_attack.innerHTML = `special_attack: ${data.special_attack}`;
+  // special_defense.innerHTML = `special_defense: ${data.special_defense}`;
+  // speed.innerHTML = `speed: ${data.speed}`;
+  // cardBack.className = CSS_CLASSES.CARD_BACK;
+  // card_img.append(img, dummy_color);
+  // img_container.appendChild(card_img);
+  // stats.append(hp, attack, defense, special_attack, special_defense, speed);
+  // cardInner.append(name, img_container, type, stats);
+  // cardBody.append(cardInner, cardBack);
+  // cardOuter.appendChild(cardBody);
+  // cardOuter.metaData = data;
+  // return cardOuter;
 };
 
 export const spliceRandomItem = (array: string[]) => {
@@ -108,12 +103,10 @@ export const buildDummyData = (endpoint: string): TPokemon => {
 };
 
 export const createAndAppendCard = (data: TPokemon) => {
-  const cardHTML = buildCardHTML(data);
-  const card = new Card(cardHTML, data);
-
-  allCards.push(card);
-
-  return card_container.appendChild(cardHTML);
+  // const cardHTML = buildCardHTML(data);
+  // const card = new Card(cardHTML, data);
+  // allCards.push(card);
+  // return card_container.appendChild(cardHTML);
 };
 
 export const createAndAppendAllCards = (array: TPokemon[]) => {
@@ -176,13 +169,11 @@ export const swapScreens = (
   elementToActivate: HTMLElement,
   className: string,
 ) => {
-  const elementToDeactivate = document.querySelector(
-    `.${className}.${CSS_CLASSES.ACTIVE}`,
-  );
+  const elementToDeactivate = document.querySelector(`.${className}.${ACTIVE}`);
   if (elementToDeactivate !== null) {
-    elementToDeactivate.classList.remove(CSS_CLASSES.ACTIVE);
+    elementToDeactivate.classList.remove(ACTIVE);
   }
-  elementToActivate.classList.add(CSS_CLASSES.ACTIVE);
+  elementToActivate.classList.add(ACTIVE);
 };
 
 export const writePlayerPoints = (text: string) => {
