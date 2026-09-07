@@ -1,1 +1,1 @@
-{"version":3,"file":"GameHandler.d.ts","sourceRoot":"","sources":["../src/GameHandler.ts"],"names":[],"mappings":"AAeA,OAAO,KAAK,EAAE,YAAY,EAAE,MAAM,YAAY,CAAC;AAS/C,eAAO,MAAM,WAAW,EAAE,YAiGzB,CAAC;AAEF,eAAe,WAAW,CAAC"}
+{"version":3,"file":"gameHandler.d.ts","sourceRoot":"","sources":["../src/gameHandler.ts"],"names":[],"mappings":"AAgBA,OAAO,KAAK,EAAE,YAAY,EAAE,MAAM,YAAY,CAAC;AAU/C,eAAO,MAAM,WAAW,EAAE,YAiGzB,CAAC;AAEF,eAAe,WAAW,CAAC"}

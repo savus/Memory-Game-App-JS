@@ -94,7 +94,7 @@ export function shuffleInPlace<T>(array: T[]): T[] {
   return array;
 }
 
-export const generateCardData = (array: TPokemonData[]) => {
+export const populateCardDataList = (array: TPokemonData[]) => {
   array.forEach((item) => {
     const clone1 = { ...item };
     const clone2 = { ...item };
@@ -141,7 +141,7 @@ export const swapScreens = (
   elementToActivate.classList.add(ACTIVE);
 };
 
-export const writePlayerPoints = (text: string) => {
+export const updatePlayerPoints = (text: string) => {
   playerPoints.innerHTML = text;
 };
 

@@ -15,9 +15,12 @@ export type TPokemonData = {
 
 export type TApiObject = {
   fetchData: (endpoint: string) => Promise<TPokemonData>;
-  fetchAllPokemon: (array: string[]) => Promise<TPokemonData[]>;
+  fetchAllPokemon: (
+    array: string[],
+    arrayToStore: TPokemonData[],
+  ) => Promise<TPokemonData[]>;
   buildDummyData: (endpoint: string) => TPokemonData;
-  convertToTSObject: (endpoint: string) => TPokemonData;
+  convertToTSObject: (data: any) => TPokemonData;
 };
 
 export type TGameHandler = {
@@ -26,7 +29,11 @@ export type TGameHandler = {
   level_points: number;
   choices_matched: boolean;
 
-  initializeApp: (apiObject: TApiObject, names: string[]) => void;
+  initializeApp: (
+    apiObject: TApiObject,
+    names: string[],
+    arrayToStore: TPokemonData[],
+  ) => void;
   startMemoryGame: () => void;
   displayGameMessage: (className: string, message: string) => void;
   doPlayerChoicesMatch: () => boolean;

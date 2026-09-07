@@ -1,4 +1,4 @@
-import { API_REQUESTS } from "./api.js";
+import API_REQUESTS from "./api.js";
 import Card from "./Card.js";
 import { ACTIVE, pokeNames } from "./constants.js";
 import GameHandler from "./GameHandler.js";
@@ -43,7 +43,7 @@ export let incomingGamePoints = 0;
 export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
-GameHandler.initializeApp(API_REQUESTS, pokeNames);
+GameHandler.initializeApp(API_REQUESTS, pokeNames, pokemonData);
 // let gameScreenIndex = 0;
 // document.addEventListener("keyup", async (e) => {
 //   const key = e.key;

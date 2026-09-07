@@ -74,7 +74,7 @@ export function shuffleInPlace(array) {
     }
     return array;
 }
-export const generateCardData = (array) => {
+export const populateCardDataList = (array) => {
     array.forEach((item) => {
         const clone1 = { ...item };
         const clone2 = { ...item };
@@ -105,7 +105,7 @@ export const swapScreens = (elementToActivate, className) => {
     }
     elementToActivate.classList.add(ACTIVE);
 };
-export const writePlayerPoints = (text) => {
+export const updatePlayerPoints = (text) => {
     playerPoints.innerHTML = text;
 };
 export const setIncomingPointsText = (points, addOrSubtract) => {

@@ -1,17 +1,17 @@
-import { allCards, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, points, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
+import { allCards, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, points, pokemonData, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
 import { ACTIVE, SLIDE } from "./constants.js";
-import { animateElement, flipAllCardsDown, setIncomingPointsText, writePlayerPoints, wait, } from "./utility.js";
+import { animateElement, flipAllCardsDown, setIncomingPointsText, wait, updatePlayerPoints, populateCardDataList, } from "./utility.js";
 export const GameHandler = {
     game_state: "choose-card",
     player_choices: [null, null],
     level_points: 50,
     choices_matched: false,
-    initializeApp: (apiObject, names) => apiObject.fetchAllPokemon(names).finally(() => {
+    initializeApp: (apiObject, names, arrayToStore) => apiObject.fetchAllPokemon(names, arrayToStore).finally(() => {
         GameHandler.startMemoryGame();
     }),
     startMemoryGame: async () => {
-        // writePlayerPoints(`${points} ${gamePoints}`);
-        // generateCardData(pokemonData);
+        updatePlayerPoints(`${points} ${gamePoints}`);
+        populateCardDataList(pokemonData);
         // createAndAppendAllCards(cardData);
         console.log("start game");
     },
@@ -70,7 +70,7 @@ export const GameHandler = {
     setPlayerPoints: async (points) => {
         setIncomingGamePoints(parseInt(points));
         setIncomingPointsText(incomingGamePoints, "-");
-        writePlayerPoints(`${points} ${gamePoints}`);
+        updatePlayerPoints(`${points} ${gamePoints}`);
         await animateElement(incomingPoints, ACTIVE, "transitionend");
         await GameHandler.transferPointsAnimation();
         incomingPoints.classList.remove("active");
@@ -84,11 +84,11 @@ export const GameHandler = {
             setIncomingGamePoints(incomingGamePoints - 1);
             setGamePoints(gamePoints - 1);
             setIncomingPointsText(incomingGamePoints, "-");
-            writePlayerPoints(`${points} ${gamePoints}`);
+            updatePlayerPoints(`${points} ${gamePoints}`);
             await wait(10);
         }
         return;
     },
 };
 export default GameHandler;
-//# sourceMappingURL=GameHandler.js.map
+//# sourceMappingURL=gameHandler.js.map

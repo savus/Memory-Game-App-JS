@@ -6,6 +6,7 @@ import {
   incomingPoints,
   messageContainer,
   points,
+  pokemonData,
   setGamePoints,
   setIncomingGamePoints,
   setWhileLoopFailSafe,
@@ -18,8 +19,9 @@ import {
   animateElement,
   flipAllCardsDown,
   setIncomingPointsText,
-  writePlayerPoints,
   wait,
+  updatePlayerPoints,
+  populateCardDataList,
 } from "./utility.js";
 
 export const GameHandler: TGameHandler = {
@@ -28,14 +30,14 @@ export const GameHandler: TGameHandler = {
   level_points: 50,
   choices_matched: false,
 
-  initializeApp: (apiObject, names) =>
-    apiObject.fetchAllPokemon(names).finally(() => {
+  initializeApp: (apiObject, names, arrayToStore) =>
+    apiObject.fetchAllPokemon(names, arrayToStore).finally(() => {
       GameHandler.startMemoryGame();
     }),
 
   startMemoryGame: async () => {
-    // writePlayerPoints(`${points} ${gamePoints}`);
-    // generateCardData(pokemonData);
+    updatePlayerPoints(`${points} ${gamePoints}`);
+    populateCardDataList(pokemonData);
     // createAndAppendAllCards(cardData);
     console.log("start game");
   },
@@ -100,7 +102,7 @@ export const GameHandler: TGameHandler = {
   setPlayerPoints: async (points) => {
     setIncomingGamePoints(parseInt(points));
     setIncomingPointsText(incomingGamePoints, "-");
-    writePlayerPoints(`${points} ${gamePoints}`);
+    updatePlayerPoints(`${points} ${gamePoints}`);
     await animateElement(incomingPoints, ACTIVE, "transitionend");
     await GameHandler.transferPointsAnimation();
     incomingPoints.classList.remove("active");
@@ -114,7 +116,7 @@ export const GameHandler: TGameHandler = {
       setIncomingGamePoints(incomingGamePoints - 1);
       setGamePoints(gamePoints - 1);
       setIncomingPointsText(incomingGamePoints, "-");
-      writePlayerPoints(`${points} ${gamePoints}`);
+      updatePlayerPoints(`${points} ${gamePoints}`);
       await wait(10);
     }
     return;
