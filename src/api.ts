@@ -1,11 +1,11 @@
 import { dummyColors, dummyTypes, pokemonData } from "./app.js";
-import type { TPokemonData } from "./types.js";
+import type { TApiObject, TPokemonData } from "./types.js";
 import { spliceRandomItem } from "./utility.js";
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
-export const API_REQUESTS = {
-  fetchData: async (endpoint: string): Promise<TPokemonData> => {
+export const API_REQUESTS: TApiObject = {
+  fetchData: async (endpoint) => {
     const response = await fetch(`${BASE_URL}${endpoint}`);
 
     if (!response.ok) {
@@ -17,15 +17,16 @@ export const API_REQUESTS = {
     return API_REQUESTS.convertToTSObject(await response.json());
   },
 
-  fetchAllPokemon: (array: string[]) => {
+  fetchAllPokemon: (array) => {
     return Promise.all(array.map((name) => API_REQUESTS.fetchData(name))).then(
       (data) => {
         Array.from(data).forEach((mon) => pokemonData.push(mon));
+        return data;
       },
     );
   },
 
-  buildDummyData(endpoint: string): TPokemonData {
+  buildDummyData(endpoint): TPokemonData {
     const dummyColor = spliceRandomItem(dummyColors)!;
 
     const dummyType = spliceRandomItem(dummyTypes)!;

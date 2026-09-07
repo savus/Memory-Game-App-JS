@@ -1,8 +1,8 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { ACTIVE, pokeNames } from "./constants.js";
-import GameHandler from "./gameHandler.js";
-import { generateCardData, createAndAppendAllCards, swapScreens, writePlayerPoints, } from "./utility.js";
+import GameHandler from "./GameHandler.js";
+import { swapScreens } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",
     "#0ed3e5",
@@ -43,17 +43,7 @@ export let incomingGamePoints = 0;
 export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
-export const gameHandler = new GameHandler();
-const initializeApp = () => API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
-    startMemoryGame();
-});
-const startMemoryGame = async () => {
-    // writePlayerPoints(`${points} ${gamePoints}`);
-    // generateCardData(pokemonData);
-    // createAndAppendAllCards(cardData);
-    console.log("start game");
-};
-initializeApp();
+GameHandler.initializeApp(API_REQUESTS, pokeNames);
 // let gameScreenIndex = 0;
 // document.addEventListener("keyup", async (e) => {
 //   const key = e.key;

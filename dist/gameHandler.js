@@ -1,77 +1,82 @@
 import { allCards, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, points, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
 import { ACTIVE, SLIDE } from "./constants.js";
 import { animateElement, flipAllCardsDown, setIncomingPointsText, writePlayerPoints, wait, } from "./utility.js";
-class GameHandler {
-    game_state;
-    player_choices;
-    level_points;
-    choices_matched;
-    constructor() {
-        this.game_state = "choose-card";
-        this.player_choices = [null, null];
-        this.level_points = 50;
-        this.choices_matched = false;
-    }
-    displayGameMessage = async (className, message) => {
+export const GameHandler = {
+    game_state: "choose-card",
+    player_choices: [null, null],
+    level_points: 50,
+    choices_matched: false,
+    initializeApp: (apiObject, names) => apiObject.fetchAllPokemon(names).finally(() => {
+        GameHandler.startMemoryGame();
+    }),
+    startMemoryGame: async () => {
+        // writePlayerPoints(`${points} ${gamePoints}`);
+        // generateCardData(pokemonData);
+        // createAndAppendAllCards(cardData);
+        console.log("start game");
+    },
+    displayGameMessage: async (className, message) => {
         gameMessage.innerHTML = message;
         await animateElement(messageContainer, className, "animationend");
         messageContainer.classList.remove(className);
-    };
-    doPlayerChoicesMatch = () => (this.player_choices[0] && this.player_choices[0].metaData?.name) ===
-        (this.player_choices[1] && this.player_choices[1].metaData?.name);
-    handlePlayerChoice = async (card) => {
-        if (this.game_state === "choose-card") {
+    },
+    doPlayerChoicesMatch: () => (GameHandler.player_choices[0] &&
+        GameHandler.player_choices[0].metaData?.name) ===
+        (GameHandler.player_choices[1] &&
+            GameHandler.player_choices[1].metaData?.name),
+    handlePlayerChoice: async (card) => {
+        if (GameHandler.game_state === "choose-card") {
             if (card.facePosition === "down") {
-                if (this.player_choices[0] === null) {
-                    this.setFirstChoice(card);
+                if (GameHandler.player_choices[0] === null) {
+                    GameHandler.setFirstChoice(card);
                 }
-                else if (this.player_choices[1] === null) {
-                    this.setSecondChoice(card);
+                else if (GameHandler.player_choices[1] === null) {
+                    GameHandler.setSecondChoice(card);
                 }
             }
         }
         else {
             console.log("sorry, you may not click right now");
         }
-    };
-    displayRightOrWrongChoice = () => {
-        if (this.doPlayerChoicesMatch()) {
-            this.displayGameMessage(SLIDE, "There was a match!");
-            this.setPlayerPoints(this.level_points);
-            this.choices_matched = true;
+    },
+    displayRightOrWrongChoice: () => {
+        if (GameHandler.doPlayerChoicesMatch()) {
+            GameHandler.displayGameMessage(SLIDE, "There was a match!");
+            GameHandler.setPlayerPoints(`${GameHandler.level_points}`);
+            GameHandler.choices_matched = true;
         }
         else {
-            this.displayGameMessage(SLIDE, "Oops! No Match!");
+            GameHandler.displayGameMessage(SLIDE, "Oops! No Match!");
         }
-    };
-    setFirstChoice = (card) => {
-        this.player_choices[0] = card.html;
+    },
+    setFirstChoice: (card) => {
+        GameHandler.player_choices[0] = card.html;
         card.flipCardUp();
-    };
-    resetPlayerChoices = () => (this.player_choices = [null, null]);
-    setSecondChoice = async (card) => {
-        this.player_choices[1] = card.html;
-        this.displayRightOrWrongChoice();
+    },
+    resetPlayerChoices: () => (GameHandler.player_choices = [null, null]),
+    setSecondChoice: async (card) => {
+        GameHandler.player_choices[1] = card.html;
+        GameHandler.displayRightOrWrongChoice();
         card.flipCardUp();
-        this.game_state = "waiting";
+        GameHandler.game_state = "waiting";
         await wait(2000);
-        if (!this.choices_matched) {
+        if (!GameHandler.choices_matched) {
             flipAllCardsDown(allCards);
         }
-        this.resetPlayerChoices();
-        this.game_state = "choose-card";
-        this.choices_matched = false;
-    };
-    setPlayerPoints = async (points) => {
-        setIncomingGamePoints(points);
+        GameHandler.resetPlayerChoices();
+        GameHandler.game_state = "choose-card";
+        GameHandler.choices_matched = false;
+    },
+    setPlayerPoints: async (points) => {
+        setIncomingGamePoints(parseInt(points));
         setIncomingPointsText(incomingGamePoints, "-");
         writePlayerPoints(`${points} ${gamePoints}`);
         await animateElement(incomingPoints, ACTIVE, "transitionend");
-        await this.transferPointsAnimation();
+        await GameHandler.transferPointsAnimation();
         incomingPoints.classList.remove("active");
         setWhileLoopFailSafe(0);
-    };
-    transferPointsAnimation = async () => {
+    },
+    transferPointsAnimation: async () => {
         while (incomingGamePoints > 0) {
             setWhileLoopFailSafe(whileLoopFailsafe + 1);
             if (whileLoopFailsafe >= 1000)
@@ -83,7 +88,7 @@ class GameHandler {
             await wait(10);
         }
         return;
-    };
-}
+    },
+};
 export default GameHandler;
-//# sourceMappingURL=gameHandler.js.map
+//# sourceMappingURL=GameHandler.js.map

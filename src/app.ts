@@ -1,14 +1,10 @@
 import { API_REQUESTS } from "./api.js";
 import Card from "./Card.js";
 import { ACTIVE, pokeNames } from "./constants.js";
-import GameHandler from "./gameHandler.js";
+import GameHandler from "./GameHandler.js";
+
 import type { THTML_Element, TPokemonData } from "./types.js";
-import {
-  generateCardData,
-  createAndAppendAllCards,
-  swapScreens,
-  writePlayerPoints,
-} from "./utility.js";
+import { swapScreens } from "./utility.js";
 
 export const dummyColors = [
   "#e80a0a",
@@ -71,22 +67,7 @@ export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit: number) =>
   (whileLoopFailsafe = limit);
 
-export const gameHandler = new GameHandler();
-
-const initializeApp = () =>
-  API_REQUESTS.fetchAllPokemon(pokeNames).finally(() => {
-    startMemoryGame();
-  });
-
-const startMemoryGame = async () => {
-  // writePlayerPoints(`${points} ${gamePoints}`);
-  // generateCardData(pokemonData);
-  // createAndAppendAllCards(cardData);
-  console.log("start game");
-};
-
-initializeApp();
-
+GameHandler.initializeApp(API_REQUESTS, pokeNames);
 // let gameScreenIndex = 0;
 // document.addEventListener("keyup", async (e) => {
 //   const key = e.key;

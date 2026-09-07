@@ -13,6 +13,7 @@ export const API_REQUESTS = {
     fetchAllPokemon: (array) => {
         return Promise.all(array.map((name) => API_REQUESTS.fetchData(name))).then((data) => {
             Array.from(data).forEach((mon) => pokemonData.push(mon));
+            return data;
         });
     },
     buildDummyData(endpoint) {

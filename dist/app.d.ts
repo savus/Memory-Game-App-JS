@@ -1,5 +1,4 @@
 import Card from "./Card.js";
-import GameHandler from "./gameHandler.js";
 import type { TPokemonData } from "./types.js";
 export declare const dummyColors: string[];
 export declare const dummyTypes: string[];
@@ -18,5 +17,4 @@ export declare let incomingGamePoints: number;
 export declare const setIncomingGamePoints: (points: number) => number;
 export declare let whileLoopFailsafe: number;
 export declare const setWhileLoopFailSafe: (limit: number) => number;
-export declare const gameHandler: GameHandler;
 //# sourceMappingURL=app.d.ts.map
