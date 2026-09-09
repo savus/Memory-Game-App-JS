@@ -67,25 +67,6 @@ export const spliceRandomItem = (array: string[]) => {
   return array.splice(random, 1)[0];
 };
 
-export const createAndAppendCard = (data: TPokemonData) => {
-  // const cardHTML = buildCardHTML(data);
-  // const card = new Card(cardHTML, data);
-  // allCards.push(card);
-  // return card_container.appendChild(cardHTML);
-};
-
-export const createAndAppendAllCards = (array: TPokemonData[]) => {
-  let shuffledArray: TPokemonData[] = [];
-
-  for (let i = 0; i <= 10; i++) {
-    shuffledArray = shuffleInPlace(array);
-  }
-
-  shuffledArray.forEach((mon) => {
-    createAndAppendCard(mon);
-  });
-};
-
 export function shuffleInPlace<T>(array: T[]): T[] {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -94,12 +75,15 @@ export function shuffleInPlace<T>(array: T[]): T[] {
   return array;
 }
 
-export const populateCardDataList = (array: TPokemonData[]) => {
+export const populateCardDataList = (
+  array: TPokemonData[],
+  arrayToCloneTo: TPokemonData[],
+) => {
   array.forEach((item) => {
     const clone1 = { ...item };
     const clone2 = { ...item };
-    cardData.push(clone1);
-    cardData.push(clone2);
+    arrayToCloneTo.push(clone1);
+    arrayToCloneTo.push(clone2);
   });
 };
 
