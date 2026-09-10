@@ -17,9 +17,11 @@ export type TApiObject = {
     buildDummyData: (endpoint: string) => TPokemonData;
     convertToTSObject: (data: any) => TPokemonData;
 };
+export type TGameState = "choose-card" | "waiting" | "something";
+export type TPlayerChoices = [TPokemonDom | null, TPokemonDom | null];
 export type TGameHandler = {
-    game_state: TGame_State;
-    player_choices: TPlayer_Choices;
+    game_state: TGameState;
+    player_choices: TPlayerChoices;
     level_points: number;
     choices_matched: boolean;
     initializeApp: (apiObject: TApiObject, names: string[], arrayToStore: TPokemonData[]) => void;
@@ -34,10 +36,8 @@ export type TGameHandler = {
     setPlayerPoints: (point: string) => void;
     transferPointsAnimation: () => void;
 };
-export type TPokemon_Dom = HTMLElement & {
+export type TPokemonDom = HTMLElement & {
     metaData?: TPokemonData;
 };
-export type TGame_State = "choose-card" | "waiting" | "something";
-export type TPlayer_Choices = [TPokemon_Dom | null, TPokemon_Dom | null];
-export type THTML_Element = HTMLElement;
+export type THTMLElement = HTMLElement;
 //# sourceMappingURL=types.d.ts.map

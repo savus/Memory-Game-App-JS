@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import { ACTIVE, pokeNames } from "./constants.js";
 import GameHandler from "./GameHandler.js";
 
-import type { THTML_Element, TPokemonData } from "./types.js";
+import type { THTMLElement, TPokemonData } from "./types.js";
 import { swapScreens } from "./utility.js";
 
 export const dummyColors = [
@@ -48,7 +48,7 @@ export const incomingPoints = document.querySelector(
   `.incoming-points`,
 )! as HTMLElement;
 
-const mainGame: THTML_Element = document.querySelector(`.main-game`)!;
+const mainGame: THTMLElement = document.querySelector(`.main-game`)!;
 
 const newGameButton = document.getElementById("new-game");
 

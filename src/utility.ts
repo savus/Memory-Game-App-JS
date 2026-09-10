@@ -11,10 +11,39 @@ import {
 } from "./app.js";
 import Card from "./Card.js";
 import { ACTIVE } from "./constants.js";
-import type { TPokemonData } from "./types.js";
+import type { TPokemonData, TPokemonDom } from "./types.js";
 
 export const buildCardHTML = (data: TPokemonData) => {
-  // const cardOuter: TPokemonData_Dom = document.createElement("div");
+  // const card = document.createElement("div");
+  // card.innerHTML = `<div class="face-down ${data.isDummyData ? "dummy-card" : ""}">
+  //   <div class="card-body">
+  //     <div class="card-inner">
+  //       <div class="card-name">${data.name}</div>
+  //       <div class="img-container">
+  //         <div class="card-img">
+  //           <img
+  //             class="img"
+  //             src="${data.img}"
+  //           />
+  //           <div class="dummy-color" style={${data.isDummyData ? data.img : ""}></div>
+  //         </div>
+  //       </div>
+  //       <div>Type: ${data.type}</div>
+  //       <div class="stats">
+  //         <div>hp: ${data.hp}</div>
+  //         <div>attack: ${data.attack}</div>
+  //         <div>defense: ${data.defense}</div>
+  //         <div>special_attack: ${data.special_attack}</div>
+  //         <div>special_defense: ${data.special_defense}</div>
+  //         <div>speed: ${data.speed}</div>
+  //       </div>
+  //     </div>
+  //     <div class="card-back"></div>
+  //   </div>
+  // </div>`;
+  // card.metaData = data;
+  // return card;
+  // const cardOuter: TPokemonDom = document.createElement("div");
   // const cardBody = document.createElement("div");
   // const cardInner = document.createElement("div");
   // const name = document.createElement("div");
@@ -31,34 +60,81 @@ export const buildCardHTML = (data: TPokemonData) => {
   // const special_defense = document.createElement("div");
   // const speed = document.createElement("div");
   // const cardBack = document.createElement("div");
-  // cardOuter.className = `${CSS_CLASSES} ${CSS_CLASSES.FACE_DOWN} ${data.isDummyData ? CSS_CLASSES.DUMMY_CARD : ""}`;
-  // cardBody.className = CSS_CLASSES.CARD_BODY;
-  // cardInner.className = CSS_CLASSES.CARD_INNER;
-  // name.className = CSS_CLASSES.CARD_NAME;
+  // cardOuter.className = `face-down ${data.isDummyData ? "dummy-card" : ""}`;
+  // cardBody.className = "card-body";
+  // cardInner.className = "card-inner";
+  // name.className = "card-name";
   // name.innerHTML = data.name;
-  // img_container.className = CSS_CLASSES.IMG_CONTAINER;
-  // card_img.className = CSS_CLASSES.CARD_IMG;
-  // dummy_color.className = CSS_CLASSES.DUMMY_COLOR;
+  // img_container.className = "img-container";
+  // card_img.className = "card-img";
+  // dummy_color.className = "dummy-color";
   // dummy_color.style.backgroundColor = data.img;
-  // img.className = CSS_CLASSES.IMG;
+  // img.className = "img";
   // img.src = data.img;
   // type.innerHTML = `Type: ${data.type}`;
-  // stats.className = CSS_CLASSES.STATS;
+  // stats.className = "stats";
   // hp.innerHTML = `hp: ${data.hp}`;
   // attack.innerHTML = `attack: ${data.attack}`;
   // defense.innerHTML = `defense: ${data.defense}`;
   // special_attack.innerHTML = `special_attack: ${data.special_attack}`;
   // special_defense.innerHTML = `special_defense: ${data.special_defense}`;
   // speed.innerHTML = `speed: ${data.speed}`;
-  // cardBack.className = CSS_CLASSES.CARD_BACK;
+  // cardBack.className = "card-back";
   // card_img.append(img, dummy_color);
   // img_container.appendChild(card_img);
   // stats.append(hp, attack, defense, special_attack, special_defense, speed);
   // cardInner.append(name, img_container, type, stats);
   // cardBody.append(cardInner, cardBack);
   // cardOuter.appendChild(cardBody);
-  // cardOuter.metaData = data;
-  // return cardOuter;
+  const card = `<div class="face-down ${data.isDummyData ? "dummy-card" : ""}">
+    <div class="card-body">
+      <div class="card-inner">
+        <div class="card-name">${data.name}</div>
+        <div class="img-container">
+          <div class="card-img">
+            <img
+              class="img"
+              src="${data.img}"
+            />
+            <div class="dummy-color" style={${data.isDummyData ? data.img : ""}></div>
+          </div>
+        </div>
+        <div>Type: ${data.type}</div>
+        <div class="stats">
+          <div>hp: ${data.hp}</div>
+          <div>attack: ${data.attack}</div>
+          <div>defense: ${data.defense}</div>
+          <div>special_attack: ${data.special_attack}</div>
+          <div>special_defense: ${data.special_defense}</div>
+          <div>speed: ${data.speed}</div>
+        </div>
+      </div>
+      <div class="card-back"></div>
+    </div>
+  </div>`;
+  return card;
+};
+
+export const createAndAppendCard = (data: TPokemonData) => {
+  const cardHTMLString = buildCardHTML(data);
+  const cardHTML: TPokemonDom = document.createElement("div");
+  cardHTML.metaData = data;
+  cardHTML.insertAdjacentHTML("beforeend", cardHTMLString);
+  const card = new Card(cardHTML, data);
+  allCards.push(card);
+  return card_container.appendChild(cardHTML);
+};
+
+export const createAndAppendAllCards = (array: TPokemonData[]) => {
+  let shuffledArray: TPokemonData[] = [];
+
+  for (let i = 0; i <= 10; i++) {
+    shuffledArray = shuffleInPlace(array);
+  }
+
+  shuffledArray.forEach((mon) => {
+    createAndAppendCard(mon);
+  });
 };
 
 export const spliceRandomItem = (array: string[]) => {
