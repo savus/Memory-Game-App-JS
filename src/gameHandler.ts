@@ -15,6 +15,7 @@ import {
   whileLoopFailsafe,
 } from "./app.js";
 import type Card from "./Card.js";
+import CardFactory from "./CardFactory.js";
 import { ACTIVE, SLIDE } from "./constants.js";
 import type { TGameHandler } from "./types.js";
 import {
@@ -24,7 +25,6 @@ import {
   wait,
   updatePlayerPoints,
   populateCardDataList,
-  createAndAppendAllCards,
 } from "./utility.js";
 
 let game_state: TGameHandler["game_state"] = "choose-card";
@@ -44,8 +44,7 @@ const initializeApp: TGameHandler["initializeApp"] = (
 const startMemoryGame: TGameHandler["startMemoryGame"] = async () => {
   updatePlayerPoints(`${points} ${gamePoints}`);
   populateCardDataList(pokemonData, cardData);
-  createAndAppendAllCards(cardData);
-  console.log(card_container);
+  CardFactory.createAndAppendAllCards(cardData);
 };
 
 const displayGameMessage: TGameHandler["displayGameMessage"] = async (

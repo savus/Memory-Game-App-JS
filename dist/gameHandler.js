@@ -1,6 +1,7 @@
 import { allCards, card_container, cardData, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, points, pokemonData, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
+import CardFactory from "./CardFactory.js";
 import { ACTIVE, SLIDE } from "./constants.js";
-import { animateElement, flipAllCardsDown, setIncomingPointsText, wait, updatePlayerPoints, populateCardDataList, createAndAppendAllCards, } from "./utility.js";
+import { animateElement, flipAllCardsDown, setIncomingPointsText, wait, updatePlayerPoints, populateCardDataList, } from "./utility.js";
 let game_state = "choose-card";
 let player_choices = [null, null];
 let level_points = 50;
@@ -11,8 +12,7 @@ const initializeApp = (apiObject, names, arrayToStore) => apiObject.fetchAllPoke
 const startMemoryGame = async () => {
     updatePlayerPoints(`${points} ${gamePoints}`);
     populateCardDataList(pokemonData, cardData);
-    createAndAppendAllCards(cardData);
-    console.log(card_container);
+    CardFactory.createAndAppendAllCards(cardData);
 };
 const displayGameMessage = async (className, message) => {
     gameMessage.innerHTML = message;

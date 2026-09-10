@@ -1,8 +1,5 @@
 import Card from "./Card.js";
-import type { TPokemonData, TPokemonDom } from "./types.js";
-export declare const buildCardHTML: (data: TPokemonData) => string;
-export declare const createAndAppendCard: (data: TPokemonData) => TPokemonDom;
-export declare const createAndAppendAllCards: (array: TPokemonData[]) => void;
+import type { TPokemonData } from "./types.js";
 export declare const spliceRandomItem: (array: string[]) => string | undefined;
 export declare function shuffleInPlace<T>(array: T[]): T[];
 export declare const populateCardDataList: (array: TPokemonData[], arrayToCloneTo: TPokemonData[]) => void;
