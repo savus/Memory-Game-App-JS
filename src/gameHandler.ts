@@ -123,7 +123,7 @@ const setPlayerPoints = async (points: string | number) => {
   if (typeof points == "string") points = parseInt(points);
   setIncomingGamePoints(points);
   setIncomingPointsText(incomingGamePoints, "-");
-  updatePlayerPoints(`${points} ${gamePoints}`);
+  updatePlayerPoints(`Points: ${gamePoints}`);
   await animateElement(incomingPoints, ACTIVE, "transitionend");
   await animateTransferingPoints();
   incomingPoints.classList.remove("active");

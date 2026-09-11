@@ -76,7 +76,7 @@ const setPlayerPoints = async (points) => {
         points = parseInt(points);
     setIncomingGamePoints(points);
     setIncomingPointsText(incomingGamePoints, "-");
-    updatePlayerPoints(`${points} ${gamePoints}`);
+    updatePlayerPoints(`Points: ${gamePoints}`);
     await animateElement(incomingPoints, ACTIVE, "transitionend");
     await animateTransferingPoints();
     incomingPoints.classList.remove("active");
