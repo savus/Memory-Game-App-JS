@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import { shuffleInPlace } from "./utility.js";
 const buildCardHTML = (data) => {
     const card = document.createElement("div");
-    card.className = `face-down ${data.isDummyData ? "dummy-card" : ""}`;
+    card.className = `card-outer face-down ${data.isDummyData ? "dummy-card" : ""}`;
     const cardHTMLString = `<div class="card-body">
       <div class="card-inner">
         <div class="card-name">${data.name}</div>

@@ -1,4 +1,3 @@
-import type Card from "./Card.js";
 export type TPokemonData = {
     name: string;
     img: string;
@@ -19,23 +18,6 @@ export type TApiObject = {
 };
 export type TGameState = "choose-card" | "waiting" | "something";
 export type TPlayerChoices = [TPokemonDom | null, TPokemonDom | null];
-export type TGameHandler = {
-    game_state: TGameState;
-    player_choices: TPlayerChoices;
-    level_points: number;
-    choices_matched: boolean;
-    initializeApp: (apiObject: TApiObject, names: string[], arrayToStore: TPokemonData[]) => void;
-    startMemoryGame: () => void;
-    displayGameMessage: (className: string, message: string) => void;
-    doPlayerChoicesMatch: () => boolean;
-    handlePlayerChoice: (card: Card) => void;
-    displayRightOrWrongChoice: () => void;
-    setFirstChoice: (card: Card) => void;
-    resetPlayerChoices: () => void;
-    setSecondChoice: (card: Card) => void;
-    setPlayerPoints: (point: string) => void;
-    transferPointsAnimation: () => void;
-};
 export type TPokemonDom = HTMLElement & {
     metaData?: TPokemonData;
 };

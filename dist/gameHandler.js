@@ -1,12 +1,12 @@
-import { allCards, card_container, cardData, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, points, pokemonData, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
+import { allCards, cardData, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, points, pokemonData, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
 import CardFactory from "./CardFactory.js";
 import { ACTIVE, SLIDE } from "./constants.js";
 import { animateElement, flipAllCardsDown, setIncomingPointsText, wait, updatePlayerPoints, populateCardDataList, } from "./utility.js";
-let game_state = "choose-card";
-let player_choices = [null, null];
+let gameState = "choose-card";
+let playerChoices = [null, null];
 let level_points = 50;
 let choices_matched = false;
-const initializeApp = (apiObject, names, arrayToStore) => apiObject.fetchAllPokemon(names, arrayToStore).finally(() => {
+const initializeApp = (apiObject, pokemonNames, arrayToStore) => apiObject.fetchAllPokemon(pokemonNames, arrayToStore).finally(() => {
     startMemoryGame();
 });
 const startMemoryGame = async () => {
@@ -19,15 +19,15 @@ const displayGameMessage = async (className, message) => {
     await animateElement(messageContainer, className, "animationend");
     messageContainer.classList.remove(className);
 };
-const doPlayerChoicesMatch = () => (player_choices[0] && player_choices[0].metaData?.name) ===
-    (player_choices[1] && player_choices[1].metaData?.name);
+const doPlayerChoicesMatch = () => (playerChoices[0] && playerChoices[0].metaData?.name) ===
+    (playerChoices[1] && playerChoices[1].metaData?.name);
 const handlePlayerChoice = async (card) => {
-    if (game_state === "choose-card") {
+    if (gameState === "choose-card") {
         if (card.facePosition === "down") {
-            if (player_choices[0] === null) {
+            if (playerChoices[0] === null) {
                 setFirstChoice(card);
             }
-            else if (player_choices[1] === null) {
+            else if (playerChoices[1] === null) {
                 setSecondChoice(card);
             }
         }
@@ -47,25 +47,28 @@ const displayRightOrWrongChoice = () => {
     }
 };
 const setFirstChoice = (card) => {
-    player_choices[0] = card.html;
+    playerChoices[0] = card.html;
     card.flipCardUp();
 };
-const resetPlayerChoices = () => (player_choices = [null, null]);
+const resetPlayerChoices = () => (playerChoices = [null, null]);
 const setSecondChoice = async (card) => {
-    player_choices[1] = card.html;
+    playerChoices[1] = card.html;
     displayRightOrWrongChoice();
     card.flipCardUp();
-    game_state = "waiting";
+    gameState = "waiting";
     await wait(2000);
     if (!choices_matched) {
         flipAllCardsDown(allCards);
     }
     resetPlayerChoices();
-    game_state = "choose-card";
+    gameState = "choose-card";
     choices_matched = false;
 };
 const setPlayerPoints = async (points) => {
-    setIncomingGamePoints(parseInt(points));
+    if (typeof points != "number" && typeof points != "string")
+        return;
+    if (typeof points == "string")
+        setIncomingGamePoints(parseInt(points));
     setIncomingPointsText(incomingGamePoints, "-");
     updatePlayerPoints(`${points} ${gamePoints}`);
     await animateElement(incomingPoints, ACTIVE, "transitionend");
@@ -87,8 +90,8 @@ const transferPointsAnimation = async () => {
     return;
 };
 export const GameHandler = {
-    game_state,
-    player_choices,
+    gameState,
+    playerChoices,
     level_points,
     choices_matched,
     initializeApp,

@@ -1,4 +1,4 @@
-import GameHandler from "./GameHandler.js";
+import GameHandler from "./gameHandler.js";
 export const cardOnClickHandler = async (card) => {
     GameHandler.handlePlayerChoice(card);
 };

@@ -1,13 +1,13 @@
 import { cardOnClickHandler } from "./clickEvents.js";
 import { FACEDOWN } from "./constants.js";
-import type { TPokemonData, TPokemon_Dom } from "./types.js";
+import type { TPokemonData, TPokemonDom } from "./types.js";
 
 class Card {
-  html: TPokemon_Dom;
+  html: TPokemonDom;
   cardData: TPokemonData;
   facePosition: "up" | "down";
 
-  constructor(htmlData: TPokemon_Dom, cardData: TPokemonData) {
+  constructor(htmlData: TPokemonDom, cardData: TPokemonData) {
     this.html = htmlData;
     this.cardData = cardData;
     this.facePosition = "down";

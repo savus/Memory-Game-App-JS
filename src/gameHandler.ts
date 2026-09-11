@@ -1,6 +1,5 @@
 import {
   allCards,
-  card_container,
   cardData,
   gameMessage,
   gamePoints,
@@ -17,7 +16,12 @@ import {
 import type Card from "./Card.js";
 import CardFactory from "./CardFactory.js";
 import { ACTIVE, SLIDE } from "./constants.js";
-import type { TGameHandler } from "./types.js";
+import type {
+  TApiObject,
+  TGameState,
+  TPlayerChoices,
+  TPokemonData,
+} from "./types.js";
 import {
   animateElement,
   flipAllCardsDown,
@@ -27,45 +31,42 @@ import {
   populateCardDataList,
 } from "./utility.js";
 
-let game_state: TGameHandler["game_state"] = "choose-card";
-let player_choices: TGameHandler["player_choices"] = [null, null];
-let level_points: TGameHandler["level_points"] = 50;
-let choices_matched: TGameHandler["choices_matched"] = false;
+let gameState: TGameState = "choose-card";
+let playerChoices: TPlayerChoices = [null, null];
+let level_points = 50;
+let choices_matched = false;
 
-const initializeApp: TGameHandler["initializeApp"] = (
-  apiObject,
-  names,
-  arrayToStore,
+const initializeApp = (
+  apiObject: TApiObject,
+  pokemonNames: string[],
+  arrayToStore: TPokemonData[],
 ) =>
-  apiObject.fetchAllPokemon(names, arrayToStore).finally(() => {
+  apiObject.fetchAllPokemon(pokemonNames, arrayToStore).finally(() => {
     startMemoryGame();
   });
 
-const startMemoryGame: TGameHandler["startMemoryGame"] = async () => {
+const startMemoryGame = async () => {
   updatePlayerPoints(`${points} ${gamePoints}`);
   populateCardDataList(pokemonData, cardData);
   CardFactory.createAndAppendAllCards(cardData);
 };
 
-const displayGameMessage: TGameHandler["displayGameMessage"] = async (
-  className,
-  message,
-) => {
+const displayGameMessage = async (className: string, message: string) => {
   gameMessage.innerHTML = message;
   await animateElement(messageContainer, className, "animationend");
   messageContainer.classList.remove(className);
 };
 
-const doPlayerChoicesMatch: TGameHandler["doPlayerChoicesMatch"] = () =>
-  (player_choices[0] && player_choices[0].metaData?.name) ===
-  (player_choices[1] && player_choices[1].metaData?.name);
+const doPlayerChoicesMatch = () =>
+  (playerChoices[0] && playerChoices[0].metaData?.name) ===
+  (playerChoices[1] && playerChoices[1].metaData?.name);
 
-const handlePlayerChoice: TGameHandler["handlePlayerChoice"] = async (card) => {
-  if (game_state === "choose-card") {
+const handlePlayerChoice = async (card: Card) => {
+  if (gameState === "choose-card") {
     if (card.facePosition === "down") {
-      if (player_choices[0] === null) {
+      if (playerChoices[0] === null) {
         setFirstChoice(card);
-      } else if (player_choices[1] === null) {
+      } else if (playerChoices[1] === null) {
         setSecondChoice(card);
       }
     }
@@ -74,41 +75,40 @@ const handlePlayerChoice: TGameHandler["handlePlayerChoice"] = async (card) => {
   }
 };
 
-const displayRightOrWrongChoice: TGameHandler["displayRightOrWrongChoice"] =
-  () => {
-    if (doPlayerChoicesMatch()) {
-      displayGameMessage(SLIDE, "There was a match!");
-      setPlayerPoints(`${level_points}`);
-      choices_matched = true;
-    } else {
-      displayGameMessage(SLIDE, "Oops! No Match!");
-    }
-  };
+const displayRightOrWrongChoice = () => {
+  if (doPlayerChoicesMatch()) {
+    displayGameMessage(SLIDE, "There was a match!");
+    setPlayerPoints(`${level_points}`);
+    choices_matched = true;
+  } else {
+    displayGameMessage(SLIDE, "Oops! No Match!");
+  }
+};
 
-const setFirstChoice: TGameHandler["setFirstChoice"] = (card: Card) => {
-  player_choices[0] = card.html;
+const setFirstChoice = (card: Card) => {
+  playerChoices[0] = card.html;
   card.flipCardUp();
 };
 
-const resetPlayerChoices: TGameHandler["resetPlayerChoices"] = () =>
-  (player_choices = [null, null]);
+const resetPlayerChoices = () => (playerChoices = [null, null]);
 
-const setSecondChoice: TGameHandler["setSecondChoice"] = async (card: Card) => {
-  player_choices[1] = card.html;
+const setSecondChoice = async (card: Card) => {
+  playerChoices[1] = card.html;
   displayRightOrWrongChoice();
   card.flipCardUp();
-  game_state = "waiting";
+  gameState = "waiting";
   await wait(2000);
   if (!choices_matched) {
     flipAllCardsDown(allCards);
   }
   resetPlayerChoices();
-  game_state = "choose-card";
+  gameState = "choose-card";
   choices_matched = false;
 };
 
-const setPlayerPoints: TGameHandler["setPlayerPoints"] = async (points) => {
-  setIncomingGamePoints(parseInt(points));
+const setPlayerPoints = async (points: string | number) => {
+  if (typeof points != "number" && typeof points != "string") return;
+  if (typeof points == "string") setIncomingGamePoints(parseInt(points));
   setIncomingPointsText(incomingGamePoints, "-");
   updatePlayerPoints(`${points} ${gamePoints}`);
   await animateElement(incomingPoints, ACTIVE, "transitionend");
@@ -117,23 +117,22 @@ const setPlayerPoints: TGameHandler["setPlayerPoints"] = async (points) => {
   setWhileLoopFailSafe(0);
 };
 
-const transferPointsAnimation: TGameHandler["transferPointsAnimation"] =
-  async () => {
-    while (incomingGamePoints > 0) {
-      setWhileLoopFailSafe(whileLoopFailsafe + 1);
-      if (whileLoopFailsafe >= 1000) return;
-      setIncomingGamePoints(incomingGamePoints - 1);
-      setGamePoints(gamePoints - 1);
-      setIncomingPointsText(incomingGamePoints, "-");
-      updatePlayerPoints(`${points} ${gamePoints}`);
-      await wait(10);
-    }
-    return;
-  };
+const transferPointsAnimation = async () => {
+  while (incomingGamePoints > 0) {
+    setWhileLoopFailSafe(whileLoopFailsafe + 1);
+    if (whileLoopFailsafe >= 1000) return;
+    setIncomingGamePoints(incomingGamePoints - 1);
+    setGamePoints(gamePoints - 1);
+    setIncomingPointsText(incomingGamePoints, "-");
+    updatePlayerPoints(`${points} ${gamePoints}`);
+    await wait(10);
+  }
+  return;
+};
 
-export const GameHandler: TGameHandler = {
-  game_state,
-  player_choices,
+export const GameHandler = {
+  gameState,
+  playerChoices,
   level_points,
   choices_matched,
   initializeApp,
