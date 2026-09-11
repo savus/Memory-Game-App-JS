@@ -34,7 +34,7 @@ export const allCards: Card[] = [];
 export const pokemonData: TPokemonData[] = [];
 export const cardData: TPokemonData[] = [];
 
-export const card_container = document.querySelector(`.card-container`)!;
+export const cardContainer = document.querySelector(`.card-container`)!;
 
 export const messageContainer = document.querySelector(
   `.message-container`,
@@ -50,12 +50,8 @@ export const incomingPoints = document.querySelector(
 
 const mainGame: THTMLElement = document.querySelector(`.main-game`)!;
 
-const newGameButton = document.getElementById("new-game");
-
-newGameButton?.addEventListener("click", () => {
-  swapScreens(mainGame, ACTIVE);
-});
-
+// export let gameIsLoaded = false;
+// export const setGameIsLoaded = (value: boolean) => (gameIsLoaded = value);
 export let gamePoints = 500;
 export const setGamePoints = (points: number) => (gamePoints = points);
 
@@ -67,7 +63,14 @@ export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit: number) =>
   (whileLoopFailsafe = limit);
 
+const newGameButton = document.getElementById("new-game");
+
+newGameButton?.addEventListener("click", () => {
+  swapScreens(mainGame, ACTIVE);
+});
+
 GameHandler.initializeApp(API_REQUESTS, pokeNames, pokemonData);
+
 // let gameScreenIndex = 0;
 // document.addEventListener("keyup", async (e) => {
 //   const key = e.key;

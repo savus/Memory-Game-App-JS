@@ -27,22 +27,24 @@ export const points = "Points: ";
 export const allCards = [];
 export const pokemonData = [];
 export const cardData = [];
-export const card_container = document.querySelector(`.card-container`);
+export const cardContainer = document.querySelector(`.card-container`);
 export const messageContainer = document.querySelector(`.message-container`);
 export const gameMessage = document.querySelector(`.game-message`);
 export const playerPoints = document.querySelector(`.player-points`);
 export const incomingPoints = document.querySelector(`.incoming-points`);
 const mainGame = document.querySelector(`.main-game`);
-const newGameButton = document.getElementById("new-game");
-newGameButton?.addEventListener("click", () => {
-    swapScreens(mainGame, ACTIVE);
-});
+// export let gameIsLoaded = false;
+// export const setGameIsLoaded = (value: boolean) => (gameIsLoaded = value);
 export let gamePoints = 500;
 export const setGamePoints = (points) => (gamePoints = points);
 export let incomingGamePoints = 0;
 export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
+const newGameButton = document.getElementById("new-game");
+newGameButton?.addEventListener("click", () => {
+    swapScreens(mainGame, ACTIVE);
+});
 GameHandler.initializeApp(API_REQUESTS, pokeNames, pokemonData);
 // let gameScreenIndex = 0;
 // document.addEventListener("keyup", async (e) => {

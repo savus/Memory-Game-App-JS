@@ -17,3 +17,5 @@ displayYouLostMessage(); // => will wait 3000 miliseconds before displaying the 
 TASK : build click event method that handles game stages and initial game play. build structure of how rules work and what user interaction should entail.
 
 TASK : Clean up html structure and css code. Include custom properties and organization. Make game screens look more neat.
+
+TASK : Build gameplay that persists beyond first matching set. If player finds a matching pair, cards should stay flipped up and no longer be clickable

@@ -1,4 +1,4 @@
-import { allCards, card_container } from "./app.js";
+import { allCards, cardContainer } from "./app.js";
 import Card from "./Card.js";
 import { shuffleInPlace } from "./utility.js";
 const buildCardHTML = (data) => {
@@ -36,7 +36,7 @@ export const createAndAppendCard = (data) => {
     const cardHTML = buildCardHTML(data);
     const card = new Card(cardHTML, data);
     allCards.push(card);
-    return card_container.appendChild(cardHTML);
+    return cardContainer.appendChild(cardHTML);
 };
 const createAndAppendAllCards = (array) => {
     let shuffledArray = [];

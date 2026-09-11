@@ -6,7 +6,7 @@ export declare const points = "Points: ";
 export declare const allCards: Card[];
 export declare const pokemonData: TPokemonData[];
 export declare const cardData: TPokemonData[];
-export declare const card_container: Element;
+export declare const cardContainer: Element;
 export declare const messageContainer: HTMLElement;
 export declare const gameMessage: Element;
 export declare const playerPoints: Element;
