@@ -32,7 +32,9 @@ import {
   populateCardDataList,
 } from "./utility.js";
 
-let gameState: TGameState = "choose-card";
+const state: TGameState = {
+  phase: "choose-card",
+};
 let playerChoices: TPlayerChoices = [null, null];
 let levelPoints = 50;
 let choicesMatched = false;
@@ -72,7 +74,7 @@ const doPlayerChoicesMatch = () =>
     playerChoicesUpdate.secondChoice.metaData?.name);
 
 const handlePlayerChoice = async (card: Card) => {
-  if (gameState != "choose-card" || card.facePosition != "down") {
+  if (state.phase != "choose-card" || card.state.facePosition != "down") {
     console.log("You may not click at this time");
     return;
   }
@@ -110,11 +112,11 @@ const setSecondChoice = async (card: Card) => {
   playerChoicesUpdate.secondChoice = card.html;
   displayRightOrWrongChoice();
   card.flipCardUp();
-  gameState = "waiting";
+  state.phase = "waiting";
   await wait(2000);
   if (!choicesMatched) flipAllCardsDown(allCards);
   resetPlayerChoicesUpdate();
-  gameState = "choose-card";
+  state.phase = "choose-card";
   choicesMatched = false;
 };
 
@@ -125,12 +127,12 @@ const setPlayerPoints = async (points: string | number) => {
   setIncomingPointsText(incomingGamePoints, "-");
   updatePlayerPoints(`Points: ${gamePoints}`);
   await animateElement(incomingPoints, ACTIVE, "transitionend");
-  await animateTransferingPoints();
+  await animateTransferringPoints();
   incomingPoints.classList.remove("active");
   setWhileLoopFailSafe(0);
 };
 
-const animateTransferingPoints = async () => {
+const animateTransferringPoints = async () => {
   while (incomingGamePoints > 0) {
     setWhileLoopFailSafe(whileLoopFailsafe + 1);
     if (whileLoopFailsafe >= 1000) return;
@@ -144,7 +146,7 @@ const animateTransferingPoints = async () => {
 };
 
 export const GameHandler = {
-  gameState,
+  state,
   playerChoices,
   levelPoints,
   choicesMatched,
@@ -157,7 +159,7 @@ export const GameHandler = {
   setFirstChoice,
   setSecondChoice,
   setPlayerPoints,
-  animateTransferingPoints,
+  animateTransferringPoints,
   resetPlayerChoices,
 };
 

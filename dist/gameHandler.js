@@ -2,7 +2,9 @@ import { allCards, cardData, gameMessage, gamePoints, incomingGamePoints, incomi
 import CardFactory from "./CardFactory.js";
 import { ACTIVE, SLIDE } from "./constants.js";
 import { animateElement, flipAllCardsDown, setIncomingPointsText, wait, updatePlayerPoints, populateCardDataList, } from "./utility.js";
-let gameState = "choose-card";
+const state = {
+    phase: "choose-card",
+};
 let playerChoices = [null, null];
 let levelPoints = 50;
 let choicesMatched = false;
@@ -28,7 +30,7 @@ const doPlayerChoicesMatch = () => (playerChoicesUpdate.firstChoice &&
     (playerChoicesUpdate.secondChoice &&
         playerChoicesUpdate.secondChoice.metaData?.name);
 const handlePlayerChoice = async (card) => {
-    if (gameState != "choose-card" || card.facePosition != "down") {
+    if (state.phase != "choose-card" || card.state.facePosition != "down") {
         console.log("You may not click at this time");
         return;
     }
@@ -61,12 +63,12 @@ const setSecondChoice = async (card) => {
     playerChoicesUpdate.secondChoice = card.html;
     displayRightOrWrongChoice();
     card.flipCardUp();
-    gameState = "waiting";
+    state.phase = "waiting";
     await wait(2000);
     if (!choicesMatched)
         flipAllCardsDown(allCards);
     resetPlayerChoicesUpdate();
-    gameState = "choose-card";
+    state.phase = "choose-card";
     choicesMatched = false;
 };
 const setPlayerPoints = async (points) => {
@@ -78,11 +80,11 @@ const setPlayerPoints = async (points) => {
     setIncomingPointsText(incomingGamePoints, "-");
     updatePlayerPoints(`Points: ${gamePoints}`);
     await animateElement(incomingPoints, ACTIVE, "transitionend");
-    await animateTransferingPoints();
+    await animateTransferringPoints();
     incomingPoints.classList.remove("active");
     setWhileLoopFailSafe(0);
 };
-const animateTransferingPoints = async () => {
+const animateTransferringPoints = async () => {
     while (incomingGamePoints > 0) {
         setWhileLoopFailSafe(whileLoopFailsafe + 1);
         if (whileLoopFailsafe >= 1000)
@@ -96,7 +98,7 @@ const animateTransferingPoints = async () => {
     return;
 };
 export const GameHandler = {
-    gameState,
+    state,
     playerChoices,
     levelPoints,
     choicesMatched,
@@ -109,7 +111,7 @@ export const GameHandler = {
     setFirstChoice,
     setSecondChoice,
     setPlayerPoints,
-    animateTransferingPoints,
+    animateTransferringPoints,
     resetPlayerChoices,
 };
 export default GameHandler;

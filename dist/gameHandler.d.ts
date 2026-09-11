@@ -1,7 +1,7 @@
 import type Card from "./Card.js";
-import type { TApiObject, TPlayerChoices, TPokemonData } from "./types.js";
+import type { TApiObject, TGameState, TPlayerChoices, TPokemonData } from "./types.js";
 export declare const GameHandler: {
-    gameState: "choose-card";
+    state: TGameState;
     playerChoices: TPlayerChoices;
     levelPoints: number;
     choicesMatched: boolean;
@@ -14,7 +14,7 @@ export declare const GameHandler: {
     setFirstChoice: (card: Card) => void;
     setSecondChoice: (card: Card) => Promise<void>;
     setPlayerPoints: (points: string | number) => Promise<void>;
-    animateTransferingPoints: () => Promise<void>;
+    animateTransferringPoints: () => Promise<void>;
     resetPlayerChoices: () => [null, null];
 };
 export default GameHandler;

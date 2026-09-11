@@ -23,7 +23,12 @@ export type TApiObject = {
   convertToTSObject: (data: any) => TPokemonData;
 };
 
-export type TGameState = "choose-card" | "waiting" | "something";
+export type TGameState = {
+  phase: TGamePhase;
+};
+
+export type TGamePhase = "choose-card" | "waiting" | "something";
+
 export type TPlayerChoices = [TPokemonDom | null, TPokemonDom | null];
 
 export type TPokemonDom = HTMLElement & { metaData?: TPokemonData };

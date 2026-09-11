@@ -3,21 +3,24 @@ import { FACEDOWN } from "./constants.js";
 class Card {
     html;
     cardData;
-    facePosition;
+    state;
     constructor(htmlData, cardData) {
         this.html = htmlData;
         this.cardData = cardData;
-        this.facePosition = "down";
+        this.state = {
+            isClickable: false,
+            facePosition: "down",
+        };
         this.html.addEventListener("click", () => {
             cardOnClickHandler(this);
         });
     }
     flipCardUp = () => {
-        this.facePosition = "up";
+        this.state.facePosition = "up";
         this.html.classList.remove(FACEDOWN);
     };
     flipCardDown = () => {
-        this.facePosition = "down";
+        this.state.facePosition = "down";
         this.html.classList.add(FACEDOWN);
     };
 }
