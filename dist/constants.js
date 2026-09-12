@@ -11,4 +11,6 @@ export const pokeNames = [
 export const ACTIVE = "active";
 export const FACEDOWN = "face-down";
 export const SLIDE = "slide";
+export const DOWN = "down";
+export const UP = "up";
 //# sourceMappingURL=constants.js.map

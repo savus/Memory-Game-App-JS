@@ -35,12 +35,11 @@ import {
 const state: TGameState = {
   phase: "choose-card",
 };
-let playerChoices: TPlayerChoices = [null, null];
 let levelPoints = 50;
 let choicesMatched = false;
-const playerChoicesUpdate: {
-  firstChoice: TPokemonDom | null;
-  secondChoice: TPokemonDom | null;
+const playerChoices: {
+  firstChoice: Card | null;
+  secondChoice: Card | null;
 } = {
   firstChoice: null,
   secondChoice: null,
@@ -67,21 +66,26 @@ const displayGameMessage = async (className: string, message: string) => {
   messageContainer.classList.remove(className);
 };
 
-const doPlayerChoicesMatch = () =>
-  (playerChoicesUpdate.firstChoice &&
-    playerChoicesUpdate.firstChoice.metaData?.name) ===
-  (playerChoicesUpdate.secondChoice &&
-    playerChoicesUpdate.secondChoice.metaData?.name);
+const doPlayerChoicesMatch = () => {
+  return (
+    (playerChoices.firstChoice &&
+      playerChoices.firstChoice.html.metaData?.name) ===
+    (playerChoices.secondChoice &&
+      playerChoices.secondChoice.html.metaData?.name)
+  );
+};
 
 const handlePlayerChoice = async (card: Card) => {
-  if (state.phase != "choose-card" || card.state.facePosition != "down") {
+  const canChooseCard = state.phase === "choose-card";
+
+  if (!canChooseCard) {
     console.log("You may not click at this time");
     return;
   }
 
-  if (playerChoicesUpdate.firstChoice === null) {
+  if (playerChoices.firstChoice === null) {
     setFirstChoice(card);
-  } else if (playerChoicesUpdate.secondChoice === null) {
+  } else if (playerChoices.secondChoice === null) {
     setSecondChoice(card);
   }
 };
@@ -97,25 +101,27 @@ const displayRightOrWrongChoice = () => {
 };
 
 const setFirstChoice = (card: Card) => {
-  playerChoicesUpdate.firstChoice = card.html;
-  card.flipCardUp();
+  playerChoices.firstChoice = card;
+  card.chooseCard();
 };
 
-const resetPlayerChoices = () => (playerChoices = [null, null]);
-
-const resetPlayerChoicesUpdate = () => {
-  playerChoicesUpdate.firstChoice = null;
-  playerChoicesUpdate.secondChoice = null;
+const resetPlayerChoices = () => {
+  if (!choicesMatched) {
+    playerChoices.firstChoice?.unChooseCard();
+    playerChoices.secondChoice?.unChooseCard();
+  }
+  playerChoices.firstChoice = null;
+  playerChoices.secondChoice = null;
 };
 
 const setSecondChoice = async (card: Card) => {
-  playerChoicesUpdate.secondChoice = card.html;
+  playerChoices.secondChoice = card;
   displayRightOrWrongChoice();
-  card.flipCardUp();
+  card.chooseCard();
   state.phase = "waiting";
   await wait(2000);
   if (!choicesMatched) flipAllCardsDown(allCards);
-  resetPlayerChoicesUpdate();
+  resetPlayerChoices();
   state.phase = "choose-card";
   choicesMatched = false;
 };

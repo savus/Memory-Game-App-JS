@@ -63,6 +63,10 @@ export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit: number) =>
   (whileLoopFailsafe = limit);
 
+export let consultCardState = true;
+export const setConsultCardState = (state: boolean) =>
+  (consultCardState = state);
+
 const newGameButton = document.getElementById("new-game");
 
 newGameButton?.addEventListener("click", () => {

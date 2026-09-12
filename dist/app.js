@@ -41,6 +41,8 @@ export let incomingGamePoints = 0;
 export const setIncomingGamePoints = (points) => (incomingGamePoints = points);
 export let whileLoopFailsafe = 0;
 export const setWhileLoopFailSafe = (limit) => (whileLoopFailsafe = limit);
+export let consultCardState = true;
+export const setConsultCardState = (state) => (consultCardState = state);
 const newGameButton = document.getElementById("new-game");
 newGameButton?.addEventListener("click", () => {
     swapScreens(mainGame, ACTIVE);

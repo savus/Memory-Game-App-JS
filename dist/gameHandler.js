@@ -5,10 +5,9 @@ import { animateElement, flipAllCardsDown, setIncomingPointsText, wait, updatePl
 const state = {
     phase: "choose-card",
 };
-let playerChoices = [null, null];
 let levelPoints = 50;
 let choicesMatched = false;
-const playerChoicesUpdate = {
+const playerChoices = {
     firstChoice: null,
     secondChoice: null,
 };
@@ -25,19 +24,22 @@ const displayGameMessage = async (className, message) => {
     await animateElement(messageContainer, className, "animationend");
     messageContainer.classList.remove(className);
 };
-const doPlayerChoicesMatch = () => (playerChoicesUpdate.firstChoice &&
-    playerChoicesUpdate.firstChoice.metaData?.name) ===
-    (playerChoicesUpdate.secondChoice &&
-        playerChoicesUpdate.secondChoice.metaData?.name);
+const doPlayerChoicesMatch = () => {
+    return ((playerChoices.firstChoice &&
+        playerChoices.firstChoice.html.metaData?.name) ===
+        (playerChoices.secondChoice &&
+            playerChoices.secondChoice.html.metaData?.name));
+};
 const handlePlayerChoice = async (card) => {
-    if (state.phase != "choose-card" || card.state.facePosition != "down") {
+    const canChooseCard = state.phase === "choose-card";
+    if (!canChooseCard) {
         console.log("You may not click at this time");
         return;
     }
-    if (playerChoicesUpdate.firstChoice === null) {
+    if (playerChoices.firstChoice === null) {
         setFirstChoice(card);
     }
-    else if (playerChoicesUpdate.secondChoice === null) {
+    else if (playerChoices.secondChoice === null) {
         setSecondChoice(card);
     }
 };
@@ -51,23 +53,26 @@ const displayRightOrWrongChoice = () => {
     choicesMatched = true;
 };
 const setFirstChoice = (card) => {
-    playerChoicesUpdate.firstChoice = card.html;
-    card.flipCardUp();
+    playerChoices.firstChoice = card;
+    card.chooseCard();
 };
-const resetPlayerChoices = () => (playerChoices = [null, null]);
-const resetPlayerChoicesUpdate = () => {
-    playerChoicesUpdate.firstChoice = null;
-    playerChoicesUpdate.secondChoice = null;
+const resetPlayerChoices = () => {
+    if (!choicesMatched) {
+        playerChoices.firstChoice?.unChooseCard();
+        playerChoices.secondChoice?.unChooseCard();
+    }
+    playerChoices.firstChoice = null;
+    playerChoices.secondChoice = null;
 };
 const setSecondChoice = async (card) => {
-    playerChoicesUpdate.secondChoice = card.html;
+    playerChoices.secondChoice = card;
     displayRightOrWrongChoice();
-    card.flipCardUp();
+    card.chooseCard();
     state.phase = "waiting";
     await wait(2000);
     if (!choicesMatched)
         flipAllCardsDown(allCards);
-    resetPlayerChoicesUpdate();
+    resetPlayerChoices();
     state.phase = "choose-card";
     choicesMatched = false;
 };

@@ -34,9 +34,12 @@ export const wait = async (miliseconds: number) =>
     return setTimeout(resolve, miliseconds);
   });
 
-export const flipAllCardsDown = (array: Card[]) => {
+export const flipAllCardsDown = (
+  array: Card[],
+  ignoreState: boolean = false,
+) => {
   array.forEach((card) => {
-    card.flipCardDown();
+    card.flipCard("down", ignoreState);
   });
 };
 

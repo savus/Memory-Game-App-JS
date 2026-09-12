@@ -23,9 +23,9 @@ export const populateCardDataList = (array, arrayToCloneTo) => {
 export const wait = async (miliseconds) => new Promise((resolve) => {
     return setTimeout(resolve, miliseconds);
 });
-export const flipAllCardsDown = (array) => {
+export const flipAllCardsDown = (array, ignoreState = false) => {
     array.forEach((card) => {
-        card.flipCardDown();
+        card.flipCard("down", ignoreState);
     });
 };
 export const animateElement = async (element, className, animationOrTransition) => new Promise((resolve) => {

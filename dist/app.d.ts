@@ -17,4 +17,6 @@ export declare let incomingGamePoints: number;
 export declare const setIncomingGamePoints: (points: number) => number;
 export declare let whileLoopFailsafe: number;
 export declare const setWhileLoopFailSafe: (limit: number) => number;
+export declare let consultCardState: boolean;
+export declare const setConsultCardState: (state: boolean) => boolean;
 //# sourceMappingURL=app.d.ts.map

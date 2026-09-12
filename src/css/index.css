@@ -206,9 +206,10 @@ body {
   width: 15.9375rem;
   height: 23.75rem;
   perspective: 1000px;
+  user-select: none;
 }
 
-.card-outer.face-down .card-body {
+.card-outer[data-face-position="down"] .card-body {
   transform: rotateY(180deg);
 }
 
