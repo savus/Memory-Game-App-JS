@@ -1,7 +1,7 @@
 import API_REQUESTS from "./api.js";
-import Card from "./Card.js";
+import Card from "./Classes/Card.js";
 import { ACTIVE, pokeNames } from "./constants.js";
-import GameHandler from "./gameHandler.js";
+import GameHandler from "./Classes/gameHandler.js";
 import { swapScreens } from "./utility.js";
 export const dummyColors = [
     "#e80a0a",

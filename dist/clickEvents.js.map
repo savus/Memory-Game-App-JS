@@ -1,1 +1,1 @@
-{"version":3,"file":"clickEvents.js","sourceRoot":"","sources":["../src/clickEvents.ts"],"names":[],"mappings":"AACA,OAAO,WAAW,MAAM,kBAAkB,CAAC;AAE3C,MAAM,CAAC,MAAM,kBAAkB,GAAG,KAAK,EAAE,IAAU,EAAE,EAAE;IACrD,WAAW,CAAC,kBAAkB,CAAC,IAAI,CAAC,CAAC;AACvC,CAAC,CAAC"}
+{"version":3,"file":"clickEvents.js","sourceRoot":"","sources":["../src/clickEvents.ts"],"names":[],"mappings":"AACA,OAAO,WAAW,MAAM,0BAA0B,CAAC;AAEnD,MAAM,CAAC,MAAM,kBAAkB,GAAG,KAAK,EAAE,IAAU,EAAE,EAAE;IACrD,WAAW,CAAC,kBAAkB,CAAC,IAAI,CAAC,CAAC;AACvC,CAAC,CAAC"}

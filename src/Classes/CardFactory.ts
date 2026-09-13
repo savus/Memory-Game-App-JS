@@ -1,7 +1,7 @@
-import { allCards, cardContainer } from "./app.js";
+import { allCards, cardContainer } from "../app.js";
 import Card from "./Card.js";
-import type { TPokemonData, TPokemonDom } from "./types.js";
-import { shuffleInPlace } from "./utility.js";
+import type { TPokemonData, TPokemonDom } from "../types.js";
+import { shuffleInPlace } from "../utility.js";
 
 const buildCardHTML = (data: TPokemonData) => {
   const card: TPokemonDom = document.createElement("div");

@@ -12,17 +12,17 @@ import {
   setIncomingGamePoints,
   setWhileLoopFailSafe,
   whileLoopFailsafe,
-} from "./app.js";
+} from "../app.js";
 import type Card from "./Card.js";
 import CardFactory from "./CardFactory.js";
-import { ACTIVE, CLASS, SLIDE } from "./constants.js";
+import { ACTIVE, CLASS, SLIDE } from "../constants.js";
 import type {
   TApiObject,
   TGameState,
   TPlayerChoices,
   TPokemonData,
   TPokemonDom,
-} from "./types.js";
+} from "../types.js";
 import {
   animateElement,
   flipAllCardsDown,
@@ -30,7 +30,7 @@ import {
   wait,
   updatePlayerPoints,
   populateCardDataList,
-} from "./utility.js";
+} from "../utility.js";
 
 const state: TGameState = {
   phase: "choose-card",

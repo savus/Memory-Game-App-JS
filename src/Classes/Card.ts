@@ -1,8 +1,7 @@
-import { consultCardState } from "./app.js";
-import { cardOnClickHandler } from "./clickEvents.js";
-import { DATA_FACE_POSIION, DOWN, FACEDOWN, UP } from "./constants.js";
-import type { TPokemonData, TPokemonDom } from "./types.js";
-import { animateElement } from "./utility.js";
+import { cardOnClickHandler } from "../clickEvents.js";
+import { DATA_FACE_POSIION, DOWN, UP } from "../constants.js";
+import type { TPokemonData, TPokemonDom } from "../types.js";
+import { animateElement } from "../utility.js";
 type TCardState = {
   isClickable: boolean;
   facePosition: "up" | "down";

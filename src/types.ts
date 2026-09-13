@@ -1,4 +1,4 @@
-import type Card from "./Card.js";
+import type Card from "./Classes/Card.js";
 
 export type TPokemonData = {
   name: string;
@@ -34,3 +34,17 @@ export type TPlayerChoices = [TPokemonDom | null, TPokemonDom | null];
 export type TPokemonDom = HTMLElement & { metaData?: TPokemonData };
 
 export type THTMLElement = HTMLElement;
+
+export type TState = {
+  stateName: string;
+  enterState: () => void;
+  exitState: () => void;
+};
+
+export type TStateMachine = {
+  states: TState[];
+  currentState: TState;
+  prevState: TState;
+  initialize: () => void;
+  changeState: (newState: string) => void;
+};

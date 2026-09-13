@@ -1,5 +1,5 @@
 import { incomingPoints, playerPoints } from "./app.js";
-import Card from "./Card.js";
+import Card from "./Classes/Card.js";
 import { ACTIVE, CLASS } from "./constants.js";
 export const spliceRandomItem = (array) => {
     const random = Math.floor(Math.random() * array.length);

@@ -1,4 +1,4 @@
-import Card from "./Card.js";
+import Card from "./Classes/Card.js";
 import type { TPokemonData } from "./types.js";
 export declare const dummyColors: string[];
 export declare const dummyTypes: string[];
