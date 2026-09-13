@@ -1,7 +1,8 @@
 import { cardOnClickHandler } from "../clickEvents.js";
-import { DATA_FACE_POSIION, DOWN, UP } from "../constants.js";
+import { CARDSTATES, DATA_FACE_POSIION, DOWN, UP } from "../constants.js";
 import type { TPokemonData, TPokemonDom } from "../types.js";
 import { animateElement } from "../utility.js";
+import { StateMachine } from "./StateMachine.js";
 type TCardState = {
   isClickable: boolean;
   facePosition: "up" | "down";
@@ -12,6 +13,7 @@ class Card {
   html: TPokemonDom;
   cardData: TPokemonData;
   state: TCardState;
+  stateMachine;
   constructor(htmlData: TPokemonDom, cardData: TPokemonData) {
     this.html = htmlData;
     this.cardData = cardData;
@@ -20,10 +22,13 @@ class Card {
       facePosition: "down",
       isFlippable: true,
     };
+    this.stateMachine = new StateMachine(CARDSTATES);
     this.html.addEventListener("click", () => {
       if (this.state.isClickable) return cardOnClickHandler(this);
       console.log("card is not clickable");
     });
+
+    console.log(this.stateMachine);
   }
 
   flipCard = (

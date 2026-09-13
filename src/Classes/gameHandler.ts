@@ -15,13 +15,14 @@ import {
 } from "../app.js";
 import type Card from "./Card.js";
 import CardFactory from "./CardFactory.js";
-import { ACTIVE, CLASS, SLIDE } from "../constants.js";
+import { ACTIVE, CLASS, GAMESTATES, SLIDE } from "../constants.js";
 import type {
   TApiObject,
   TGameState,
   TPlayerChoices,
   TPokemonData,
   TPokemonDom,
+  TStateMachine,
 } from "../types.js";
 import {
   animateElement,
@@ -31,6 +32,7 @@ import {
   updatePlayerPoints,
   populateCardDataList,
 } from "../utility.js";
+import { StateMachine } from "./StateMachine.js";
 
 const state: TGameState = {
   phase: "choose-card",
@@ -44,15 +46,19 @@ const playerChoices: {
   firstChoice: null,
   secondChoice: null,
 };
+let stateMachine;
 
 const initializeApp = (
   apiObject: TApiObject,
   pokemonNames: string[],
   arrayToStore: TPokemonData[],
-) =>
-  apiObject.fetchAllPokemon(pokemonNames, arrayToStore).finally(() => {
+) => {
+  stateMachine = new StateMachine(GAMESTATES);
+  console.log(stateMachine);
+  return apiObject.fetchAllPokemon(pokemonNames, arrayToStore).finally(() => {
     startMemoryGame();
   });
+};
 
 const startMemoryGame = async () => {
   updatePlayerPoints(`${points} ${gamePoints}`);

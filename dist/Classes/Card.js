@@ -1,10 +1,12 @@
 import { cardOnClickHandler } from "../clickEvents.js";
-import { DATA_FACE_POSIION, DOWN, UP } from "../constants.js";
+import { CARDSTATES, DATA_FACE_POSIION, DOWN, UP } from "../constants.js";
 import { animateElement } from "../utility.js";
+import { StateMachine } from "./StateMachine.js";
 class Card {
     html;
     cardData;
     state;
+    stateMachine;
     constructor(htmlData, cardData) {
         this.html = htmlData;
         this.cardData = cardData;
@@ -13,11 +15,13 @@ class Card {
             facePosition: "down",
             isFlippable: true,
         };
+        this.stateMachine = new StateMachine(CARDSTATES);
         this.html.addEventListener("click", () => {
             if (this.state.isClickable)
                 return cardOnClickHandler(this);
             console.log("card is not clickable");
         });
+        console.log(this.stateMachine);
     }
     flipCard = (direction = "toggle", ignoreState = false) => {
         if (!this.state.isFlippable && !ignoreState)

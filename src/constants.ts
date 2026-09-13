@@ -1,3 +1,5 @@
+import type { TGamePhase, TGameState } from "./types.js";
+
 export const pokeNames = [
   "pikachu",
   "ditto",
@@ -16,3 +18,5 @@ export const DOWN = "down";
 export const UP = "up";
 export const DATA_FACE_POSIION = "data-face-position";
 export const CLASS = "class";
+export const GAMESTATES = ["choose-card", "something", "waiting"];
+export const CARDSTATES = ["face-up", "face-down"];

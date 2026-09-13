@@ -6,4 +6,6 @@ export declare const DOWN = "down";
 export declare const UP = "up";
 export declare const DATA_FACE_POSIION = "data-face-position";
 export declare const CLASS = "class";
+export declare const GAMESTATES: string[];
+export declare const CARDSTATES: string[];
 //# sourceMappingURL=constants.d.ts.map
