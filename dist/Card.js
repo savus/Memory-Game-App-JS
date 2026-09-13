@@ -1,6 +1,7 @@
 import { consultCardState } from "./app.js";
 import { cardOnClickHandler } from "./clickEvents.js";
-import { DOWN, FACEDOWN, UP } from "./constants.js";
+import { DATA_FACE_POSIION, DOWN, FACEDOWN, UP } from "./constants.js";
+import { animateElement } from "./utility.js";
 class Card {
     html;
     cardData;
@@ -50,15 +51,15 @@ class Card {
                 break;
         }
     };
-    chooseCard = () => {
+    selectCard = () => {
         this.flipCard("up");
         this.state.isClickable = false;
         this.state.isFlippable = false;
     };
-    unChooseCard = () => {
+    deSelectCard = async () => {
+        await animateElement(this.html, { type: DATA_FACE_POSIION, value: "down" }, "transitionend");
         this.state.isClickable = true;
         this.state.isFlippable = true;
-        this.flipCard("down");
     };
 }
 export default Card;

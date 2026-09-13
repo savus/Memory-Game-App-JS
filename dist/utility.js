@@ -1,6 +1,6 @@
 import { incomingPoints, playerPoints } from "./app.js";
 import Card from "./Card.js";
-import { ACTIVE } from "./constants.js";
+import { ACTIVE, CLASS } from "./constants.js";
 export const spliceRandomItem = (array) => {
     const random = Math.floor(Math.random() * array.length);
     return array.splice(random, 1)[0];
@@ -28,13 +28,17 @@ export const flipAllCardsDown = (array, ignoreState = false) => {
         card.flipCard("down", ignoreState);
     });
 };
-export const animateElement = async (element, className, animationOrTransition) => new Promise((resolve) => {
+export const animateElement = async (element, attribute, animationOrTransition) => new Promise((resolve) => {
+    const { type, value } = attribute;
     const handleListenerEnd = () => {
         element.removeEventListener(animationOrTransition, handleListenerEnd);
         resolve(element);
     };
     element.addEventListener(animationOrTransition, handleListenerEnd);
-    element.classList.add(className);
+    if (type === CLASS)
+        element.classList.add(value);
+    else
+        element.setAttribute(type, value);
 });
 export const swapScreens = (elementToActivate, className) => {
     const elementToDeactivate = document.querySelector(`.${className}.${ACTIVE}`);

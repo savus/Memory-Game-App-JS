@@ -1,6 +1,6 @@
 import { incomingPoints, playerPoints } from "./app.js";
 import Card from "./Card.js";
-import { ACTIVE } from "./constants.js";
+import { ACTIVE, CLASS } from "./constants.js";
 import type { TPokemonData } from "./types.js";
 
 export const spliceRandomItem = (array: string[]) => {
@@ -45,10 +45,11 @@ export const flipAllCardsDown = (
 
 export const animateElement = async (
   element: HTMLElement,
-  className: string,
+  attribute: { type: string; value: string },
   animationOrTransition: "animationend" | "transitionend",
 ) =>
   new Promise((resolve) => {
+    const { type, value } = attribute;
     const handleListenerEnd = () => {
       element.removeEventListener(animationOrTransition, handleListenerEnd);
       resolve(element);
@@ -56,7 +57,8 @@ export const animateElement = async (
 
     element.addEventListener(animationOrTransition, handleListenerEnd);
 
-    element.classList.add(className);
+    if (type === CLASS) element.classList.add(value);
+    else element.setAttribute(type, value);
   });
 
 export const swapScreens = (

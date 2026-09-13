@@ -13,4 +13,6 @@ export const FACEDOWN = "face-down";
 export const SLIDE = "slide";
 export const DOWN = "down";
 export const UP = "up";
+export const DATA_FACE_POSIION = "data-face-position";
+export const CLASS = "class";
 //# sourceMappingURL=constants.js.map

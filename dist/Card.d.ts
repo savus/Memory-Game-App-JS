@@ -10,8 +10,8 @@ declare class Card {
     state: TCardState;
     constructor(htmlData: TPokemonDom, cardData: TPokemonData);
     flipCard: (direction?: "up" | "down" | "toggle", ignoreState?: boolean) => void;
-    chooseCard: () => void;
-    unChooseCard: () => void;
+    selectCard: () => void;
+    deSelectCard: () => Promise<void>;
 }
 export default Card;
 //# sourceMappingURL=Card.d.ts.map

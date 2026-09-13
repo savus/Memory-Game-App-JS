@@ -1,6 +1,6 @@
 import { allCards, cardData, gameMessage, gamePoints, incomingGamePoints, incomingPoints, messageContainer, points, pokemonData, setGamePoints, setIncomingGamePoints, setWhileLoopFailSafe, whileLoopFailsafe, } from "./app.js";
 import CardFactory from "./CardFactory.js";
-import { ACTIVE, SLIDE } from "./constants.js";
+import { ACTIVE, CLASS, SLIDE } from "./constants.js";
 import { animateElement, flipAllCardsDown, setIncomingPointsText, wait, updatePlayerPoints, populateCardDataList, } from "./utility.js";
 const state = {
     phase: "choose-card",
@@ -21,7 +21,7 @@ const startMemoryGame = async () => {
 };
 const displayGameMessage = async (className, message) => {
     gameMessage.innerHTML = message;
-    await animateElement(messageContainer, className, "animationend");
+    await animateElement(messageContainer, { type: CLASS, value: className }, "animationend");
     messageContainer.classList.remove(className);
 };
 const doPlayerChoicesMatch = () => {
@@ -54,12 +54,12 @@ const displayRightOrWrongChoice = () => {
 };
 const setFirstChoice = (card) => {
     playerChoices.firstChoice = card;
-    card.chooseCard();
+    card.selectCard();
 };
 const resetPlayerChoices = () => {
     if (!choicesMatched) {
-        playerChoices.firstChoice?.unChooseCard();
-        playerChoices.secondChoice?.unChooseCard();
+        playerChoices.firstChoice?.deSelectCard();
+        playerChoices.secondChoice?.deSelectCard();
     }
     playerChoices.firstChoice = null;
     playerChoices.secondChoice = null;
@@ -67,7 +67,7 @@ const resetPlayerChoices = () => {
 const setSecondChoice = async (card) => {
     playerChoices.secondChoice = card;
     displayRightOrWrongChoice();
-    card.chooseCard();
+    card.selectCard();
     state.phase = "waiting";
     await wait(2000);
     if (!choicesMatched)
@@ -84,9 +84,9 @@ const setPlayerPoints = async (points) => {
     setIncomingGamePoints(points);
     setIncomingPointsText(incomingGamePoints, "-");
     updatePlayerPoints(`Points: ${gamePoints}`);
-    await animateElement(incomingPoints, ACTIVE, "transitionend");
+    await animateElement(incomingPoints, { type: CLASS, value: ACTIVE }, "transitionend");
     await animateTransferringPoints();
-    incomingPoints.classList.remove("active");
+    incomingPoints.classList.remove(ACTIVE);
     setWhileLoopFailSafe(0);
 };
 const animateTransferringPoints = async () => {
