@@ -1,5 +1,5 @@
 import type { TState } from "../types.js";
-import { State } from "./State.js";
+import { State } from "./states/State.js";
 
 export class StateMachine {
   states: TState[];
