@@ -18,4 +18,4 @@ TASK : build click event method that handles game stages and initial game play. 
 
 TASK : Clean up html structure and css code. Include custom properties and organization. Make game screens look more neat.
 
-TASK : Build gameplay that persists beyond first matching set. If player finds a matching pair, cards should stay flipped up and no longer be clickable
+TASK(completed) : Build gameplay that persists beyond first matching set. If player finds a matching pair, cards should stay flipped up and no longer be clickable
